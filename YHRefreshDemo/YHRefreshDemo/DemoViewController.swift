@@ -62,16 +62,6 @@ class TableViewController: UITableViewController {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
             
-            self.s += 20
-            
-            for i in self.s..<self.s+20 {
-                
-                self.numbers.append(i)
-                
-            }
-            
-            self.tableView.reloadData()
-            
             switch self.style {
                 
             case .NormalHeader :
@@ -91,6 +81,17 @@ class TableViewController: UITableViewController {
                 self.tableView.yh_footer?.endRefreshing()
                 
             }
+            
+            
+            self.s += 20
+            
+            for i in self.s..<self.s+20 {
+                
+                self.numbers.append(i)
+                
+            }
+            
+            self.tableView.reloadData()
             
         })
         
