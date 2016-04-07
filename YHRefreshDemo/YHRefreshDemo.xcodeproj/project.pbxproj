@@ -10,7 +10,7 @@
 		2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */; };
 		2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */; };
 		2E3E56D11CB5EC3300C59E87 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */; };
-		2E3E56D21CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CD1CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift */; };
+		2E3E56D21CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CD1CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift */; };
 		2E3E56D31CB5EC3300C59E87 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */; };
 		2E3E56D41CB5EC3300C59E87 /* YHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */; };
 		2E3E56D51CB5EC3300C59E87 /* YHRefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */; };
@@ -24,7 +24,7 @@
 		2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
-		2E3E56CD1CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+LYH_Refresh.swift"; sourceTree = "<group>"; };
+		2E3E56CD1CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+YH_Refresh.swift"; sourceTree = "<group>"; };
 		2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
 		2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshComponent.swift; sourceTree = "<group>"; };
 		2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshConst.swift; sourceTree = "<group>"; };
@@ -52,7 +52,7 @@
 			children = (
 				2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */,
 				2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */,
-				2E3E56CD1CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift */,
+				2E3E56CD1CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift */,
 				2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */,
 				2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */,
 			);
@@ -168,7 +168,7 @@
 				2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */,
 				2E3E56D41CB5EC3300C59E87 /* YHRefreshComponent.swift in Sources */,
 				2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */,
-				2E3E56D21CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift in Sources */,
+				2E3E56D21CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift in Sources */,
 				2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
