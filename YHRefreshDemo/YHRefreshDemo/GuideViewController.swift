@@ -8,11 +8,11 @@
 
 import UIKit
 
-enum RefreshStyle : Int {
-    case NormalHeader = 0
-    case SpringHeader = 1
-    case NormalFooter = 2
-    case AutoFooter = 3
+enum RefreshStyle : String {
+    case NormalHeader = "NormalHeader"
+    case SpringHeader = "SpringHeader"
+    case NormalFooter = "NormalFooter"
+    case AutoFooter = "AutoFooter"
 }
 
 
@@ -24,16 +24,24 @@ class GuideViewController: UITableViewController {
         switch indexPath.row {
             
         case 0 :
-            navigationController?.pushViewController(TableViewController(style: .NormalHeader), animated: true)
+            pushViewController(.NormalHeader)
         case 1 :
-            navigationController?.pushViewController(TableViewController(style: .SpringHeader), animated: true)
+            pushViewController(.SpringHeader)
         case 2 :
-            navigationController?.pushViewController(TableViewController(style: .NormalFooter), animated: true)
+             pushViewController(.NormalFooter)
         case 3 :
-            navigationController?.pushViewController(TableViewController(style: .AutoFooter), animated: true)
+             pushViewController(.AutoFooter)
         default:break
-        
+            
         }
+        
+    }
+    
+    func pushViewController(style:RefreshStyle) {
+        
+        let vc = TableViewController(style: style)
+        vc.title = vc.style.rawValue
+        navigationController?.pushViewController(vc, animated: true)
         
     }
 

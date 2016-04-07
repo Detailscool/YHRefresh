@@ -7,33 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */; };
+		2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */; };
+		2E3E56D11CB5EC3300C59E87 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */; };
+		2E3E56D21CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CD1CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift */; };
+		2E3E56D31CB5EC3300C59E87 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */; };
+		2E3E56D41CB5EC3300C59E87 /* YHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */; };
+		2E3E56D51CB5EC3300C59E87 /* YHRefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */; };
 		2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9131611CB566FB007A4535 /* AppDelegate.swift */; };
 		2E9131671CB566FB007A4535 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131651CB566FB007A4535 /* Main.storyboard */; };
 		2E9131691CB566FB007A4535 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131681CB566FB007A4535 /* Assets.xcassets */; };
 		2E91316C1CB566FB007A4535 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E91316A1CB566FB007A4535 /* LaunchScreen.storyboard */; };
-		2E9131751CB56775007A4535 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9131731CB56775007A4535 /* DemoViewController.swift */; };
-		2E9131761CB56775007A4535 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9131741CB56775007A4535 /* GuideViewController.swift */; };
-		2E91317D1CB567A0007A4535 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9131781CB567A0007A4535 /* NSDate+Extension.swift */; };
-		2E91317E1CB567A0007A4535 /* UIScrollView+LYH_Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9131791CB567A0007A4535 /* UIScrollView+LYH_Refresh.swift */; };
-		2E91317F1CB567A0007A4535 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E91317A1CB567A0007A4535 /* YHRefresh.bundle */; };
-		2E9131801CB567A0007A4535 /* YHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91317B1CB567A0007A4535 /* YHRefreshComponent.swift */; };
-		2E9131811CB567A0007A4535 /* YHRefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91317C1CB567A0007A4535 /* YHRefreshConst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
+		2E3E56CD1CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+LYH_Refresh.swift"; sourceTree = "<group>"; };
+		2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
+		2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshComponent.swift; sourceTree = "<group>"; };
+		2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshConst.swift; sourceTree = "<group>"; };
 		2E91315E1CB566FB007A4535 /* YHRefreshDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YHRefreshDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9131611CB566FB007A4535 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E9131661CB566FB007A4535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2E9131681CB566FB007A4535 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E91316B1CB566FB007A4535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E91316D1CB566FB007A4535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2E9131731CB56775007A4535 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoViewController.swift; path = ../../Test5/Test5/DemoViewController.swift; sourceTree = "<group>"; };
-		2E9131741CB56775007A4535 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GuideViewController.swift; path = ../../Test5/Test5/GuideViewController.swift; sourceTree = "<group>"; };
-		2E9131781CB567A0007A4535 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
-		2E9131791CB567A0007A4535 /* UIScrollView+LYH_Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+LYH_Refresh.swift"; sourceTree = "<group>"; };
-		2E91317A1CB567A0007A4535 /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
-		2E91317B1CB567A0007A4535 /* YHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshComponent.swift; sourceTree = "<group>"; };
-		2E91317C1CB567A0007A4535 /* YHRefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshConst.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +47,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E3E56CB1CB5EC3300C59E87 /* YHRresh */ = {
+			isa = PBXGroup;
+			children = (
+				2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */,
+				2E3E56CD1CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift */,
+				2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */,
+				2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */,
+				2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */,
+			);
+			path = YHRresh;
+			sourceTree = "<group>";
+		};
 		2E9131551CB566FB007A4535 = {
 			isa = PBXGroup;
 			children = (
@@ -67,27 +79,15 @@
 			isa = PBXGroup;
 			children = (
 				2E9131611CB566FB007A4535 /* AppDelegate.swift */,
-				2E9131731CB56775007A4535 /* DemoViewController.swift */,
-				2E9131741CB56775007A4535 /* GuideViewController.swift */,
-				2E9131771CB567A0007A4535 /* YHRresh */,
+				2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */,
+				2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */,
+				2E3E56CB1CB5EC3300C59E87 /* YHRresh */,
 				2E9131651CB566FB007A4535 /* Main.storyboard */,
 				2E9131681CB566FB007A4535 /* Assets.xcassets */,
 				2E91316A1CB566FB007A4535 /* LaunchScreen.storyboard */,
 				2E91316D1CB566FB007A4535 /* Info.plist */,
 			);
 			path = YHRefreshDemo;
-			sourceTree = "<group>";
-		};
-		2E9131771CB567A0007A4535 /* YHRresh */ = {
-			isa = PBXGroup;
-			children = (
-				2E9131781CB567A0007A4535 /* NSDate+Extension.swift */,
-				2E9131791CB567A0007A4535 /* UIScrollView+LYH_Refresh.swift */,
-				2E91317A1CB567A0007A4535 /* YHRefresh.bundle */,
-				2E91317B1CB567A0007A4535 /* YHRefreshComponent.swift */,
-				2E91317C1CB567A0007A4535 /* YHRefreshConst.swift */,
-			);
-			path = YHRresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E91317F1CB567A0007A4535 /* YHRefresh.bundle in Resources */,
+				2E3E56D31CB5EC3300C59E87 /* YHRefresh.bundle in Resources */,
 				2E91316C1CB566FB007A4535 /* LaunchScreen.storyboard in Resources */,
 				2E9131691CB566FB007A4535 /* Assets.xcassets in Resources */,
 				2E9131671CB566FB007A4535 /* Main.storyboard in Resources */,
@@ -163,13 +163,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E91317D1CB567A0007A4535 /* NSDate+Extension.swift in Sources */,
-				2E9131811CB567A0007A4535 /* YHRefreshConst.swift in Sources */,
+				2E3E56D11CB5EC3300C59E87 /* NSDate+Extension.swift in Sources */,
+				2E3E56D51CB5EC3300C59E87 /* YHRefreshConst.swift in Sources */,
+				2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */,
+				2E3E56D41CB5EC3300C59E87 /* YHRefreshComponent.swift in Sources */,
 				2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */,
-				2E9131801CB567A0007A4535 /* YHRefreshComponent.swift in Sources */,
-				2E9131751CB56775007A4535 /* DemoViewController.swift in Sources */,
-				2E91317E1CB567A0007A4535 /* UIScrollView+LYH_Refresh.swift in Sources */,
-				2E9131761CB56775007A4535 /* GuideViewController.swift in Sources */,
+				2E3E56D21CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift in Sources */,
+				2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -317,6 +317,7 @@
 				2E9131721CB566FB007A4535 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
