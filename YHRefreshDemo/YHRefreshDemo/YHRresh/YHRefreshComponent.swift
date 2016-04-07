@@ -9,7 +9,7 @@ import UIKit
 
 class YHRefreshComponent: UIView {
     
-    private var scrollView : UIScrollView!
+    private weak var scrollView : UIScrollView!
     
     private weak var target : AnyObject?
     
@@ -54,11 +54,6 @@ class YHRefreshComponent: UIView {
     
     func endRefreshing() {
         state = .Normal
-    }
-    
-    deinit {
-        scrollView.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
-        scrollView.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
     }
     
 }
@@ -106,7 +101,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 UIImageView.animateWithDuration(0.5, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformIdentity
                 })
-                
+               
                 if currentState == .Refreshing {
                     
                     UIView.animateWithDuration(0.25, animations: { () -> Void in
@@ -150,6 +145,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
             }
             
             currentState = state
+             print("currentState:\(currentState)")
         }
     }
     
@@ -203,16 +199,15 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 }
                 
             }else {
-                
-                if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshViewHeight && state != .Refreshing{
-                    
+
+                if state == .WillRefresh {
                     state = .Refreshing
                 }
                 
             }
         }
     }
-    
+
 }
 
 class YHRefreshSpringHeader : YHRefreshHeader {

@@ -132,6 +132,5 @@ class TableViewController: UITableViewController {
         cell.backgroundColor =  colorforIndex(indexPath.row)
         
     }
-
-
+    
 }

@@ -50,9 +50,9 @@
 		2E3E56CB1CB5EC3300C59E87 /* YHRresh */ = {
 			isa = PBXGroup;
 			children = (
+				2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */,
 				2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */,
 				2E3E56CD1CB5EC3300C59E87 /* UIScrollView+LYH_Refresh.swift */,
-				2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */,
 				2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */,
 				2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */,
 			);
