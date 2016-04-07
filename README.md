@@ -30,16 +30,16 @@ Inspired By `MJRefresh`
     }
 
 ##Effect
->①YHRefreshNormalHeader<br>
+>①YHRefreshNormalHeader<br><br>
 ![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeq6qwpbg20ab0iiwg9.gif)
 
->②YHRefreshSpringHeader<br>
+>②YHRefreshSpringHeader<br><br>
 ![](http://ww3.sinaimg.cn/mw690/9a2346e2gw1f2oeq84xd9g20ab0ii0vt.gif)
 
->③YHRefreshNormalFooter<br>
+>③YHRefreshNormalFooter<br><br>
 ![](http://ww1.sinaimg.cn/mw690/9a2346e2gw1f2oeq945pkg20ab0iiwgh.gif)
 
->④YHRefreshAutoFooter<br>
+>④YHRefreshAutoFooter<br><br>
 ![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeqawm9vg20ab0iiq71.gif)
 
 
