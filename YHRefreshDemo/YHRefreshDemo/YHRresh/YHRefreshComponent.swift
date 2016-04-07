@@ -48,9 +48,6 @@ class YHRefreshComponent: UIView {
         return iv
     }()
     
-    func begingRefreshing() {
-        state = .Refreshing
-    }
     
     func endRefreshing() {
         state = .Normal
@@ -80,6 +77,10 @@ class YHRefreshHeader : YHRefreshComponent {
         header.target = target
         header.selector = selector
         return header
+    }
+    
+    func begingRefreshing() {
+        state = .Refreshing
     }
     
 }
@@ -145,7 +146,6 @@ class YHRefreshNormalHeader : YHRefreshHeader {
             }
             
             currentState = state
-             print("currentState:\(currentState)")
         }
     }
     
