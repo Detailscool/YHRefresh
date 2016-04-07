@@ -1,8 +1,14 @@
 # YHRefresh
+
+###Introduction 
 Inspired By `MJRefresh`
 #####A refreshing helper written in Swift, which can be used to refresh easily.
-#####一款简单易用的Swift版上拉或者下拉刷新...稍迟上Gif图
-    
+#####一款简单易用的Swift版上拉或者下拉刷新...
+
+###Components
+![](屏幕快照 2016-04-07 下午7.11.23.png)
+ 
+##Usage##   
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -22,5 +28,17 @@ Inspired By `MJRefresh`
             
         }
     }
+
+##Effect## 
+>①YHRefreshNormalHeader
+![](123.gif)
+
+>②YHRefreshSpringHeader
+![](234.gif)
+
+>③YHRefreshNormalFooter
+![](345.gif)
+
+>④YHRefreshAutoFooter
 
 
