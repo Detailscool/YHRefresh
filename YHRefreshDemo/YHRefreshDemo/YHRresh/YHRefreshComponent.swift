@@ -72,7 +72,7 @@ class YHRefreshHeader : YHRefreshComponent {
         }
     }
     
-    class func header(target:AnyObject?,selector:Selector) -> AnyObject {
+    class func header(target:AnyObject?,selector:Selector?) -> AnyObject {
         let header = self.init()
         header.target = target
         header.selector = selector
@@ -462,7 +462,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
 
 class YHRefreshFooter : YHRefreshComponent {
     
-    class func footer(target:AnyObject?,selector:Selector) -> AnyObject {
+    class func footer(target:AnyObject?,selector:Selector?) -> AnyObject {
         let footer = self.init()
         footer.target = target
         footer.selector = selector

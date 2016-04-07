@@ -1,5 +1,5 @@
 //
-//  UIScrollView+LYH_Refresh.swift
+//  UIScrollView+YH_Refresh.swift
 //
 //  Created by Detailscool on 16/3/28.
 //  Copyright © 2016年 Detailscool. All rights reserved.
