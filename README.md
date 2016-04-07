@@ -49,5 +49,5 @@ Inspired By `MJRefresh`
 
 ##License
 
-Routable for iOS is available under the MIT license. See the LICENSE file for more info.
+Copyright (c) 2016 YuanHui Lee detailsli@gmail.com. See the LICENSE file for more info.
 
