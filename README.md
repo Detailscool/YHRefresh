@@ -6,7 +6,7 @@ Inspired By `MJRefresh`
 #####一款简单易用的Swift版上拉或者下拉刷新...
 
 ###Components
-![](屏幕快照 2016-04-07 下午7.11.23.png)
+![](http://ww2.sinaimg.cn/mw690/9a2346e2gw1f2oeuztvzoj20hy09a0tf.jpg)
  
 ##Usage
     override func viewDidLoad() {
@@ -32,11 +32,15 @@ Inspired By `MJRefresh`
 ##Effect
 >①YHRefreshNormalHeader
 ![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeq6qwpbg20ab0iiwg9.gif)
+
 >②YHRefreshSpringHeader
+![](http://ww3.sinaimg.cn/mw690/9a2346e2gw1f2oeq84xd9g20ab0ii0vt.gif)
 
 >③YHRefreshNormalFooter
+![](http://ww1.sinaimg.cn/mw690/9a2346e2gw1f2oeq945pkg20ab0iiwgh.gif)
 
 >④YHRefreshAutoFooter
+![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeqawm9vg20ab0iiq71.gif)
 
 
 ##Requirements
