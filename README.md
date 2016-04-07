@@ -29,7 +29,7 @@ Inspired By `MJRefresh`
         }
     }
     
-<br>
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +52,7 @@ Inspired By `MJRefresh`
             
         }
     }
-<br>
+
     注：header和footer可以同时用，但请回避两者同时刷新~！
 
 ##Effect
