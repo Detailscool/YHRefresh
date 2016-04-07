@@ -8,7 +8,7 @@ Inspired By `MJRefresh`
 ###Components
 ![](屏幕快照 2016-04-07 下午7.11.23.png)
  
-##Usage##   
+##Usage
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,7 +29,7 @@ Inspired By `MJRefresh`
         }
     }
 
-##Effect## 
+##Effect
 >①YHRefreshNormalHeader
 ![](123.gif)
 
