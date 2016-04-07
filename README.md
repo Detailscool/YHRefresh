@@ -31,7 +31,7 @@ Inspired By `MJRefresh`
 
 ##Effect
 >①YHRefreshNormalHeader
-
+![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeq6qwpbg20ab0iiwg9.gif)
 >②YHRefreshSpringHeader
 
 >③YHRefreshNormalFooter
