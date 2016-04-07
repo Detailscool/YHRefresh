@@ -25,10 +25,6 @@ class TableViewController: UITableViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -58,15 +54,6 @@ class TableViewController: UITableViewController {
             tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: "load") as! YHRefreshAutoFooter
             
         }
-        
-
-//        tableView.yh_header = YHRefreshSpringHeader.header(self, selector: "load") as! YHRefreshSpringHeader
-        
-//        tableView.yh_header = YHRefreshNormalHeader.header(self, selector: "load") as! YHRefreshNormalHeader
-        
-//        tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: "load") as! YHRefreshAutoFooter
-        
-//        tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: "load") as! YHRefreshNormalFooter
         
 //        tableView.yh_footer?.showNoMoreData()
     }
