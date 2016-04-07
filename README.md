@@ -31,16 +31,13 @@ Inspired By `MJRefresh`
 
 ##Effect
 >①YHRefreshNormalHeader
-![](123.gif)
 
 >②YHRefreshSpringHeader
-![](234.gif)
 
 >③YHRefreshNormalFooter
-![](345.gif)
 
 >④YHRefreshAutoFooter
-![](456.gif)
+
 
 ##Requirements
 * Swift 2.0
