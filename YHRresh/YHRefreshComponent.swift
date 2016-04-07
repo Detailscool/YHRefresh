@@ -137,7 +137,10 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                     
                     }, completion: { (_) -> Void in
                         
-                        self.target?.performSelector(self.selector!)
+                        if let _ = self.selector {
+                            
+                            self.target?.performSelector(self.selector!)
+                        }
                         
                 })
                 
@@ -536,9 +539,15 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 self.loadingView.layer.addAnimation(ani, forKey: "")
                 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    
                     self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
+                    
                     }, completion: { (_) -> Void in
-                        self.target?.performSelector(self.selector!)
+                        
+                        if let _ = self.selector {
+                            
+                            self.target?.performSelector(self.selector!)
+                        }
                 })
                 
             case .NoMoreData :
@@ -657,9 +666,15 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 activityIndicator.startAnimating()
                 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    
                     self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
+                    
                     }, completion: { (_) -> Void in
-                        self.target?.performSelector(self.selector!)
+                        
+                        if let _ = self.selector {
+                            
+                            self.target?.performSelector(self.selector!)
+                        }
                         
                 })
                 
