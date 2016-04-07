@@ -42,4 +42,11 @@ Inspired By `MJRefresh`
 >④YHRefreshAutoFooter
 ![](456.gif)
 
+##Requirements
+* Swift 2.0
+
+
+##License
+
+Routable for iOS is available under the MIT license. See the LICENSE file for more info.
 
