@@ -20,6 +20,7 @@ Inspired By `MJRefresh`
         
         //模拟网络请求
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
+            
             self.tableView.yh_header?.endRefreshing()
             
             /*网络回调处理*/
@@ -41,6 +42,7 @@ Inspired By `MJRefresh`
         
         //模拟网络请求
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
+            
             self.tableView.yh_footer?.endRefreshing()
             
             /*网络回调处理*/
