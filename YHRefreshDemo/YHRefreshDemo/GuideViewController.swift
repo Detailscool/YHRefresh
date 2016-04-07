@@ -15,8 +15,13 @@ enum RefreshStyle : String {
     case AutoFooter = "AutoFooter"
 }
 
-
 class GuideViewController: UITableViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "back")
+    }
 
   
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -43,6 +48,11 @@ class GuideViewController: UITableViewController {
         vc.title = vc.style.rawValue
         navigationController?.pushViewController(vc, animated: true)
         
+    }
+    
+    func back() {
+    
+        navigationController?.popViewControllerAnimated(true)
     }
 
 }

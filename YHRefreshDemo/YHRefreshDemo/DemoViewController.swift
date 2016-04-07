@@ -72,8 +72,6 @@ class TableViewController: UITableViewController {
             
             self.tableView.reloadData()
             
-            
-            
             switch self.style {
                 
             case .NormalHeader :
