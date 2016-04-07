@@ -13,21 +13,47 @@ Inspired By `MJRefresh`
         super.viewDidLoad()
         
         tableView.yh_header = YHRefreshNormalHeader.header(self, selector: "load") as! YHRefreshNormalHeader
-        tableView.yh_header.beginRefreshing
+        tableView.yh_header.beginRefreshing()
     }
     
     func load() {
         
         //模拟网络请求
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
+            self.tableView.yh_header?.endRefreshing()
             
             /*网络回调处理*/
             
             self.tableView.reloadData()
-            self.tableView.yh_header?.endRefreshing()
             
         }
     }
+    
+<br>
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: "loadMore") as! YHRefreshNormalFooter
+        
+    }
+    
+    func loadMore() {
+        
+        //模拟网络请求
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
+            self.tableView.yh_footer?.endRefreshing()
+            
+            /*网络回调处理*/
+            
+            self.tableView.reloadData()
+            
+            /*条件判断是否已经数据最大,若是显示没有更多数据*/
+            self.tableView.yh_footer?.showNoMoreData()
+            
+        }
+    }
+<br>
+    注：header和footer可以同时用，但请回避两者同时刷新~！
 
 ##Effect
 >①YHRefreshNormalHeader<br><br>
