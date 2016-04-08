@@ -9,31 +9,31 @@
 /* Begin PBXBuildFile section */
 		2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */; };
 		2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */; };
-		2E3E56D11CB5EC3300C59E87 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */; };
-		2E3E56D21CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CD1CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift */; };
-		2E3E56D31CB5EC3300C59E87 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */; };
-		2E3E56D41CB5EC3300C59E87 /* YHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */; };
-		2E3E56D51CB5EC3300C59E87 /* YHRefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */; };
 		2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9131611CB566FB007A4535 /* AppDelegate.swift */; };
 		2E9131671CB566FB007A4535 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131651CB566FB007A4535 /* Main.storyboard */; };
 		2E9131691CB566FB007A4535 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131681CB566FB007A4535 /* Assets.xcassets */; };
 		2E91316C1CB566FB007A4535 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E91316A1CB566FB007A4535 /* LaunchScreen.storyboard */; };
+		2ED170C01CB7675700D12EA9 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BB1CB7675700D12EA9 /* NSDate+Extension.swift */; };
+		2ED170C11CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BC1CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift */; };
+		2ED170C21CB7675700D12EA9 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */; };
+		2ED170C31CB7675700D12EA9 /* YHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */; };
+		2ED170C41CB7675700D12EA9 /* YHRefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BF1CB7675700D12EA9 /* YHRefreshConst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
-		2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
-		2E3E56CD1CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+YH_Refresh.swift"; sourceTree = "<group>"; };
-		2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
-		2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshComponent.swift; sourceTree = "<group>"; };
-		2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshConst.swift; sourceTree = "<group>"; };
 		2E91315E1CB566FB007A4535 /* YHRefreshDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YHRefreshDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9131611CB566FB007A4535 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E9131661CB566FB007A4535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2E9131681CB566FB007A4535 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E91316B1CB566FB007A4535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E91316D1CB566FB007A4535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2ED170BB1CB7675700D12EA9 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
+		2ED170BC1CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+YH_Refresh.swift"; sourceTree = "<group>"; };
+		2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
+		2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshComponent.swift; sourceTree = "<group>"; };
+		2ED170BF1CB7675700D12EA9 /* YHRefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshConst.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,18 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2E3E56CB1CB5EC3300C59E87 /* YHRresh */ = {
-			isa = PBXGroup;
-			children = (
-				2E3E56CE1CB5EC3300C59E87 /* YHRefresh.bundle */,
-				2E3E56CC1CB5EC3300C59E87 /* NSDate+Extension.swift */,
-				2E3E56CD1CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift */,
-				2E3E56CF1CB5EC3300C59E87 /* YHRefreshComponent.swift */,
-				2E3E56D01CB5EC3300C59E87 /* YHRefreshConst.swift */,
-			);
-			path = YHRresh;
-			sourceTree = "<group>";
-		};
 		2E9131551CB566FB007A4535 = {
 			isa = PBXGroup;
 			children = (
@@ -81,13 +69,25 @@
 				2E9131611CB566FB007A4535 /* AppDelegate.swift */,
 				2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */,
 				2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */,
-				2E3E56CB1CB5EC3300C59E87 /* YHRresh */,
+				2ED170BA1CB7675700D12EA9 /* YHRefresh */,
 				2E9131651CB566FB007A4535 /* Main.storyboard */,
 				2E9131681CB566FB007A4535 /* Assets.xcassets */,
 				2E91316A1CB566FB007A4535 /* LaunchScreen.storyboard */,
 				2E91316D1CB566FB007A4535 /* Info.plist */,
 			);
 			path = YHRefreshDemo;
+			sourceTree = "<group>";
+		};
+		2ED170BA1CB7675700D12EA9 /* YHRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				2ED170BB1CB7675700D12EA9 /* NSDate+Extension.swift */,
+				2ED170BC1CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift */,
+				2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */,
+				2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */,
+				2ED170BF1CB7675700D12EA9 /* YHRefreshConst.swift */,
+			);
+			path = YHRefresh;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,7 +149,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E3E56D31CB5EC3300C59E87 /* YHRefresh.bundle in Resources */,
+				2ED170C21CB7675700D12EA9 /* YHRefresh.bundle in Resources */,
 				2E91316C1CB566FB007A4535 /* LaunchScreen.storyboard in Resources */,
 				2E9131691CB566FB007A4535 /* Assets.xcassets in Resources */,
 				2E9131671CB566FB007A4535 /* Main.storyboard in Resources */,
@@ -163,12 +163,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2E3E56D11CB5EC3300C59E87 /* NSDate+Extension.swift in Sources */,
-				2E3E56D51CB5EC3300C59E87 /* YHRefreshConst.swift in Sources */,
+				2ED170C01CB7675700D12EA9 /* NSDate+Extension.swift in Sources */,
+				2ED170C41CB7675700D12EA9 /* YHRefreshConst.swift in Sources */,
+				2ED170C11CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift in Sources */,
+				2ED170C31CB7675700D12EA9 /* YHRefreshComponent.swift in Sources */,
 				2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */,
-				2E3E56D41CB5EC3300C59E87 /* YHRefreshComponent.swift in Sources */,
 				2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */,
-				2E3E56D21CB5EC3300C59E87 /* UIScrollView+YH_Refresh.swift in Sources */,
 				2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

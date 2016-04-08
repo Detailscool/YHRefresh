@@ -630,7 +630,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                     
                 }else {
                     
-                    if scrollView.contentSize.height != 0 && scrollView?.contentOffset.y > 0 && scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .Refreshing {
+                    if state == .WillRefresh {
                         
                         state = .Refreshing
                     }
