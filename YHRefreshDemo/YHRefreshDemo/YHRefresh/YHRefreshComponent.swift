@@ -79,7 +79,7 @@ class YHRefreshHeader : YHRefreshComponent {
         return header
     }
     
-    func begingRefreshing() {
+    func beginRefreshing() {
         state = .Refreshing
     }
     
