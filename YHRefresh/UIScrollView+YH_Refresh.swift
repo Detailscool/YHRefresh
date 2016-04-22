@@ -31,10 +31,8 @@ extension UIScrollView {
             removeObserver(yh_footer!, forKeyPath: yh_RefreshContentSizeKey)
             yh_footer!.removeFromSuperview()
         }
-        
     }
-    
-    
+
     var yh_header : YHRefreshHeader? {
         
         get {
@@ -94,5 +92,4 @@ extension UIScrollView {
             
         }
     }
-    
 }

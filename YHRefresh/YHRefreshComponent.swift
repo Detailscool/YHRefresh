@@ -48,7 +48,6 @@ class YHRefreshComponent: UIView {
         return iv
     }()
     
-    
     func endRefreshing() {
         state = .Normal
     }
@@ -62,8 +61,8 @@ class YHRefreshHeader : YHRefreshComponent {
         
         if let view = newSuperview as? UIScrollView {
             
-            self.superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
-            self.superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
+            superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
+            superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
             
             scrollView = view
             
@@ -93,6 +92,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
             switch state {
                 
             case .Normal:
+                
                 loadingView.hidden = true
                 arrowView.hidden = false
                 messageLabel.text = updateTime == nil ? "下拉刷新..." : "下拉刷新...\n最后更新时间 : " + updateTime!.stringFromDate().timeStateForRefresh()
@@ -104,13 +104,13 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 })
                
                 if currentState == .Refreshing {
-                    
                     UIView.animateWithDuration(0.25, animations: { () -> Void in
                         self.scrollView.contentInset.top -= yh_RefreshViewHeight
                     })
                 }
                 
             case .WillRefresh:
+                
                 messageLabel.text = updateTime == nil ? "释放刷新..." : "释放刷新...\n最后更新时间 : " + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 UIImageView.animateWithDuration(0.5, animations: { () -> Void in
@@ -118,6 +118,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 })
                 
             case .Refreshing:
+                
                 loadingView.hidden = false
                 arrowView.hidden = true
                 messageLabel.text = "正在刷新...\n最后更新时间 : 今天\(NSDate().stringFromDate("HH : mm"))"
@@ -128,20 +129,14 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
                 ani.removedOnCompletion = false
-                self.loadingView.layer.addAnimation(ani, forKey: "")
-                
+                loadingView.layer.addAnimation(ani, forKey: "")
                 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    
                     self.scrollView.contentInset.top += yh_RefreshViewHeight
-                    
                     }, completion: { (_) -> Void in
-                        
                         if let _ = self.selector {
-                            
                             self.target?.performSelector(self.selector!)
                         }
-                        
                 })
                 
             default : break
@@ -175,14 +170,14 @@ class YHRefreshNormalHeader : YHRefreshHeader {
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        self.addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -15))
-        self.addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -15))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        self.addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
     }
     
@@ -227,7 +222,6 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 springView.hidden = false
                 
                 if currentState == .Refreshing {
-                    
                     UIView.animateWithDuration(0.25, animations: { () -> Void in
                         self.scrollView.contentInset.top -= yh_SpringHeaderHeight
                     })
@@ -240,16 +234,11 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 activityIndicator.startAnimating()
                 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    
                     self.scrollView.contentInset.top += yh_SpringHeaderHeight
-                    
                     }, completion: { (_) -> Void in
-                        
                         if let _ = self.selector {
-                            
                             self.target?.performSelector(self.selector!)
                         }
-                        
                 })
                 
             default:break
@@ -281,13 +270,13 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         springView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
         springView.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: yh_SpringHeaderHeight))
         springView.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: yh_RefreshViewHeight))
         
-        self.addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
     }
     
@@ -340,7 +329,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 
                 radius2 = (min(frame.width, frame.height)/factor) * (1 - (1 - endFactor2) * progress!)
                 
-                self.setNeedsDisplay()
+                setNeedsDisplay()
                 
             }
         }
@@ -470,7 +459,7 @@ class YHRefreshFooter : YHRefreshComponent {
     }
     
     func showNoMoreData() {
-        self.state = .NoMoreData
+        state = .NoMoreData
     }
     
     override func willMoveToSuperview(newSuperview: UIView?) {
@@ -478,8 +467,8 @@ class YHRefreshFooter : YHRefreshComponent {
         
         if let view = newSuperview as? UIScrollView {
             
-            self.superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
-            self.superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
+            superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
+            superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
             
             scrollView = view
             
@@ -501,6 +490,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
             switch state {
                 
             case .Normal:
+                
                 loadingView.hidden = true
                 arrowView.hidden = false
                 messageLabel.text = updateTime == nil ? "上拉刷新..." : "上拉刷新...\n最后更新时间:" + updateTime!.stringFromDate().timeStateForRefresh()
@@ -512,13 +502,13 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 })
                 
                 if currentState == .Refreshing {
-                    
                     UIView.animateWithDuration(0.25, animations: { () -> Void in
                         self.scrollView?.contentInset.bottom -= yh_RefreshViewHeight
                     })
                 }
                 
             case .WillRefresh:
+                
                 messageLabel.text = updateTime == nil ? "释放刷新..." : "释放刷新...\n最后更新时间:" + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 UIImageView.animateWithDuration(0.5, animations: { () -> Void in
@@ -526,6 +516,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 })
                 
             case .Refreshing:
+                
                 loadingView.hidden = false
                 arrowView.hidden = true
                 messageLabel.text = "正在刷新...\n最后更新时间 : 今天\(NSDate().stringFromDate("HH : mm"))"
@@ -536,16 +527,12 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
                 ani.removedOnCompletion = false
-                self.loadingView.layer.addAnimation(ani, forKey: "")
+                loadingView.layer.addAnimation(ani, forKey: "")
                 
                 UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    
                     self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
-                    
                     }, completion: { (_) -> Void in
-                        
                         if let _ = self.selector {
-                            
                             self.target?.performSelector(self.selector!)
                         }
                 })
@@ -558,7 +545,6 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 loadingView.hidden = true
                 messageLabel.hidden = false
                 messageLabel.text = "没有更多数据"
-                
             }
             
             currentState = state
@@ -578,7 +564,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
     func setup() {
         
         backgroundColor = UIColor.clearColor()
-        self.state = .Normal
+        state = .Normal
         
         addSubview(arrowView)
         addSubview(loadingView)
@@ -588,14 +574,14 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        self.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        self.addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -15))
-        self.addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -15))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        self.addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
         arrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI + 0.0001))
     }
@@ -604,9 +590,9 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         
         if keyPath == yh_RefreshContentSizeKey {
             
-            self.hidden = self.scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
+            hidden = self.scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
             
-            self.frame = CGRect(x: 0, y: self.scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshViewHeight)
+            frame = CGRect(x: 0, y: self.scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshViewHeight)
         }
         
         if state == .NoMoreData {
@@ -634,14 +620,10 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                         
                         state = .Refreshing
                     }
-                    
                 }
             }
         }
-        
-        
     }
-    
 }
 
 class YHRefreshAutoFooter : YHRefreshFooter {
@@ -655,7 +637,6 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 activityIndicator.stopAnimating()
                 
                 if currentState == .Refreshing {
-                    
                     UIView.animateWithDuration(0.25, animations: { () -> Void in
                         self.scrollView?.contentInset.bottom -= yh_RefreshViewHeight
                     })
@@ -665,17 +646,11 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 
                 activityIndicator.startAnimating()
                 
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
-                    
-                    self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
-                    
+                UIView.animateWithDuration(0.25, animations: { () -> Void in self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
-                        
                         if let _ = self.selector {
-                            
                             self.target?.performSelector(self.selector!)
                         }
-                        
                 })
                 
             case .NoMoreData :
@@ -708,7 +683,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
     func setup() {
         
         backgroundColor = UIColor.clearColor()
-        self.state = .Normal
+        state = .Normal
         
         addSubview(activityIndicator)
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -718,12 +693,11 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         
         messageLabel.hidden = true
         
-        self.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        self.addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
-        
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
     }
     
@@ -731,9 +705,9 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         
         if keyPath == yh_RefreshContentSizeKey {
             
-            self.hidden = self.scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
+            hidden = scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
             
-            self.frame = CGRect(x: 0, y: self.scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshViewHeight)
+            frame = CGRect(x: 0, y: scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshViewHeight)
         }
         
         if state == .NoMoreData {
@@ -744,7 +718,5 @@ class YHRefreshAutoFooter : YHRefreshFooter {
             
             state = .Refreshing
         }
-        
     }
-
 }
