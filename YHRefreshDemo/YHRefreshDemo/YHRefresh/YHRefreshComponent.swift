@@ -21,6 +21,8 @@ class YHRefreshComponent: UIView {
     
     private var updateTime : NSDate?
     
+    private var titles : [String] = ["下拉刷新...","释放刷新...","正在刷新..."]
+    
     private lazy var loadingView : UIImageView = {
         let iv = UIImageView(image: UIImage(named: "YHRefresh.bundle/YHRefresh_loading"))
         iv.hidden = true
@@ -95,7 +97,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
                 loadingView.hidden = true
                 arrowView.hidden = false
-                messageLabel.text = updateTime == nil ? "下拉刷新..." : "下拉刷新...\n最后更新时间 : " + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 loadingView.layer.removeAllAnimations()
                 
@@ -111,7 +113,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
             case .WillRefresh:
                 
-                messageLabel.text = updateTime == nil ? "释放刷新..." : "释放刷新...\n最后更新时间 : " + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 UIImageView.animateWithDuration(0.5, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI - 0.0001))
@@ -121,7 +123,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
                 loadingView.hidden = false
                 arrowView.hidden = true
-                messageLabel.text = "正在刷新...\n最后更新时间 : 今天\(NSDate().stringFromDate("HH : mm"))"
+                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
                 let ani = CABasicAnimation(keyPath: "transform.rotation")
@@ -493,7 +495,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
                 loadingView.hidden = true
                 arrowView.hidden = false
-                messageLabel.text = updateTime == nil ? "上拉刷新..." : "上拉刷新...\n最后更新时间:" + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 loadingView.layer.removeAllAnimations()
                 
@@ -509,7 +511,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
             case .WillRefresh:
                 
-                messageLabel.text = updateTime == nil ? "释放刷新..." : "释放刷新...\n最后更新时间:" + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 UIImageView.animateWithDuration(0.5, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformIdentity
@@ -519,7 +521,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
                 loadingView.hidden = false
                 arrowView.hidden = true
-                messageLabel.text = "正在刷新...\n最后更新时间 : 今天\(NSDate().stringFromDate("HH : mm"))"
+                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
                 let ani = CABasicAnimation(keyPath: "transform.rotation")
@@ -544,7 +546,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 arrowView.hidden = true
                 loadingView.hidden = true
                 messageLabel.hidden = false
-                messageLabel.text = "没有更多数据"
+                messageLabel.text = NSLocalizedString("没有更多数据", comment: state.rawValue)
             }
             
             currentState = state
@@ -660,7 +662,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 arrowView.hidden = true
                 loadingView.hidden = true
                 messageLabel.hidden = false
-                messageLabel.text = "没有更多数据"
+                messageLabel.text = NSLocalizedString("没有更多数据", comment: state.rawValue)
                
             default : break
                 
