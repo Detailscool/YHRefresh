@@ -9,13 +9,13 @@ Inspired By `MJRefresh`
 ![](http://ww2.sinaimg.cn/mw690/9a2346e2gw1f2oeuztvzoj20hy09a0tf.jpg)
 
 ###Cocoapods
-Edit Podfile 
+edit Podfile 编辑Podfile文件： 
 ``` bash 
   use_frameworks!
   
   pod 'YHRefresh', '~> 0.0.1’
 ```
-then run in terminal
+then run in terminal 在终端运行：
 ``` bash 
   pod install --no-repo-update
 ```
@@ -81,10 +81,9 @@ then run in terminal
 >④YHRefreshAutoFooter<br><br>
 ![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeqawm9vg20ab0iiq71.gif)
 
-
 ##Requirements
 * Swift 2.0
-
+* iOS 8.0
 
 ##License
 
