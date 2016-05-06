@@ -7,6 +7,14 @@ Inspired By `MJRefresh`
 
 ###Components
 ![](http://ww2.sinaimg.cn/mw690/9a2346e2gw1f2oeuztvzoj20hy09a0tf.jpg)
+
+###Cocoapods
+Edit Podfile 
+  use_frameworks!
+  
+  pod 'ZRefreshing', '~> 0.0.1’
+<br/>then run in terminal
+  pod install --no-repo-update
  
 ##Usage
     override func viewDidLoad() {
