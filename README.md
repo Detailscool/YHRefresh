@@ -13,7 +13,7 @@ Edit Podfile
 ``` bash 
   use_frameworks!
   
-  pod 'ZRefreshing', '~> 0.0.1’
+  pod 'YHRefresh', '~> 0.0.1’
 ```
 then run in terminal
 ``` bash 
