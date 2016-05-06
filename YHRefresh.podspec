@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
   s.source_files  = "YHRefresh/*.swift"
   s.resources    = "YHRefresh/YHRefresh.bundle"
   s.requires_arc = true
-  s.platform     = :ios
+  s.platform     = :ios, "8.0"
   
   s.ios.deployment_target = '8.0'
   
