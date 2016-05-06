@@ -83,7 +83,6 @@ then run in terminal 在终端运行：
 
 ##Requirements
 * Swift 2.0
-* iOS 8.0
 
 ##License
 
