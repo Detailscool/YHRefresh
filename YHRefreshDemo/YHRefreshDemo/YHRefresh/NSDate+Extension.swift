@@ -68,20 +68,20 @@ extension String {
             if date.isThisYear() {
                 
                 if date.isToday() {
-
-                    return "今天 \(date.stringFromDate("HH:mm"))"
+    
+                    return NSLocalizedString("今天 ", comment: "Today")+"\(date.stringFromDate("HH:mm"))"
                     
                 }else if date.isYesterday() {
-                    // 昨天
-                    return "昨天 \(date.stringFromDate("HH:mm"))"
+                    
+                    return NSLocalizedString("昨天 ", comment: "Yesterday")+" \(date.stringFromDate("HH:mm"))"
                     
                 }else {
-                    // 既不是今天也不是昨天
+                    
                     return "\(date.stringFromDate("MM-dd HH:mm"))"
                 }
                 
             }else {
-                // 非今年 显示全日期
+                
                 return self
             }
             
