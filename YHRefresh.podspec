@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = "10.8"
   s.source       = { :git => "https://github.com/Detailscool/YHRefresh.git", :tag => "#{s.version}" }
   s.social_media_url   = "http://www.jianshu.com/users/5a65c3921bda/top_articles"
-  s.source_files  = "YHRefrsh"
+  s.source_files  = "YHRefresh"
   s.requires_arc = true
 end
