@@ -13,7 +13,7 @@
 		2E9131671CB566FB007A4535 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131651CB566FB007A4535 /* Main.storyboard */; };
 		2E9131691CB566FB007A4535 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131681CB566FB007A4535 /* Assets.xcassets */; };
 		2E91316C1CB566FB007A4535 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E91316A1CB566FB007A4535 /* LaunchScreen.storyboard */; };
-		2ED170C01CB7675700D12EA9 /* NSDate+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BB1CB7675700D12EA9 /* NSDate+Extension.swift */; };
+		2ECE6D971CDD7FC600A7EA91 /* NSDate+YHRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE6D961CDD7FC600A7EA91 /* NSDate+YHRefresh.swift */; };
 		2ED170C11CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BC1CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift */; };
 		2ED170C21CB7675700D12EA9 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */; };
 		2ED170C31CB7675700D12EA9 /* YHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */; };
@@ -29,7 +29,7 @@
 		2E9131681CB566FB007A4535 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2E91316B1CB566FB007A4535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2E91316D1CB566FB007A4535 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		2ED170BB1CB7675700D12EA9 /* NSDate+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Extension.swift"; sourceTree = "<group>"; };
+		2ECE6D961CDD7FC600A7EA91 /* NSDate+YHRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+YHRefresh.swift"; sourceTree = "<group>"; };
 		2ED170BC1CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+YH_Refresh.swift"; sourceTree = "<group>"; };
 		2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
 		2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshComponent.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 		2ED170BA1CB7675700D12EA9 /* YHRefresh */ = {
 			isa = PBXGroup;
 			children = (
-				2ED170BB1CB7675700D12EA9 /* NSDate+Extension.swift */,
+				2ECE6D961CDD7FC600A7EA91 /* NSDate+YHRefresh.swift */,
 				2ED170BC1CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift */,
 				2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */,
 				2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */,
@@ -122,7 +122,7 @@
 				TargetAttributes = {
 					2E91315D1CB566FB007A4535 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = K98M2XPBH8;
+						DevelopmentTeam = R8UGPPBG7C;
 					};
 				};
 			};
@@ -163,9 +163,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2ED170C01CB7675700D12EA9 /* NSDate+Extension.swift in Sources */,
 				2ED170C41CB7675700D12EA9 /* YHRefreshConst.swift in Sources */,
 				2ED170C11CB7675700D12EA9 /* UIScrollView+YH_Refresh.swift in Sources */,
+				2ECE6D971CDD7FC600A7EA91 /* NSDate+YHRefresh.swift in Sources */,
 				2ED170C31CB7675700D12EA9 /* YHRefreshComponent.swift in Sources */,
 				2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */,
 				2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */,
@@ -280,7 +280,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = YHRefreshDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.hehe.YHRefreshDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -291,7 +293,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = YHRefreshDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = cn.hehe.YHRefreshDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
