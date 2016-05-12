@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */; };
 		2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */; };
+		2E80E5B61CE4C8400085AB7C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E80E5B51CE4C8400085AB7C /* Info.plist */; };
 		2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9131611CB566FB007A4535 /* AppDelegate.swift */; };
 		2E9131671CB566FB007A4535 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131651CB566FB007A4535 /* Main.storyboard */; };
 		2E9131691CB566FB007A4535 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E9131681CB566FB007A4535 /* Assets.xcassets */; };
@@ -16,13 +17,15 @@
 		2ECE6D971CDD7FC600A7EA91 /* NSDate+YHRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE6D961CDD7FC600A7EA91 /* NSDate+YHRefresh.swift */; };
 		2ED170C11CB7675700D12EA9 /* UIScrollView+YHRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BC1CB7675700D12EA9 /* UIScrollView+YHRefresh.swift */; };
 		2ED170C21CB7675700D12EA9 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */; };
-		2ED170C31CB7675700D12EA9 /* YHRefreshComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */; };
+		2ED170C31CB7675700D12EA9 /* YHRefresh.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BE1CB7675700D12EA9 /* YHRefresh.swift */; };
 		2ED170C41CB7675700D12EA9 /* YHRefreshConst.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED170BF1CB7675700D12EA9 /* YHRefreshConst.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2E3E56C71CB5EC1C00C59E87 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
 		2E3E56C81CB5EC1C00C59E87 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
+		2E80E5B41CE4C7D80085AB7C /* YHRefresh.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YHRefresh.h; sourceTree = "<group>"; };
+		2E80E5B51CE4C8400085AB7C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2E91315E1CB566FB007A4535 /* YHRefreshDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YHRefreshDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E9131611CB566FB007A4535 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2E9131661CB566FB007A4535 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -32,7 +35,7 @@
 		2ECE6D961CDD7FC600A7EA91 /* NSDate+YHRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+YHRefresh.swift"; sourceTree = "<group>"; };
 		2ED170BC1CB7675700D12EA9 /* UIScrollView+YHRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+YHRefresh.swift"; sourceTree = "<group>"; };
 		2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
-		2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshComponent.swift; sourceTree = "<group>"; };
+		2ED170BE1CB7675700D12EA9 /* YHRefresh.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefresh.swift; sourceTree = "<group>"; };
 		2ED170BF1CB7675700D12EA9 /* YHRefreshConst.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YHRefreshConst.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,7 +87,9 @@
 				2ECE6D961CDD7FC600A7EA91 /* NSDate+YHRefresh.swift */,
 				2ED170BC1CB7675700D12EA9 /* UIScrollView+YHRefresh.swift */,
 				2ED170BD1CB7675700D12EA9 /* YHRefresh.bundle */,
-				2ED170BE1CB7675700D12EA9 /* YHRefreshComponent.swift */,
+				2ED170BE1CB7675700D12EA9 /* YHRefresh.swift */,
+				2E80E5B41CE4C7D80085AB7C /* YHRefresh.h */,
+				2E80E5B51CE4C8400085AB7C /* Info.plist */,
 				2ED170BF1CB7675700D12EA9 /* YHRefreshConst.swift */,
 			);
 			path = YHRefresh;
@@ -152,6 +157,7 @@
 				2ED170C21CB7675700D12EA9 /* YHRefresh.bundle in Resources */,
 				2E91316C1CB566FB007A4535 /* LaunchScreen.storyboard in Resources */,
 				2E9131691CB566FB007A4535 /* Assets.xcassets in Resources */,
+				2E80E5B61CE4C8400085AB7C /* Info.plist in Resources */,
 				2E9131671CB566FB007A4535 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +172,7 @@
 				2ED170C41CB7675700D12EA9 /* YHRefreshConst.swift in Sources */,
 				2ED170C11CB7675700D12EA9 /* UIScrollView+YHRefresh.swift in Sources */,
 				2ECE6D971CDD7FC600A7EA91 /* NSDate+YHRefresh.swift in Sources */,
-				2ED170C31CB7675700D12EA9 /* YHRefreshComponent.swift in Sources */,
+				2ED170C31CB7675700D12EA9 /* YHRefresh.swift in Sources */,
 				2E3E56CA1CB5EC1C00C59E87 /* GuideViewController.swift in Sources */,
 				2E9131621CB566FB007A4535 /* AppDelegate.swift in Sources */,
 				2E3E56C91CB5EC1C00C59E87 /* DemoViewController.swift in Sources */,

@@ -8,14 +8,14 @@
 
 Pod::Spec.new do |s|
   s.name         = "YHRefresh"
-  s.version      = "0.0.5"
+  s.version      = "0.0.6"
   s.summary      = "A Refresh Framework Written In Swift."  
   s.homepage     = "https://github.com/Detailscool/YHRefresh"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Detailscool" => "detailsli@gmail.com" }
   s.source       = { :git => "https://github.com/Detailscool/YHRefresh.git", :tag => s.version }
   s.social_media_url   = "http://www.jianshu.com/users/5a65c3921bda/top_articles"
-  s.source_files  = "YHRefresh/*.swift"
+  s.source_files  = "YHRefresh/*.{h,swift}"
   s.resources    = "YHRefresh/YHRefresh.bundle"
   s.requires_arc = true
   s.platform     = :ios, "8.0"

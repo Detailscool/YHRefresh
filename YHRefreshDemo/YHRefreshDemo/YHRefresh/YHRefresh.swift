@@ -1,5 +1,5 @@
 //
-//  YHRefreshComponent.swift
+//  YHRefresh.swift
 //
 //  Created by Detailscool on 16/4/1.
 //  Copyright © 2016年 Detailscool. All rights reserved.
