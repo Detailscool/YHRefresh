@@ -101,12 +101,12 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
                 loadingView.layer.removeAllAnimations()
                 
-                UIImageView.animateWithDuration(0.5, animations: { () -> Void in
+                UIImageView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformIdentity
                 })
                
                 if currentState == .Refreshing {
-                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                         self.scrollView.contentInset.top -= yh_RefreshViewHeight
                     })
                 }
@@ -115,7 +115,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
                 messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
                 
-                UIImageView.animateWithDuration(0.5, animations: { () -> Void in
+                UIImageView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI - 0.0001))
                 })
                 
@@ -133,7 +133,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 ani.removedOnCompletion = false
                 loadingView.layer.addAnimation(ani, forKey: "")
                 
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView.contentInset.top += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.selector {
@@ -224,7 +224,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 springView.hidden = false
                 
                 if currentState == .Refreshing {
-                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                         self.scrollView.contentInset.top -= yh_SpringHeaderHeight
                     })
                 }
@@ -235,7 +235,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 
                 activityIndicator.startAnimating()
                 
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView.contentInset.top += yh_SpringHeaderHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.selector {
@@ -499,12 +499,12 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
                 loadingView.layer.removeAllAnimations()
                 
-                UIImageView.animateWithDuration(0.5, animations: { () -> Void in
+                UIImageView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI - 0.0001))
                 })
                 
                 if currentState == .Refreshing {
-                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                         self.scrollView?.contentInset.bottom -= yh_RefreshViewHeight
                     })
                 }
@@ -513,7 +513,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
                 messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
                 
-                UIImageView.animateWithDuration(0.5, animations: { () -> Void in
+                UIImageView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformIdentity
                 })
                 
@@ -531,7 +531,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 ani.removedOnCompletion = false
                 loadingView.layer.addAnimation(ani, forKey: "")
                 
-                UIView.animateWithDuration(0.25, animations: { () -> Void in
+                UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.selector {
@@ -639,7 +639,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 activityIndicator.stopAnimating()
                 
                 if currentState == .Refreshing {
-                    UIView.animateWithDuration(0.25, animations: { () -> Void in
+                    UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                         self.scrollView?.contentInset.bottom -= yh_RefreshViewHeight
                     })
                 }
@@ -648,7 +648,8 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 
                 activityIndicator.startAnimating()
                 
-                UIView.animateWithDuration(0.25, animations: { () -> Void in self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
+                UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
+                    self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.selector {
                             self.target?.performSelector(self.selector!)
@@ -716,7 +717,9 @@ class YHRefreshAutoFooter : YHRefreshFooter {
             return
         }
     
-        if scrollView.contentSize.height != 0 && scrollView?.contentOffset.y > 0 && scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom && state != .Refreshing {
+        if scrollView.contentSize.height != 0 && scrollView?.contentOffset.y > 0 && scrollView?.contentOffset.y > scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom && state != .Refreshing {
+            
+            print("\(scrollView?.contentOffset.y)"+"---"+"\(scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom)")
             
             state = .Refreshing
         }

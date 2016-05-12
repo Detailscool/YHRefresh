@@ -22,3 +22,5 @@ let yh_SpringHeaderHeight : CGFloat = yh_RefreshViewHeight * 4 / 3
 
 let yh_ScreenW = UIScreen.mainScreen().bounds.size.width
 let yh_ScreenH = UIScreen.mainScreen().bounds.size.height
+
+let yh_AnimationDuration = 0.25
