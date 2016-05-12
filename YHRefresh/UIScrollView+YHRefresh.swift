@@ -31,65 +31,50 @@ extension UIScrollView {
             removeObserver(yh_footer!, forKeyPath: yh_RefreshContentSizeKey)
             yh_footer!.removeFromSuperview()
         }
+        
     }
 
     var yh_header : YHRefreshHeader? {
         
         get {
-            
             if let header = objc_getAssociatedObject(self, &YHRefreshHeaderKey) as? YHRefreshHeader {
-
                 return header
-            
             } else {
-                
                 return nil
             }
-        
         }
         
         set {
-            
             if let _ = self.yh_header where self.yh_header != newValue {
-                
                 self.yh_header!.removeFromSuperview()
-                    
             }
             
             self.insertSubview(newValue!, atIndex: 0)
             
             objc_setAssociatedObject(self, &YHRefreshHeaderKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
-            
         }
+        
     }
     
     var yh_footer : YHRefreshFooter? {
         
         get {
-            
             if let footer = objc_getAssociatedObject(self, &YHRefreshFooterKey) as? YHRefreshFooter {
-                
                 return footer
-                
             } else {
-                
                 return nil
             }
-            
         }
         
         set {
-            
             if let _ = self.yh_footer where self.yh_footer != newValue {
-                
                 self.yh_footer!.removeFromSuperview()
-                
             }
             
             self.addSubview(newValue!)
             
             objc_setAssociatedObject(self, &YHRefreshFooterKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
-            
         }
+        
     }
 }

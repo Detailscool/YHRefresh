@@ -62,7 +62,6 @@ class YHRefreshHeader : YHRefreshComponent {
         super.willMoveToSuperview(newSuperview)
         
         if let view = newSuperview as? UIScrollView {
-            
             superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
             superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
             
@@ -152,7 +151,6 @@ class YHRefreshNormalHeader : YHRefreshHeader {
     override init(var frame: CGRect) {
         frame = CGRect(x: 0, y: -yh_RefreshViewHeight, width: yh_ScreenW, height: yh_RefreshViewHeight)
         super.init(frame: frame)
-        
         setup()
     }
     
@@ -186,28 +184,19 @@ class YHRefreshNormalHeader : YHRefreshHeader {
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if let dragging = scrollView?.dragging {
-            
             if dragging == true {
-                
                 if scrollView.contentOffset.y > -scrollView.contentInset.top - yh_RefreshViewHeight && state != .Normal {
-                    
                     state = .Normal
-                    
                 } else if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshViewHeight && state != .WillRefresh{
-                    
                     state = .WillRefresh
                 }
-                
             }else {
-
                 if state == .WillRefresh {
                     state = .Refreshing
                 }
-                
             }
         }
     }
-
 }
 
 class YHRefreshSpringHeader : YHRefreshHeader {
@@ -289,22 +278,16 @@ class YHRefreshSpringHeader : YHRefreshHeader {
             springView.progress = 0
         }
         
-        
         let factor : CGFloat =  1
 
         if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_SpringHeaderHeight && state != .Refreshing{
-            
             state = .Refreshing
         }
         
         if state != .Refreshing && scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshViewHeight * factor {
-            
             let progress = -(scrollView.contentOffset.y + scrollView.contentInset.top + yh_RefreshViewHeight * factor)/(yh_SpringHeaderHeight - yh_RefreshViewHeight * factor)
-            
             springView.progress = progress
-            
         }
-        
     }
     
     private lazy var springView : YHRefreshSpringView = YHRefreshSpringView()
@@ -324,11 +307,8 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 }
                 
                 center2.y = frame.height - (frame.height/factor)*(1 + (factor - 1 - endFactor2) * progress!)
-                
                 radius1 = (min(frame.width, frame.height)/factor) * (1 - (1 - endFactor1) * progress!) //(0.6 * pow((progress! - 1),10) + 0.4)
-                
                 center1.y = frame.height - (frame.height/factor)*(1 - (1 - endFactor1) * progress!)
-                
                 radius2 = (min(frame.width, frame.height)/factor) * (1 - (1 - endFactor2) * progress!)
                 
                 setNeedsDisplay()
@@ -358,10 +338,6 @@ class YHRefreshSpringHeader : YHRefreshHeader {
             super.init(coder: aDecoder)
         }
         
-        override func awakeFromNib() {
-            setup()
-        }
-        
         private func setup() {
             backgroundColor = UIColor.clearColor()
             
@@ -374,24 +350,18 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         
         override func layoutSubviews() {
             super.layoutSubviews()
-            
             setup()
         }
         
         override func drawRect(rect: CGRect) {
             
             let ctx = UIGraphicsGetCurrentContext()
-            
             CGContextAddArc(ctx, center1.x, center1.y, radius1 , 0, CGFloat(2 * M_PI), 1)
-            
             CGContextSetFillColorWithColor(ctx, UIColor.grayColor().CGColor)
-            
             CGContextFillPath(ctx)
             
             CGContextAddArc(ctx, center2.x, center2.y, radius2 , 0, CGFloat(2 * M_PI), 1)
-            
             CGContextSetFillColorWithColor(ctx, UIColor.grayColor().CGColor)
-            
             CGContextFillPath(ctx)
             
             if !isSameCerter() {
@@ -399,19 +369,13 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 calculateTangent()
                 
                 CGContextMoveToPoint(ctx, arcPoint1.x, arcPoint1.y)
-                
                 //            CGContextAddQuadCurveToPoint(ctx, controlPiont.x + radius2, controlPiont.y, arcPoint3.x, arcPoint3.y)
-                
                 CGContextAddLineToPoint(ctx, arcPoint3.x, arcPoint3.y)
-                
                 CGContextAddLineToPoint(ctx, arcPoint4.x, arcPoint4.y)
-                
                 //            CGContextAddQuadCurveToPoint(ctx, controlPiont.x - radius2, controlPiont.y, arcPoint2.x, arcPoint2.y)
-                
                 CGContextAddLineToPoint(ctx, arcPoint2.x, arcPoint2.y)
                 
                 CGContextClosePath(ctx)
-                
                 CGContextFillPath(ctx)
             }
             
@@ -422,24 +386,18 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         }
         
         private func isSameCerter() -> Bool {
-            
             return center1 == center2
         }
         
         private func calculateTangent() {
             
             let centerDistance = sqrt(pow((center1.x - center2.x), 2) + pow((center1.y - center2.y), 2))
-            
             let radiusGap = fabs(radius1 - radius2)
-            
             let angle = acos(radiusGap / centerDistance)
             
             arcPoint1 = CGPoint(x: radius1 * sin(angle) + center1.x, y: -radius1 * cos(angle) + center1.y)
-            
             arcPoint2 = CGPoint(x: -radius1 * sin(angle) + center1.x, y: -radius1 * cos(angle) + center1.y)
-            
             arcPoint3 = CGPoint(x: radius2 * sin(angle) + center2.x, y: -radius2 * cos(angle) + center2.y)
-            
             arcPoint4 = CGPoint(x: -radius2 * sin(angle) + center2.x, y: -radius2 * cos(angle) + center2.y)
             
             let controlY = centerDistance > 2 * (radius1 + radius2) ? center1.y + fabs(centerDistance - radius1 - radius2) : fabs(center2.y + center1.y)/2
@@ -448,7 +406,6 @@ class YHRefreshSpringHeader : YHRefreshHeader {
             
         }
     }
-    
 }
 
 class YHRefreshFooter : YHRefreshComponent {
@@ -468,7 +425,6 @@ class YHRefreshFooter : YHRefreshComponent {
         super.willMoveToSuperview(newSuperview)
         
         if let view = newSuperview as? UIScrollView {
-            
             superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
             superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
             
@@ -480,8 +436,6 @@ class YHRefreshFooter : YHRefreshComponent {
             scrollView.addObserver(self, forKeyPath: yh_RefreshContentSizeKey, options: [], context: nil)
         }
     }
-    
-    
 }
 
 class YHRefreshNormalFooter : YHRefreshFooter {
@@ -555,7 +509,6 @@ class YHRefreshNormalFooter : YHRefreshFooter {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setup()
     }
     
@@ -591,9 +544,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if keyPath == yh_RefreshContentSizeKey {
-            
             hidden = self.scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
-            
             frame = CGRect(x: 0, y: self.scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshViewHeight)
         }
         
@@ -602,24 +553,15 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         }
         
         if keyPath == yh_RefreshContentOffsetKey {
-            
             if let dragging = scrollView?.dragging {
-                
                 if dragging == true {
-                    
                     if scrollView?.contentOffset.y < scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .Normal {
-                        
                         state = .Normal
-                        
                     } else if scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .WillRefresh {
-                        
                         state = .WillRefresh
                     }
-                    
                 }else {
-                    
                     if state == .WillRefresh {
-                        
                         state = .Refreshing
                     }
                 }
@@ -707,9 +649,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if keyPath == yh_RefreshContentSizeKey {
-            
             hidden = scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
-            
             frame = CGRect(x: 0, y: scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshViewHeight)
         }
         
@@ -718,9 +658,6 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         }
     
         if scrollView.contentSize.height != 0 && scrollView?.contentOffset.y > 0 && scrollView?.contentOffset.y > scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom && state != .Refreshing {
-            
-            print("\(scrollView?.contentOffset.y)"+"---"+"\(scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom)")
-            
             state = .Refreshing
         }
     }
