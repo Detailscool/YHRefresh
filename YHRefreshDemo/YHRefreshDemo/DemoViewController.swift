@@ -61,28 +61,7 @@ class TableViewController: UITableViewController {
     func load() {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
-            
-            switch self.style {
-                
-            case .NormalHeader :
-                
-                self.tableView.yh_header?.endRefreshing()
-                
-            case .SpringHeader :
-                
-                self.tableView.yh_header?.endRefreshing()
-                
-            case .NormalFooter :
-                
-                self.tableView.yh_footer?.endRefreshing()
-                
-            case .AutoFooter :
-                
-                self.tableView.yh_footer?.endRefreshing()
-                
-            }
-            
-            
+           
             self.s += 20
             
             for i in self.s..<self.s+20 {
@@ -92,6 +71,22 @@ class TableViewController: UITableViewController {
             }
             
             self.tableView.reloadData()
+            
+            switch self.style {
+                
+            case .NormalHeader :
+                self.tableView.yh_header?.endRefreshing()
+                
+            case .SpringHeader :
+                self.tableView.yh_header?.endRefreshing()
+                
+            case .NormalFooter :
+                self.tableView.yh_footer?.endRefreshing()
+                
+            case .AutoFooter :
+                self.tableView.yh_footer?.endRefreshing()
+                
+            }
             
         })
         

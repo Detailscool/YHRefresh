@@ -185,9 +185,9 @@ class YHRefreshNormalHeader : YHRefreshHeader {
         
         if let dragging = scrollView?.dragging {
             if dragging == true {
-                if scrollView.contentOffset.y > -scrollView.contentInset.top - yh_RefreshViewHeight && state != .Normal {
+                if scrollView.contentOffset.y > -scrollView.contentInset.top - yh_RefreshViewHeight && state != .Normal && state != .Refreshing {
                     state = .Normal
-                } else if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshViewHeight && state != .WillRefresh{
+                } else if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshViewHeight && state != .WillRefresh && state != .Refreshing {
                     state = .WillRefresh
                 }
             }else {
@@ -243,7 +243,6 @@ class YHRefreshSpringHeader : YHRefreshHeader {
     override init(var frame: CGRect) {
         frame = CGRect(x: 0, y: -yh_SpringHeaderHeight, width: yh_ScreenW, height: yh_SpringHeaderHeight)
         super.init(frame: frame)
-        
         setup()
     }
     
@@ -270,7 +269,6 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
     }
-    
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
@@ -555,9 +553,9 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         if keyPath == yh_RefreshContentOffsetKey {
             if let dragging = scrollView?.dragging {
                 if dragging == true {
-                    if scrollView?.contentOffset.y < scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .Normal {
+                    if scrollView?.contentOffset.y < scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .Normal  && state != .Refreshing {
                         state = .Normal
-                    } else if scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .WillRefresh {
+                    } else if scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .WillRefresh && state != .Refreshing {
                         state = .WillRefresh
                     }
                 }else {
@@ -617,7 +615,6 @@ class YHRefreshAutoFooter : YHRefreshFooter {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setup()
     }
     
@@ -631,9 +628,9 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         state = .Normal
         
         addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(messageLabel)
+        
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
         messageLabel.hidden = true
