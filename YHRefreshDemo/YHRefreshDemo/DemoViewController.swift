@@ -8,15 +8,15 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class DemoViewController: UITableViewController {
     
     var numbers = [Int]()
     
     var s = 0
     
-    var style : RefreshStyle
+    var style : YHRefreshStyle
     
-    init(style:RefreshStyle) {
+    init(style:YHRefreshStyle) {
         self.style = style
         super.init(style: UITableViewStyle.Plain)
     }
@@ -39,19 +39,61 @@ class TableViewController: UITableViewController {
             
         case .NormalHeader :
             
-            tableView.yh_header = YHRefreshNormalHeader.header(self, selector: "load") as! YHRefreshNormalHeader
+            tableView.yh_header = YHRefreshNormalHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalHeader
             
         case .SpringHeader :
             
-            tableView.yh_header = YHRefreshSpringHeader.header(self, selector: "load") as! YHRefreshSpringHeader
+            tableView.yh_header = YHRefreshSpringHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshSpringHeader
+            
+        case .GifHeader :
+            
+            let header = YHRefreshGifHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifHeader
+            var refreshingImages = [UIImage]()
+            for i in 1...3 {
+                let image = UIImage(named: String(format:"dropdown_loading_0%zd", i))
+                refreshingImages.append(image!)
+            }
+            
+            var nomalImages = [UIImage]()
+            for i in 1...60 {
+                let image = UIImage(named: String(format:"dropdown_anim__000%zd", i))
+                nomalImages.append(image!)
+            }
+            
+            header.setGifHeader(nomalImages, state: YHRefreshState.Normal)
+            header.setGifHeader(refreshingImages, state: YHRefreshState.WillRefresh)
+            header.setGifHeader(refreshingImages, state: YHRefreshState.Refreshing)
+            
+            tableView.yh_header = header
             
         case .NormalFooter :
             
-            tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: "load") as! YHRefreshNormalFooter
+            tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalFooter
             
         case .AutoFooter :
             
-            tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: "load") as! YHRefreshAutoFooter
+            tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshAutoFooter
+            
+        case .GifFooter :
+            
+            let footer = YHRefreshGifFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifFooter
+            var refreshingImages = [UIImage]()
+            for i in 1...3 {
+                let image = UIImage(named: String(format:"dropdown_loading_0%zd", i))
+                refreshingImages.append(image!)
+            }
+            
+            var nomalImages = [UIImage]()
+            for i in 1...60 {
+                let image = UIImage(named: String(format:"dropdown_anim__000%zd", i))
+                nomalImages.append(image!)
+            }
+            
+            footer.setGifFooter(nomalImages, state: YHRefreshState.Normal)
+            footer.setGifFooter(refreshingImages, state: YHRefreshState.WillRefresh)
+            footer.setGifFooter(refreshingImages, state: YHRefreshState.Refreshing)
+            
+            tableView.yh_footer = footer
             
         }
         
@@ -80,12 +122,17 @@ class TableViewController: UITableViewController {
             case .SpringHeader :
                 self.tableView.yh_header?.endRefreshing()
                 
+            case .GifHeader :
+                self.tableView.yh_header?.endRefreshing()
+                
             case .NormalFooter :
                 self.tableView.yh_footer?.endRefreshing()
                 
             case .AutoFooter :
                 self.tableView.yh_footer?.endRefreshing()
                 
+            case .GifFooter :
+                self.tableView.yh_footer?.endRefreshing()
             }
             
         })

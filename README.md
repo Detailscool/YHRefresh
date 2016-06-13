@@ -3,7 +3,9 @@
 ###Introduction 
 Inspired By `MJRefresh`
 #####A refreshing helper written in Swift, which can be used to refresh easily.Still working on making it more perfectly.Looking forward to any positive suggestion 
+#####Swift 2.2 Supporting Now...Gif refresher has been added to New Version
 #####一款简单易用的Swift版上拉或者下拉刷新...还在努力不断完善中...欢迎任何建设性PR
+#####现已支持Swift 2.2 新增gif上拉下拉刷新
 
 ###Components
 ![](http://ww2.sinaimg.cn/mw690/9a2346e2gw1f2oeuztvzoj20hy09a0tf.jpg)
@@ -13,7 +15,7 @@ edit Podfile 编辑Podfile文件：
 ``` bash 
   use_frameworks!
   
-  pod 'YHRefresh', '~> 0.0.8’
+  pod 'YHRefresh', '~> 0.1.0’
 ```
 then run in terminal 在终端运行：
 ``` bash 
@@ -31,12 +33,14 @@ then run in terminal 在终端运行：
         
         //模拟网络请求
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
-            
-            self.tableView.yh_header?.endRefreshing()
-            
+
             /*网络回调处理*/
-            
+
+	    /*刷新数据*/
             self.tableView.reloadData()
+	    
+	    /*结束刷新*/
+	    self.tableView.yh_header?.endRefreshing()
             
         }
     }
@@ -54,12 +58,14 @@ then run in terminal 在终端运行：
         //模拟网络请求
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
             
-            self.tableView.yh_footer?.endRefreshing()
-            
             /*网络回调处理*/
             
+	    /*刷新数据*/
             self.tableView.reloadData()
-            
+           
+	    /*结束刷新*/
+	    self.tableView.yh_footer?.endRefreshing()
+ 
             /*条件判断是否已经数据最大,若是显示没有更多数据*/
             self.tableView.yh_footer?.showNoMoreData()
             
@@ -82,7 +88,7 @@ then run in terminal 在终端运行：
 ![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeqawm9vg20ab0iiq71.gif)
 
 ##Requirements
-* Swift 2.0
+* Swift 2.2
 
 ##License
 

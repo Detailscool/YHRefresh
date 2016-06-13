@@ -8,11 +8,13 @@
 
 import UIKit
 
-enum RefreshStyle : String {
+enum YHRefreshStyle : String {
     case NormalHeader = "NormalHeader"
     case SpringHeader = "SpringHeader"
+    case GifHeader = "GifHeader"
     case NormalFooter = "NormalFooter"
     case AutoFooter = "AutoFooter"
+    case GifFooter = "GifFooter"
 }
 
 class GuideViewController: UITableViewController {
@@ -20,7 +22,7 @@ class GuideViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: "back")
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(GuideViewController.back))
     }
 
   
@@ -33,18 +35,22 @@ class GuideViewController: UITableViewController {
         case 1 :
             pushViewController(.SpringHeader)
         case 2 :
-             pushViewController(.NormalFooter)
+            pushViewController(.GifHeader)
         case 3 :
+             pushViewController(.NormalFooter)
+        case 4 :
              pushViewController(.AutoFooter)
+        case 5 :
+            pushViewController(.GifFooter)
         default:break
             
         }
         
     }
     
-    func pushViewController(style:RefreshStyle) {
+    func pushViewController(style:YHRefreshStyle) {
         
-        let vc = TableViewController(style: style)
+        let vc = DemoViewController(style: style)
         vc.title = vc.style.rawValue
         navigationController?.pushViewController(vc, animated: true)
         

@@ -15,9 +15,9 @@ class YHRefreshComponent: UIView {
     
     private var selector : Selector?
     
-    private var currentState : RefreshState = RefreshState.Normal
+    private var currentState : YHRefreshState = YHRefreshState.Normal
     
-    private var state : RefreshState = RefreshState.Normal
+    private var state : YHRefreshState = YHRefreshState.Normal
     
     private var updateTime : NSDate?
     
@@ -87,7 +87,7 @@ class YHRefreshHeader : YHRefreshComponent {
 
 class YHRefreshNormalHeader : YHRefreshHeader {
     
-    override var state : RefreshState {
+    override var state : YHRefreshState {
         didSet {
             
             switch state {
@@ -103,7 +103,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 UIImageView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformIdentity
                 })
-               
+                
                 if currentState == .Refreshing {
                     UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                         self.scrollView.contentInset.top -= yh_RefreshViewHeight
@@ -171,9 +171,9 @@ class YHRefreshNormalHeader : YHRefreshHeader {
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
         addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem:self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -15))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -yh_ViewMargin))
         addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
         addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
@@ -201,7 +201,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
 
 class YHRefreshSpringHeader : YHRefreshHeader {
     
-    override var state : RefreshState {
+    override var state : YHRefreshState {
         didSet {
             
             switch state {
@@ -233,7 +233,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 })
                 
             default:break
-    
+                
             }
             
             currentState = state
@@ -277,7 +277,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         }
         
         let factor : CGFloat =  1
-
+        
         if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_SpringHeaderHeight && state != .Refreshing{
             state = .Refreshing
         }
@@ -406,6 +406,156 @@ class YHRefreshSpringHeader : YHRefreshHeader {
     }
 }
 
+class YHRefreshGifHeader : YHRefreshHeader {
+    
+    override var state : YHRefreshState {
+        didSet {
+            
+            switch state {
+                
+            case .Normal:
+                
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                
+                if currentState == .Refreshing {
+                    UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
+                        self.scrollView.contentInset.top -= yh_RefreshViewHeight
+                    })
+                    gifView.stopAnimating()
+                }
+                
+                if currentState == .WillRefresh {
+                    gifView.stopAnimating()
+                }
+                
+            case .WillRefresh:
+                
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                
+                let images = stateImages[state.rawValue]
+                
+                if let _ = images {
+                    if images!.count == 1 {
+                        gifView.image = images!.first
+                    }else {
+                        gifView.animationImages = images
+                        gifView.animationDuration = stateDurations[state.rawValue]!
+                        gifView.startAnimating()
+                    }
+                }
+                
+            case .Refreshing:
+                
+                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
+                updateTime = NSDate()
+                
+                let images = stateImages[state.rawValue]
+                
+                if let _ = images {
+                    if images!.count == 1 {
+                        gifView.image = images!.first
+                    }else {
+                        gifView.animationImages = images
+                        gifView.animationDuration = stateDurations[state.rawValue]!
+                        gifView.startAnimating()
+                    }
+                }
+                
+                UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
+                    self.scrollView.contentInset.top += yh_RefreshViewHeight
+                    }, completion: { (_) -> Void in
+                        if let _ = self.selector {
+                            self.target?.performSelector(self.selector!)
+                        }
+                })
+                
+            default : break
+                
+            }
+            
+            currentState = state
+        }
+    }
+    
+    override init(var frame: CGRect) {
+        frame = CGRect(x: 0, y: -yh_RefreshViewHeight, width: yh_ScreenW, height: yh_RefreshViewHeight)
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup() {
+        
+        backgroundColor = UIColor.clearColor()
+        
+        addSubview(gifView)
+        addSubview(messageLabel)
+        
+        gifView.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -yh_ViewMargin))
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if let dragging = scrollView?.dragging {
+            if dragging == true {
+                if scrollView.contentOffset.y > -scrollView.contentInset.top - yh_RefreshViewHeight && state != .Normal && state != .Refreshing {
+                    state = .Normal
+                } else if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshViewHeight && state != .WillRefresh && state != .Refreshing {
+                    state = .WillRefresh
+                }
+            }else {
+                if state == .WillRefresh {
+                    state = .Refreshing
+                }
+            }
+        }
+        
+        if state == .Normal {
+            pullingPercent = (scrollView.contentOffset.y + scrollView.contentInset.top) / (-yh_RefreshViewHeight)
+            
+            let images = stateImages[state.rawValue]
+            if let _ = images where pullingPercent<=1 && pullingPercent>=0 {
+                if images!.count == 1 {
+                    gifView.image = images!.first
+                }else {
+                    gifView.image = stateImages[state.rawValue]![Int(CGFloat(images!.count) * pullingPercent)]
+                }
+            }
+        }
+        
+    }
+    
+    private var pullingPercent : CGFloat!
+    
+    private lazy var gifView = UIImageView()
+    
+    private lazy var stateImages = [String : [UIImage]]()
+    
+    private lazy var stateDurations = [String : NSTimeInterval]()
+    
+    func setGifHeader(images:[UIImage],duration:NSTimeInterval,state:YHRefreshState) {
+        stateImages[state.rawValue] = images
+        stateDurations[state.rawValue] = duration
+    }
+    
+    func setGifHeader(images:[UIImage],state:YHRefreshState) {
+        stateImages[state.rawValue] = images
+        stateDurations[state.rawValue] = Double(images.count) * 0.1
+    }
+    
+}
+
 class YHRefreshFooter : YHRefreshComponent {
     
     class func footer(target:AnyObject?,selector:Selector?) -> AnyObject {
@@ -438,7 +588,7 @@ class YHRefreshFooter : YHRefreshComponent {
 
 class YHRefreshNormalFooter : YHRefreshFooter {
     
-    override var state : RefreshState {
+    override var state : YHRefreshState {
         didSet {
             
             switch state {
@@ -530,7 +680,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -15))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -yh_ViewMargin))
         addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
         
         addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: arrowView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
@@ -570,7 +720,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
 
 class YHRefreshAutoFooter : YHRefreshFooter {
     
-    override var state : RefreshState {
+    override var state : YHRefreshState {
         didSet {
             switch state {
                 
@@ -604,7 +754,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 loadingView.hidden = true
                 messageLabel.hidden = false
                 messageLabel.text = NSLocalizedString("没有更多数据", comment: state.rawValue)
-               
+                
             default : break
                 
             }
@@ -653,9 +803,169 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         if state == .NoMoreData {
             return
         }
-    
+        
         if scrollView.contentSize.height != 0 && scrollView?.contentOffset.y > 0 && scrollView?.contentOffset.y > scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom && state != .Refreshing {
             state = .Refreshing
         }
     }
+}
+
+class YHRefreshGifFooter : YHRefreshFooter {
+    
+    override var state : YHRefreshState {
+        didSet {
+            
+            switch state {
+                
+            case .Normal:
+                
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                
+                if currentState == .Refreshing {
+                    UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
+                        self.scrollView?.contentInset.bottom -= yh_RefreshViewHeight
+                    })
+                    gifView.stopAnimating()
+                }
+                
+                if currentState == .WillRefresh {
+                    gifView.stopAnimating()
+                }
+                
+            case .WillRefresh:
+                
+                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                
+                let images = stateImages[state.rawValue]
+                
+                if let _ = images {
+                    if images!.count == 1 {
+                        gifView.image = images!.first
+                    }else {
+                        gifView.animationImages = images
+                        gifView.animationDuration = stateDurations[state.rawValue]!
+                        gifView.startAnimating()
+                    }
+                }
+                
+            case .Refreshing:
+                
+                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
+                updateTime = NSDate()
+                
+                let images = stateImages[state.rawValue]
+                
+                if let _ = images {
+                    if images!.count == 1 {
+                        gifView.image = images!.first
+                    }else {
+                        gifView.animationImages = images
+                        gifView.animationDuration = stateDurations[state.rawValue]!
+                        gifView.startAnimating()
+                    }
+                }
+                
+                UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
+                    self.scrollView.contentInset.bottom += yh_RefreshViewHeight
+                    }, completion: { (_) -> Void in
+                        if let _ = self.selector {
+                            self.target?.performSelector(self.selector!)
+                        }
+                })
+                
+            default : break
+                
+            }
+            
+            currentState = state
+        }
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setup() {
+        
+        backgroundColor = UIColor.clearColor()
+        
+        addSubview(gifView)
+        addSubview(messageLabel)
+        
+        gifView.translatesAutoresizingMaskIntoConstraints = false
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.Trailing, relatedBy: NSLayoutRelation.Equal, toItem: messageLabel, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: -yh_ViewMargin))
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0))
+        
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        if keyPath == yh_RefreshContentSizeKey {
+            hidden = self.scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
+            frame = CGRect(x: 0, y: self.scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshViewHeight)
+        }
+        
+        if state == .NoMoreData {
+            return
+        }
+        
+        if keyPath == yh_RefreshContentOffsetKey {
+            if let dragging = scrollView?.dragging {
+                if dragging == true {
+                    if scrollView?.contentOffset.y < scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .Normal  && state != .Refreshing {
+                        state = .Normal
+                    } else if scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshViewHeight && state != .WillRefresh && state != .Refreshing {
+                        state = .WillRefresh
+                    }
+                }else {
+                    if state == .WillRefresh {
+                        state = .Refreshing
+                    }
+                }
+            }
+            
+            if state == .Normal {
+                pullingPercent = (scrollView.contentOffset.y - scrollView.contentSize.height + yh_ScreenH - scrollView.contentInset.bottom) / yh_RefreshViewHeight
+                
+                let images = stateImages[state.rawValue]
+                if let _ = images where pullingPercent<=1 && pullingPercent>=0 {
+                    if images!.count == 1 {
+                        gifView.image = images!.first
+                    }else {
+                        gifView.image = stateImages[state.rawValue]![Int(CGFloat(images!.count) * pullingPercent)]
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    private var pullingPercent : CGFloat!
+    
+    private lazy var gifView = UIImageView()
+    
+    private lazy var stateImages = [String : [UIImage]]()
+    
+    private lazy var stateDurations = [String : NSTimeInterval]()
+    
+    func setGifFooter(images:[UIImage],duration:NSTimeInterval,state:YHRefreshState) {
+        stateImages[state.rawValue] = images
+        stateDurations[state.rawValue] = duration
+    }
+    
+    func setGifFooter(images:[UIImage],state:YHRefreshState) {
+        stateImages[state.rawValue] = images
+        stateDurations[state.rawValue] = Double(images.count) * 0.1
+    }
+    
 }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-enum RefreshState : String {
+enum YHRefreshState : String {
     case Normal = "Normal"
     case WillRefresh = "WillRefresh"
     case Refreshing = "Refreshing"
@@ -24,3 +24,4 @@ let yh_ScreenW = UIScreen.mainScreen().bounds.size.width
 let yh_ScreenH = UIScreen.mainScreen().bounds.size.height
 
 let yh_AnimationDuration = 0.25
+let yh_ViewMargin : CGFloat = 15
