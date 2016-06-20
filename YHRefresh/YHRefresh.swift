@@ -15,13 +15,15 @@ class YHRefreshComponent: UIView {
     
     private var selector : Selector?
     
+    private var handler : (Void -> ())?
+    
     private var currentState : YHRefreshState = YHRefreshState.Normal
     
     private var state : YHRefreshState = YHRefreshState.Normal
     
     private var updateTime : NSDate?
     
-    private var titles : [String] = [NSLocalizedString("下拉刷新...", comment: "PullDownToRefresh"),NSLocalizedString("释放刷新...", comment: "ReleaseToRefresh"),NSLocalizedString("正在刷新...", comment: "Refreshing"),NSLocalizedString("上拉刷新", comment: "PullUpToRefresh"),NSLocalizedString("最后更新时间 : ", comment: "Lastest Update"),NSLocalizedString("今天 ", comment: "Today")]
+    private var titles : [String] = [NSLocalizedString("下拉刷新...", comment: "PullDownToRefresh"),NSLocalizedString("释放刷新...", comment: "ReleaseToRefresh"),NSLocalizedString("正在刷新...", comment: "Refreshing"),NSLocalizedString("上拉刷新", comment: "PullUpToRefresh"),NSLocalizedString("最后更新时间 : ", comment: "Lastest Update"),NSLocalizedString("今天 ", comment: "Today"),NSLocalizedString("没有更多数据", comment: "NoMoreData")]
     
     private lazy var loadingView : UIImageView = {
         let iv = UIImageView(image: UIImage(named: "YHRefresh.bundle/YHRefresh_loading"))
@@ -94,6 +96,12 @@ class YHRefreshHeader : YHRefreshComponent {
         return header
     }
     
+    class func header(handler:(Void -> ())) -> AnyObject {
+        let header = self.init()
+        header.handler = handler
+        return header
+    }
+    
     func beginRefreshing() {
         state = .Refreshing
     }
@@ -150,6 +158,9 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView.contentInset.top += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
+                        if let _ = self.handler {
+                            self.handler!()
+                        }
                         if let _ = self.selector {
                             self.target?.performSelector(self.selector!)
                         }
@@ -242,6 +253,9 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView.contentInset.top += yh_SpringHeaderHeight
                     }, completion: { (_) -> Void in
+                        if let _ = self.handler {
+                            self.handler!()
+                        }
                         if let _ = self.selector {
                             self.target?.performSelector(self.selector!)
                         }
@@ -479,6 +493,9 @@ class YHRefreshGifHeader : YHRefreshHeader {
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView.contentInset.top += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
+                        if let _ = self.handler {
+                            self.handler!()
+                        }
                         if let _ = self.selector {
                             self.target?.performSelector(self.selector!)
                         }
@@ -582,17 +599,6 @@ class YHRefreshFooter : YHRefreshComponent {
         fatalError("init(coder:) has not been implemented")
     }
     
-    class func footer(target:AnyObject?,selector:Selector?) -> AnyObject {
-        let footer = self.init()
-        footer.target = target
-        footer.selector = selector
-        return footer
-    }
-    
-    func showNoMoreData() {
-        state = .NoMoreData
-    }
-    
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         
@@ -608,6 +614,24 @@ class YHRefreshFooter : YHRefreshComponent {
             scrollView.addObserver(self, forKeyPath: yh_RefreshContentSizeKey, options: [], context: nil)
         }
     }
+    
+    class func footer(target:AnyObject?,selector:Selector?) -> AnyObject {
+        let footer = self.init()
+        footer.target = target
+        footer.selector = selector
+        return footer
+    }
+    
+    class func footer(handler:(Void -> ())) -> AnyObject {
+        let footer = self.init()
+        footer.handler = handler
+        return footer
+    }
+    
+    func showNoMoreData() {
+        state = .NoMoreData
+    }
+    
 }
 
 class YHRefreshNormalFooter : YHRefreshFooter {
@@ -660,6 +684,9 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
+                        if let _ = self.handler {
+                            self.handler!()
+                        }
                         if let _ = self.selector {
                             self.target?.performSelector(self.selector!)
                         }
@@ -672,7 +699,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 arrowView.hidden = true
                 loadingView.hidden = true
                 messageLabel.hidden = false
-                messageLabel.text = NSLocalizedString("没有更多数据", comment: state.rawValue)
+                messageLabel.text = titles[6]
             }
             
             currentState = state
@@ -765,6 +792,9 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView?.contentInset.bottom += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
+                        if let _ = self.handler {
+                            self.handler!()
+                        }
                         if let _ = self.selector {
                             self.target?.performSelector(self.selector!)
                         }
@@ -777,7 +807,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
                 arrowView.hidden = true
                 loadingView.hidden = true
                 messageLabel.hidden = false
-                messageLabel.text = NSLocalizedString("没有更多数据", comment: state.rawValue)
+                messageLabel.text = titles[6]
                 
             default : break
                 
@@ -892,6 +922,9 @@ class YHRefreshGifFooter : YHRefreshFooter {
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.scrollView.contentInset.bottom += yh_RefreshViewHeight
                     }, completion: { (_) -> Void in
+                        if let _ = self.handler {
+                            self.handler!()
+                        }
                         if let _ = self.selector {
                             self.target?.performSelector(self.selector!)
                         }
