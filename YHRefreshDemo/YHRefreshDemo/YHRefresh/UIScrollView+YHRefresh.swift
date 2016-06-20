@@ -50,7 +50,6 @@ extension UIScrollView {
             }
             
             self.insertSubview(newValue!, atIndex: 0)
-            
             objc_setAssociatedObject(self, &YHRefreshHeaderKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
         
@@ -72,9 +71,24 @@ extension UIScrollView {
             }
             
             self.addSubview(newValue!)
-            
             objc_setAssociatedObject(self, &YHRefreshFooterKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
         
+    }
+    
+    func isHeaderRefreshing () -> Bool {
+        if let _ = yh_header {
+            return yh_header!.isRefreshing
+        }else {
+            return false
+        }
+    }
+    
+    func isFooterRefreshing () -> Bool {
+        if let _ = yh_footer {
+            return yh_footer!.isRefreshing
+        }else {
+            return false
+        }
     }
 }

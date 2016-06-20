@@ -21,7 +21,7 @@ class YHRefreshComponent: UIView {
     
     private var updateTime : NSDate?
     
-    private var titles : [String] = ["下拉刷新...","释放刷新...","正在刷新..."]
+    private var titles : [String] = [NSLocalizedString("下拉刷新...", comment: "PullDownToRefresh"),NSLocalizedString("释放刷新...", comment: "ReleaseToRefresh"),NSLocalizedString("正在刷新...", comment: "Refreshing"),NSLocalizedString("上拉刷新", comment: "PullUpToRefresh"),NSLocalizedString("最后更新时间 : ", comment: "Lastest Update"),NSLocalizedString("今天 ", comment: "Today")]
     
     private lazy var loadingView : UIImageView = {
         let iv = UIImageView(image: UIImage(named: "YHRefresh.bundle/YHRefresh_loading"))
@@ -54,9 +54,24 @@ class YHRefreshComponent: UIView {
         state = .Normal
     }
     
+    var isRefreshing : Bool {
+        get{
+            return state == .Normal
+        }
+    }
+    
 }
 
 class YHRefreshHeader : YHRefreshComponent {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        state = YHRefreshState.Normal
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
@@ -96,7 +111,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
                 loadingView.hidden = true
                 arrowView.hidden = false
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[0] : titles[0] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 loadingView.layer.removeAllAnimations()
                 
@@ -112,7 +127,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
             case .WillRefresh:
                 
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[1] : titles[1] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 UIImageView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI - 0.0001))
@@ -122,7 +137,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
                 loadingView.hidden = false
                 arrowView.hidden = true
-                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
+                messageLabel.text = titles[2] + "\n" + titles[4] + titles[5] + "\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
                 let ani = CABasicAnimation(keyPath: "transform.rotation")
@@ -158,7 +173,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    private func setup() {
         
         backgroundColor = UIColor.clearColor()
         
@@ -181,7 +196,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if let dragging = scrollView?.dragging {
             if dragging == true {
@@ -250,7 +265,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    private func setup() {
         
         backgroundColor = UIColor.clearColor()
         
@@ -270,7 +285,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if scrollView.dragging == false {
             springView.progress = 0
@@ -415,7 +430,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
                 
             case .Normal:
                 
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[0] : titles[0] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 if currentState == .Refreshing {
                     UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
@@ -430,7 +445,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
                 
             case .WillRefresh:
                 
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[1] : titles[1] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 let images = stateImages[state.rawValue]
                 
@@ -446,7 +461,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
                 
             case .Refreshing:
                 
-                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
+                messageLabel.text = titles[2] + "\n" + titles[4] + titles[5] + "\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
                 let images = stateImages[state.rawValue]
@@ -487,7 +502,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    private func setup() {
         
         backgroundColor = UIColor.clearColor()
         
@@ -505,7 +520,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if let dragging = scrollView?.dragging {
             if dragging == true {
@@ -558,6 +573,15 @@ class YHRefreshGifHeader : YHRefreshHeader {
 
 class YHRefreshFooter : YHRefreshComponent {
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        state = YHRefreshState.Normal
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     class func footer(target:AnyObject?,selector:Selector?) -> AnyObject {
         let footer = self.init()
         footer.target = target
@@ -597,7 +621,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
                 loadingView.hidden = true
                 arrowView.hidden = false
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[3] : titles[3] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 loadingView.layer.removeAllAnimations()
                 
@@ -613,7 +637,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
             case .WillRefresh:
                 
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[1] : titles[1] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 UIImageView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
                     self.arrowView.transform = CGAffineTransformIdentity
@@ -623,7 +647,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 
                 loadingView.hidden = false
                 arrowView.hidden = true
-                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
+                messageLabel.text = titles[2] + "\n" + titles[4] + titles[5] + "\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
                 let ani = CABasicAnimation(keyPath: "transform.rotation")
@@ -664,7 +688,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    private func setup() {
         
         backgroundColor = UIColor.clearColor()
         state = .Normal
@@ -689,7 +713,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         arrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI + 0.0001))
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if keyPath == yh_RefreshContentSizeKey {
             hidden = self.scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
@@ -772,7 +796,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    private func setup() {
         
         backgroundColor = UIColor.clearColor()
         state = .Normal
@@ -793,7 +817,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if keyPath == yh_RefreshContentSizeKey {
             hidden = scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
@@ -819,7 +843,7 @@ class YHRefreshGifFooter : YHRefreshFooter {
                 
             case .Normal:
                 
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[0], comment: state.rawValue) : NSLocalizedString(titles[0], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[3] : titles[3] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 if currentState == .Refreshing {
                     UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
@@ -834,7 +858,7 @@ class YHRefreshGifFooter : YHRefreshFooter {
                 
             case .WillRefresh:
                 
-                messageLabel.text = updateTime == nil ? NSLocalizedString(titles[1], comment: state.rawValue) : NSLocalizedString(titles[1], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update") + updateTime!.stringFromDate().timeStateForRefresh()
+                messageLabel.text = updateTime == nil ? titles[1] : titles[1] + "\n" + titles[4] + updateTime!.stringFromDate().timeStateForRefresh()
                 
                 let images = stateImages[state.rawValue]
                 
@@ -850,7 +874,7 @@ class YHRefreshGifFooter : YHRefreshFooter {
                 
             case .Refreshing:
                 
-                messageLabel.text = NSLocalizedString(titles[2], comment: state.rawValue) + "\n" + NSLocalizedString("最后更新时间 : ", comment: "Lastest Update")+NSLocalizedString("今天 ", comment: "Today")+"\(NSDate().stringFromDate("HH : mm"))"
+                messageLabel.text = titles[2] + "\n" + titles[4] + titles[5] + "\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
                 let images = stateImages[state.rawValue]
@@ -890,7 +914,7 @@ class YHRefreshGifFooter : YHRefreshFooter {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setup() {
+    private func setup() {
         
         backgroundColor = UIColor.clearColor()
         
@@ -908,7 +932,7 @@ class YHRefreshGifFooter : YHRefreshFooter {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    internal override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
         if keyPath == yh_RefreshContentSizeKey {
             hidden = self.scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
