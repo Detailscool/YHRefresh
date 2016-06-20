@@ -56,7 +56,7 @@ class YHRefreshComponent: UIView {
     
     var isRefreshing : Bool {
         get{
-            return state == .Normal
+            return state == .Refreshing
         }
     }
     
