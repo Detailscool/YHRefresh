@@ -45,9 +45,9 @@ extension String {
         
         if let date = createDate {
             if date.isToday() {
-                return NSLocalizedString("今天 ", comment: "Today")+"\(date.stringFromDate("HH:mm"))"
+                return yh_Titles[6] + "\(date.stringFromDate("HH:mm"))"
             }else if date.isYesterday() {
-                return NSLocalizedString("昨天 ", comment: "Yesterday")+" \(date.stringFromDate("HH:mm"))"
+                return yh_Titles[7] + " \(date.stringFromDate("HH:mm"))"
             }else {
                 return "\(date.stringFromDate("MM-dd HH:mm"))"
             }

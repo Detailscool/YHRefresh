@@ -28,6 +28,16 @@ class DemoViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Test
+        /*
+        tableView.rowHeight = 10;
+        tableView.tableFooterView = UIView()
+        tableView.contentInset.bottom = 50
+        let bottomView = UIView(frame: CGRect(x: 0, y: yh_ScreenH - 50, width: yh_ScreenW, height: 50))
+        bottomView.backgroundColor = UIColor.redColor()
+        UIApplication.sharedApplication().keyWindow!.addSubview(bottomView)
+         */
+        
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         
         for i in s..<s+20 {
@@ -141,25 +151,22 @@ class DemoViewController: UITableViewController {
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return numbers.count
     }
 
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier")
-        
         cell!.textLabel?.text = "\(indexPath.row)"
-        // Configure the cell...
         cell?.textLabel?.textColor = UIColor.whiteColor()
-        
         return cell!
+        
     }
     
     func colorforIndex(index: Int) -> UIColor {

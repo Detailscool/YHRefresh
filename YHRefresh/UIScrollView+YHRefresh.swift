@@ -76,7 +76,7 @@ extension UIScrollView {
         
     }
     
-    func isHeaderRefreshing () -> Bool {
+    func isHeaderRefreshing() -> Bool {
         if let _ = yh_header {
             return yh_header!.isRefreshing
         }else {
@@ -84,11 +84,16 @@ extension UIScrollView {
         }
     }
     
-    func isFooterRefreshing () -> Bool {
+    func isFooterRefreshing() -> Bool {
         if let _ = yh_footer {
             return yh_footer!.isRefreshing
         }else {
             return false
         }
     }
+    
+    func isRefreshing() -> Bool {
+        return isHeaderRefreshing() || isFooterRefreshing()
+    }
+    
 }
