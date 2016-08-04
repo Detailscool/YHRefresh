@@ -8,13 +8,12 @@ Inspired By `MJRefresh`
 #####现已支持Swift 2.2 新增gif上拉下拉刷新
 
 ###Components
-![](http://ww2.sinaimg.cn/mw690/9a2346e2gw1f2oeuztvzoj20hy09a0tf.jpg)
+![](http://ww3.sinaimg.cn/mw1024/9a2346e2gw1f51ztblwehj20j1073gm7.jpg)
 
 ###Cocoapods
 edit Podfile 编辑Podfile文件： 
 ``` bash 
   use_frameworks!
-  
   pod 'YHRefresh', '~> 0.1.2’
 ```
 then run in terminal 在终端运行：
@@ -33,15 +32,14 @@ then run in terminal 在终端运行：
         
         //模拟网络请求
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
-
-            /*网络回调处理*/
-
-	    /*刷新数据*/
-            self.tableView.reloadData()
+	
+	      /*网络回调处理*/
 	    
-	    /*结束刷新*/
-	    self.tableView.yh_header?.endRefreshing()
-            
+	      /*刷新数据*/
+	      self.tableView.reloadData()
+	      /*结束刷新*/
+	      self.tableView.yh_header?.endRefreshing()
+    
         }
     }
     
@@ -57,18 +55,17 @@ then run in terminal 在终端运行：
         
         //模拟网络请求
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
-            
-            /*网络回调处理*/
-            
-	    /*刷新数据*/
-            self.tableView.reloadData()
-           
-	    /*结束刷新*/
-	    self.tableView.yh_footer?.endRefreshing()
- 
-            /*条件判断是否已经数据最大,若是显示没有更多数据*/
-            self.tableView.yh_footer?.showNoMoreData()
-            
+        
+ 	      /*网络回调处理*/
+ 	    
+	      /*刷新数据*/
+	      self.tableView.reloadData()
+	      /*结束刷新*/
+	      self.tableView.yh_footer?.endRefreshing()
+	    
+	      /*条件判断是否已经数据最大,若是显示没有更多数据*/
+ 	      //self.tableView.yh_footer?.showNoMoreData()
+
         }
     }
     -----------------------------------分割线-----------------------------------
@@ -76,19 +73,26 @@ then run in terminal 在终端运行：
 
 ##Effect
 >①YHRefreshNormalHeader<br><br>
-![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeq6qwpbg20ab0iiwg9.gif)
+![](http://ww2.sinaimg.cn/mw1024/9a2346e2jw1f52us5ae1wg208h0f943j.gif)
 
 >②YHRefreshSpringHeader<br><br>
-![](http://ww3.sinaimg.cn/mw690/9a2346e2gw1f2oeq84xd9g20ab0ii0vt.gif)
+![](http://ww1.sinaimg.cn/mw1024/9a2346e2gw1f52us2n93ig208i0f7n1e.gif)
 
->③YHRefreshNormalFooter<br><br>
-![](http://ww1.sinaimg.cn/mw690/9a2346e2gw1f2oeq945pkg20ab0iiwgh.gif)
+>③YHRefreshGifHeader<br><br>
+![](http://ww4.sinaimg.cn/mw1024/9a2346e2gw1f4yfcyypjeg208h0fcdmt.gif)
 
->④YHRefreshAutoFooter<br><br>
-![](http://ww4.sinaimg.cn/mw690/9a2346e2gw1f2oeqawm9vg20ab0iiq71.gif)
+>④YHRefreshNormalFooter<br><br>
+![](http://ww2.sinaimg.cn/mw1024/9a2346e2jw1f52wcf4mq6g208i0fajxb.gif)
+
+>⑤YHRefreshAutoFooter<br><br>
+![](http://ww4.sinaimg.cn/mw1024/9a2346e2jw1f52wcgn3psg208i0fa0xm.gif)
+
+>⑥YHRefreshGifFooter<br><br>
+![](http://ww1.sinaimg.cn/mw1024/9a2346e2gw1f4yfd1c1pag208h0fcjuj.gif)
 
 ##Requirements
 * Swift 2.2
+* Xcode 7.3
 
 ##License
 
