@@ -12,6 +12,7 @@ enum YHRefreshStyle : String {
     case NormalHeader = "NormalHeader"
     case SpringHeader = "SpringHeader"
     case GifHeader = "GifHeader"
+    case MaterialHeader = "MaterialHeader"
     case NormalFooter = "NormalFooter"
     case AutoFooter = "AutoFooter"
     case GifFooter = "GifFooter"
@@ -37,10 +38,12 @@ class GuideViewController: UITableViewController {
         case 2 :
             pushViewController(.GifHeader)
         case 3 :
-             pushViewController(.NormalFooter)
+            pushViewController(.MaterialHeader)
         case 4 :
-             pushViewController(.AutoFooter)
+             pushViewController(.NormalFooter)
         case 5 :
+             pushViewController(.AutoFooter)
+        case 6 :
             pushViewController(.GifFooter)
         default:break
             

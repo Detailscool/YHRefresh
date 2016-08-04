@@ -15,7 +15,7 @@ edit Podfile 编辑Podfile文件：
 ``` bash 
   use_frameworks!
   
-  pod 'YHRefresh', '~> 0.1.0’
+  pod 'YHRefresh', '~> 0.1.2’
 ```
 then run in terminal 在终端运行：
 ``` bash 

@@ -41,22 +41,18 @@ class DemoViewController: UITableViewController {
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         
         for i in s..<s+20 {
-            
             numbers.append(i)
         }
         
         switch style{
             
         case .NormalHeader :
-            
             tableView.yh_header = YHRefreshNormalHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalHeader
             
         case .SpringHeader :
-            
             tableView.yh_header = YHRefreshSpringHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshSpringHeader
             
         case .GifHeader :
-            
             let header = YHRefreshGifHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifHeader
             var refreshingImages = [UIImage]()
             for i in 1...3 {
@@ -76,16 +72,16 @@ class DemoViewController: UITableViewController {
             
             tableView.yh_header = header
             
-        case .NormalFooter :
+        case .MaterialHeader :
+            tableView.yh_header = YHRefreshMaterialHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshMaterialHeader
             
+        case .NormalFooter :
             tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalFooter
             
         case .AutoFooter :
-            
             tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshAutoFooter
             
         case .GifFooter :
-            
             let footer = YHRefreshGifFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifFooter
             var refreshingImages = [UIImage]()
             for i in 1...3 {
@@ -117,9 +113,7 @@ class DemoViewController: UITableViewController {
             self.s += 20
             
             for i in self.s..<self.s+20 {
-                
                 self.numbers.append(i)
-                
             }
             
             self.tableView.reloadData()
@@ -135,6 +129,9 @@ class DemoViewController: UITableViewController {
             case .GifHeader :
                 self.tableView.yh_header?.endRefreshing()
                 
+            case .MaterialHeader :
+                self.tableView.yh_header?.endRefreshing()
+    
             case .NormalFooter :
                 self.tableView.yh_footer?.endRefreshing()
                 

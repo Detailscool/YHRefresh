@@ -590,6 +590,170 @@ class YHRefreshGifHeader : YHRefreshHeader {
     
 }
 
+class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate {
+    override var state : YHRefreshState {
+        didSet {
+            
+            switch state {
+                
+            case .Normal:
+                materialView.layer.removeAllAnimations()
+                
+                UIView.animateWithDuration(yh_AnimationDuration, animations: { 
+                    self.frame.origin.y = -yh_SpringHeaderHeight
+                    }, completion: { (_) in
+                        
+                })
+                
+            case .Refreshing:
+                let ani = CABasicAnimation(keyPath: "transform.rotation")
+                ani.toValue = 2 * M_PI
+                ani.duration = 0.75
+                ani.repeatCount = MAXFLOAT
+                ani.removedOnCompletion = false
+                materialView.layer.addAnimation(ani, forKey: "")
+                
+                if let _ = self.handler {
+                    self.handler!()
+                }
+                if let _ = self.selector {
+                    self.target?.performSelector(self.selector!)
+                }
+                
+            default:break
+                
+            }
+            
+            currentState = state
+        }
+    }
+    
+    private var panGesture : UIPanGestureRecognizer!
+    
+    override init(var frame: CGRect) {
+        frame = CGRect(x: 0, y: -yh_RefreshHeaderHeight, width: yh_ScreenW, height: yh_RefreshHeaderHeight)
+        super.init(frame: frame)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func willMoveToSuperview(newSuperview: UIView?) {
+        super.willMoveToSuperview(newSuperview)
+        
+        panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panResponse(_:)))
+        panGesture.delegate = self
+        if scrollView != nil {
+            scrollView.bounces = false
+        }
+    }
+    
+    private func setup() {
+        
+        backgroundColor = UIColor.clearColor()
+        
+        addSubview(materialView)
+        
+        materialView.translatesAutoresizingMaskIntoConstraints = false
+        
+        addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
+        materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
+        materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
+    }
+    
+    func panResponse(pan:UIPanGestureRecognizer) {
+        
+        frame.origin.y = min(-yh_RefreshHeaderHeight + pan.translationInView(scrollView).y, yh_MaterialMaxOffset)
+        
+        if pan.state == .Ended && frame.origin.y == yh_MaterialMaxOffset {
+            state = .Refreshing
+        }
+        
+        if pan.state == .Ended && frame.origin.y < yh_MaterialMaxOffset {
+            state = .Normal
+        }
+    }
+    
+    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        
+        if gestureRecognizer.isEqual(panGesture) {
+            if panGesture.translationInView(scrollView).y < 0 {
+                scrollView.removeGestureRecognizer(panGesture)
+            }
+        }
+        
+        return true
+    }
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    
+        if scrollView.contentOffset.y <= -scrollView.contentInset.top {
+            if let _ = scrollView.gestureRecognizers where !scrollView.gestureRecognizers!.contains(panGesture) {
+                scrollView.addGestureRecognizer(panGesture)
+            }
+        }
+    }
+
+    private lazy var materialView : YHRefreshMaterialView = YHRefreshMaterialView()
+    
+    class YHRefreshMaterialView: UIView {
+        
+        var progress : CGFloat? {
+            didSet {
+                
+                if progress > 1 || progress < 0 {
+                    return
+                }
+                
+                setNeedsDisplay()
+            }
+        }
+        
+        private var circleCenter : CGPoint!
+        private var radius : CGFloat!
+        
+        override init(frame: CGRect) {
+            super.init(frame: frame)
+            setup()
+        }
+        
+        required init?(coder aDecoder: NSCoder) {
+            super.init(coder: aDecoder)
+        }
+        
+        private func setup() {
+            backgroundColor = UIColor.clearColor()
+            
+            radius = min(frame.width, frame.height)/2
+            circleCenter = CGPoint(x: frame.width/2, y: frame.height/2)
+        }
+        
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            setup()
+        }
+        
+        var sizeFactor : CGFloat = 1.3
+        
+        override func drawRect(rect: CGRect) {
+            
+            let ctx = UIGraphicsGetCurrentContext()
+            CGContextAddArc(ctx, circleCenter.x, circleCenter.y, radius , 0, CGFloat(2 * M_PI), 1)
+            CGContextSetFillColorWithColor(ctx, UIColor.grayColor().CGColor)
+            CGContextFillPath(ctx)
+            
+            let image = UIImage(named: "YHRefresh.bundle/YHRefresh_load")
+            
+            image?.drawInRect(CGRect(x: circleCenter.x - radius * (sizeFactor / 2), y: circleCenter.y - radius * (sizeFactor / 2), width: sizeFactor * radius, height: sizeFactor * radius))
+            
+        }
+    }
+    
+}
+
 class YHRefreshFooter : YHRefreshComponent {
     
     override init(frame: CGRect) {

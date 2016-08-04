@@ -49,7 +49,7 @@ extension UIScrollView {
                 self.yh_header!.removeFromSuperview()
             }
             
-            self.insertSubview(newValue!, atIndex: 0)
+            self.addSubview(newValue!)
             objc_setAssociatedObject(self, &YHRefreshHeaderKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
         }
         
