@@ -73,7 +73,9 @@ class DemoViewController: UITableViewController {
             tableView.yh_header = header
             
         case .MaterialHeader :
-            tableView.yh_header = YHRefreshMaterialHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshMaterialHeader
+            let header = YHRefreshMaterialHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshMaterialHeader
+            header.shouldStayOnWindow = true
+            tableView.yh_header = header
             
         case .NormalFooter :
             tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalFooter

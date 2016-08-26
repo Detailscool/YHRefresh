@@ -14,7 +14,7 @@ Inspired By `MJRefresh`
 edit Podfile 编辑Podfile文件： 
 ``` bash 
   use_frameworks!
-  pod 'YHRefresh', '~> 0.1.2’
+  pod 'YHRefresh', '~> 0.1.3’
 ```
 then run in terminal 在终端运行：
 ``` bash 

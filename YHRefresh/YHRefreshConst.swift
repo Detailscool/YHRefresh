@@ -14,8 +14,12 @@ enum YHRefreshState : String {
     case NoMoreData = "NoMoreData"
 }
 
+typealias YHRefreshHandler = (Void -> ())
+
 public let yh_RefreshContentOffsetKey = "contentOffset"
 public let yh_RefreshContentSizeKey = "contentSize"
+public let yh_RefreshFrameKey = "frame"
+public let yh_RefreshRotationKey = "transform.rotation"
 
 public let yh_RefreshHeaderHeight : CGFloat = 60
 public let yh_SpringHeaderHeight : CGFloat = yh_RefreshHeaderHeight * 4 / 3
@@ -26,7 +30,7 @@ public let yh_MaterialMaxOffset : CGFloat = 120
 public let yh_ScreenW = UIScreen.mainScreen().bounds.size.width
 public let yh_ScreenH = UIScreen.mainScreen().bounds.size.height
 
-public let yh_AnimationDuration = 0.25
+public let yh_AnimationDuration : NSTimeInterval = 0.25
 public let yh_ViewMargin : CGFloat = 15
 
 public let yh_Titles : [String] = [

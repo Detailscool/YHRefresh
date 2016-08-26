@@ -10,21 +10,17 @@ import Foundation
 extension NSDate {
     
     func stringFromDate(format:String = "yyyy-MM-dd HH:mm:ss" ) -> String {
-        
         let dfm = NSDateFormatter()
         dfm.dateFormat = format
         dfm.locale = NSLocale(localeIdentifier: "en")
         return dfm.stringFromDate(self)
-        
     }
     
     class func dateFromString(string:String, format:String = "yyyy-MM-dd HH:mm:ss") -> NSDate? {
-        
         let dfm = NSDateFormatter()
         dfm.dateFormat = format
         dfm.locale = NSLocale(localeIdentifier: "en")
         return dfm.dateFromString(string)
-        
     }
     
     func isToday() -> Bool {
@@ -40,7 +36,6 @@ extension NSDate {
 extension String {
     
     func timeStateForRefresh(format:String = "yyyy-MM-dd HH:mm:ss") -> String {
-        
         let createDate = NSDate.dateFromString(self , format: format)
         
         if let date = createDate {
@@ -51,7 +46,6 @@ extension String {
             }else {
                 return "\(date.stringFromDate("MM-dd HH:mm"))"
             }
-            
         }
         return self
     }
