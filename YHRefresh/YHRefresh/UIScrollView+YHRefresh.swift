@@ -51,7 +51,7 @@ extension UIScrollView {
         yhDeinit()
     }
     
-    var yh_header : YHRefreshHeader? {
+    public var yh_header : YHRefreshHeader? {
         
         get {
             if let header = objc_getAssociatedObject(self, &YHRefreshHeaderKey) as? YHRefreshHeader {
@@ -72,7 +72,7 @@ extension UIScrollView {
         
     }
     
-    var yh_footer : YHRefreshFooter? {
+    public var yh_footer : YHRefreshFooter? {
         
         get {
             if let footer = objc_getAssociatedObject(self, &YHRefreshFooterKey) as? YHRefreshFooter {
@@ -93,7 +93,7 @@ extension UIScrollView {
         
     }
     
-    func isHeaderRefreshing() -> Bool {
+    public func isHeaderRefreshing() -> Bool {
         if let _ = yh_header {
             return yh_header!.isRefreshing
         }else {
@@ -101,7 +101,7 @@ extension UIScrollView {
         }
     }
     
-    func isFooterRefreshing() -> Bool {
+    public func isFooterRefreshing() -> Bool {
         if let _ = yh_footer {
             return yh_footer!.isRefreshing
         }else {
@@ -109,7 +109,7 @@ extension UIScrollView {
         }
     }
     
-    func isRefreshing() -> Bool {
+    public func isRefreshing() -> Bool {
         return isHeaderRefreshing() || isFooterRefreshing()
     }
     

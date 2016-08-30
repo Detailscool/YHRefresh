@@ -7,14 +7,14 @@
 
 import UIKit
 
-enum YHRefreshState : String {
+public enum YHRefreshState : String {
     case Normal = "Normal"
     case WillRefresh = "WillRefresh"
     case Refreshing = "Refreshing"
     case NoMoreData = "NoMoreData"
 }
 
-typealias YHRefreshHandler = (Void -> ())
+typealias YHRefreshHandler = Void -> ()
 
 public let yh_RefreshContentOffsetKey = "contentOffset"
 public let yh_RefreshContentSizeKey = "contentSize"

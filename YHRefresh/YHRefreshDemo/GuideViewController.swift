@@ -30,7 +30,6 @@ class GuideViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         switch indexPath.row {
-            
         case 0 :
             pushViewController(.NormalHeader)
         case 1 :
@@ -46,21 +45,16 @@ class GuideViewController: UITableViewController {
         case 6 :
             pushViewController(.GifFooter)
         default:break
-            
         }
-        
     }
     
     func pushViewController(style:YHRefreshStyle) {
-        
         let vc = DemoViewController(style: style)
         vc.title = vc.style.rawValue
         navigationController?.pushViewController(vc, animated: true)
-        
     }
     
     func back() {
-    
         navigationController?.popViewControllerAnimated(true)
     }
 

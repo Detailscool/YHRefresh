@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  YHRefreshDemo
 //
-//  Created by Detailscool on 16/4/6.
-//  Copyright © 2016年 Detailscool. All rights reserved.
+//  Created by HenryLee on 16/8/30.
+//  Copyright © 2016年 HenryLee. All rights reserved.
 //
 
 import UIKit

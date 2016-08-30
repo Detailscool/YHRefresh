@@ -7,15 +7,16 @@
 
 import UIKit
 
-class YHRefreshComponent: UIView {
+// MARK: - YHRefreshComponent
+public class YHRefreshComponent: UIView {
     
-    private weak var scrollView : UIScrollView!
+    private weak var scrollView : UIScrollView?
     
     private weak var target : AnyObject?
     
     private var selector : Selector?
     
-    private var handler : (Void -> ())?
+    private var handler : YHRefreshHandler?
     
     private var currentState : YHRefreshState = YHRefreshState.Normal
     
@@ -46,15 +47,16 @@ class YHRefreshComponent: UIView {
     }()
     
     private lazy var arrowView : UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "YHRefresh.bundle/YHRefresh_arrow"))
+        let arrow = UIImage(named: "YHRefresh.bundle/YHRefresh_arrow")
+        let iv = UIImageView(image: arrow)
         return iv
     }()
     
-    func endRefreshing() {
+    public func endRefreshing() {
         state = .Normal
     }
     
-    var isRefreshing : Bool {
+    public var isRefreshing : Bool {
         get{
             return state == .Refreshing
         }
@@ -62,51 +64,53 @@ class YHRefreshComponent: UIView {
     
 }
 
-class YHRefreshHeader : YHRefreshComponent {
+// MARK: - YHRefreshHeader
+public class YHRefreshHeader : YHRefreshComponent {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         state = YHRefreshState.Normal
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         
         if let view = newSuperview as? UIScrollView {
-            superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
-            superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
+            scrollView?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
+            scrollView?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
             
             scrollView = view
             
-            scrollView.addObserver(self, forKeyPath: yh_RefreshContentOffsetKey, options: [], context: nil)
-            scrollView.addObserver(self, forKeyPath: yh_RefreshContentSizeKey, options: [], context: nil)
+            scrollView!.addObserver(self, forKeyPath: yh_RefreshContentOffsetKey, options: [], context: nil)
+            scrollView!.addObserver(self, forKeyPath: yh_RefreshContentSizeKey, options: [], context: nil)
         }
     }
     
-    class func header(target:AnyObject?,selector:Selector?) -> AnyObject {
+    public class func header(target:AnyObject?,selector:Selector?) -> AnyObject {
         let header = self.init()
         header.target = target
         header.selector = selector
         return header
     }
     
-    class func header(handler:(Void -> ())) -> AnyObject {
+    public class func header(handler:(Void -> ())) -> AnyObject {
         let header = self.init()
         header.handler = handler
         return header
     }
     
-    func beginRefreshing() {
+    public func beginRefreshing() {
         state = .Refreshing
     }
     
 }
 
-class YHRefreshNormalHeader : YHRefreshHeader {
+// MARK: - YHRefreshNormalHeader
+public class YHRefreshNormalHeader : YHRefreshHeader {
     
     override var state : YHRefreshState {
         didSet {
@@ -127,7 +131,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 
                 if currentState == .Refreshing {
                     UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
-                        self.scrollView.contentInset.top -= yh_RefreshHeaderHeight
+                        self.scrollView?.contentInset.top -= yh_RefreshHeaderHeight
                     })
                 }
                 
@@ -146,7 +150,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 messageLabel.text = yh_Titles[2] + "\n" + yh_Titles[5] + yh_Titles[6] + "\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
-                let ani = CABasicAnimation(keyPath: "transform.rotation")
+                let ani = CABasicAnimation(keyPath: yh_RefreshRotationKey)
                 ani.toValue = 2 * M_PI
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
@@ -154,7 +158,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
                 loadingView.layer.addAnimation(ani, forKey: "")
                 
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
-                    self.scrollView.contentInset.top += yh_RefreshHeaderHeight
+                    self.scrollView?.contentInset.top += yh_RefreshHeaderHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.handler {
                             self.handler!()
@@ -178,7 +182,7 @@ class YHRefreshNormalHeader : YHRefreshHeader {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -205,13 +209,17 @@ class YHRefreshNormalHeader : YHRefreshHeader {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        guard let _ = scrollView else {
+            return;
+        }
         
         if let dragging = scrollView?.dragging {
             if dragging == true {
-                if scrollView.contentOffset.y > -scrollView.contentInset.top - yh_RefreshHeaderHeight && state != .Normal && state != .Refreshing {
+                if scrollView!.contentOffset.y > -scrollView!.contentInset.top - yh_RefreshHeaderHeight && state != .Normal && state != .Refreshing {
                     state = .Normal
-                } else if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshHeaderHeight && state != .WillRefresh && state != .Refreshing {
+                } else if scrollView!.contentOffset.y <= -scrollView!.contentInset.top - yh_RefreshHeaderHeight && state != .WillRefresh && state != .Refreshing {
                     state = .WillRefresh
                 }
             }else {
@@ -224,7 +232,8 @@ class YHRefreshNormalHeader : YHRefreshHeader {
     
 }
 
-class YHRefreshSpringHeader : YHRefreshHeader {
+// MARK: - YHRefreshSpringHeader
+public class YHRefreshSpringHeader : YHRefreshHeader {
     
     override var state : YHRefreshState {
         didSet {
@@ -239,7 +248,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 
                 if currentState == .Refreshing {
                     UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
-                        self.scrollView.contentInset.top -= yh_SpringHeaderHeight
+                        self.scrollView?.contentInset.top -= yh_SpringHeaderHeight
                     })
                 }
                 
@@ -250,7 +259,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
                 activityIndicator.startAnimating()
                 
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
-                    self.scrollView.contentInset.top += yh_SpringHeaderHeight
+                    self.scrollView?.contentInset.top += yh_SpringHeaderHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.handler {
                             self.handler!()
@@ -274,7 +283,7 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -298,20 +307,24 @@ class YHRefreshSpringHeader : YHRefreshHeader {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         
-        if scrollView.dragging == false {
+        guard let _ = scrollView else {
+            return;
+        }
+        
+        if scrollView!.dragging == false {
             springView.progress = 0
         }
         
         let factor : CGFloat =  1
         
-        if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_SpringHeaderHeight && state != .Refreshing{
+        if scrollView!.contentOffset.y <= -scrollView!.contentInset.top - yh_SpringHeaderHeight && state != .Refreshing{
             state = .Refreshing
         }
         
-        if state != .Refreshing && scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshHeaderHeight * factor {
-            let progress = -(scrollView.contentOffset.y + scrollView.contentInset.top + yh_RefreshHeaderHeight * factor)/(yh_SpringHeaderHeight - yh_RefreshHeaderHeight * factor)
+        if state != .Refreshing && scrollView!.contentOffset.y <= -scrollView!.contentInset.top - yh_RefreshHeaderHeight * factor {
+            let progress = -(scrollView!.contentOffset.y + scrollView!.contentInset.top + yh_RefreshHeaderHeight * factor)/(yh_SpringHeaderHeight - yh_RefreshHeaderHeight * factor)
             springView.progress = progress
         }
     }
@@ -437,7 +450,8 @@ class YHRefreshSpringHeader : YHRefreshHeader {
     
 }
 
-class YHRefreshGifHeader : YHRefreshHeader {
+// MARK: - YHRefreshGifHeader
+public class YHRefreshGifHeader : YHRefreshHeader {
     
     override var state : YHRefreshState {
         didSet {
@@ -450,7 +464,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
                 
                 if currentState == .Refreshing {
                     UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
-                        self.scrollView.contentInset.top -= yh_RefreshHeaderHeight
+                        self.scrollView?.contentInset.top -= yh_RefreshHeaderHeight
                     })
                     gifView.stopAnimating()
                 }
@@ -493,7 +507,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
                 }
                 
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
-                    self.scrollView.contentInset.top += yh_RefreshHeaderHeight
+                    self.scrollView?.contentInset.top += yh_RefreshHeaderHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.handler {
                             self.handler!()
@@ -517,7 +531,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -539,13 +553,17 @@ class YHRefreshGifHeader : YHRefreshHeader {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        guard let _ = scrollView else {
+            return
+        }
         
         if let dragging = scrollView?.dragging {
             if dragging == true {
-                if scrollView.contentOffset.y > -scrollView.contentInset.top - yh_RefreshHeaderHeight && state != .Normal && state != .Refreshing {
+                if scrollView!.contentOffset.y > -scrollView!.contentInset.top - yh_RefreshHeaderHeight && state != .Normal && state != .Refreshing {
                     state = .Normal
-                } else if scrollView.contentOffset.y <= -scrollView.contentInset.top - yh_RefreshHeaderHeight && state != .WillRefresh && state != .Refreshing {
+                } else if scrollView!.contentOffset.y <= -scrollView!.contentInset.top - yh_RefreshHeaderHeight && state != .WillRefresh && state != .Refreshing {
                     state = .WillRefresh
                 }
             }else {
@@ -556,7 +574,7 @@ class YHRefreshGifHeader : YHRefreshHeader {
         }
         
         if state == .Normal {
-            pullingPercent = (scrollView.contentOffset.y + scrollView.contentInset.top) / (-yh_RefreshHeaderHeight)
+            pullingPercent = (scrollView!.contentOffset.y + scrollView!.contentInset.top) / (-yh_RefreshHeaderHeight)
             
             let images = stateImages[state.rawValue]
             if let _ = images where pullingPercent<=1 && pullingPercent>=0 {
@@ -578,39 +596,59 @@ class YHRefreshGifHeader : YHRefreshHeader {
     
     private lazy var stateDurations = [String : NSTimeInterval]()
     
-    func setGifHeader(images:[UIImage],duration:NSTimeInterval,state:YHRefreshState) {
+    public func setGifHeader(images:[UIImage],duration:NSTimeInterval,state:YHRefreshState) {
         stateImages[state.rawValue] = images
         stateDurations[state.rawValue] = duration
     }
     
-    func setGifHeader(images:[UIImage],state:YHRefreshState) {
+    public func setGifHeader(images:[UIImage],state:YHRefreshState) {
         stateImages[state.rawValue] = images
         stateDurations[state.rawValue] = Double(images.count) * 0.1
     }
     
 }
 
-class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate {
+// MARK: - YHRefreshMaterialHeader
+public class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate {
+    
+    public var shouldStayOnWindow : Bool = false
+    
     override var state : YHRefreshState {
         didSet {
             
             switch state {
                 
             case .Normal:
-                materialView.layer.removeAllAnimations()
                 
-                UIView.animateWithDuration(yh_AnimationDuration, animations: { 
-                    self.frame.origin.y = -yh_SpringHeaderHeight
-                    }, completion: { (_) in
-                        
-                })
+                guard let _ = scrollView else {
+                    remove()
+                    return
+                }
+                
+                if frame.origin.y == -yh_RefreshHeaderHeight {
+                    return
+                }
+                
+                materialView.layer.removeAllAnimations()
+    
+                if !shouldStayOnWindow {
+                    UIView.animateWithDuration(yh_AnimationDuration, animations: {
+                        self.frame.origin.y = -yh_RefreshHeaderHeight
+                        }, completion: { (_) in
+                            self.animating = false
+                    })
+                }else {
+                    displayLink = CADisplayLink(target: self, selector: #selector(self.materailViewBackToNormal))
+                    displayLink!.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+                }
                 
             case .Refreshing:
-                let ani = CABasicAnimation(keyPath: "transform.rotation")
+                let ani = CABasicAnimation(keyPath: yh_RefreshRotationKey)
                 ani.toValue = 2 * M_PI
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
                 ani.removedOnCompletion = false
+                animating = true
                 materialView.layer.addAnimation(ani, forKey: "")
                 
                 if let _ = self.handler {
@@ -628,7 +666,21 @@ class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate {
         }
     }
     
-    private var panGesture : UIPanGestureRecognizer!
+    @objc private func materailViewBackToNormal() {
+        frame.origin.y -= (yh_MaterialMaxOffset + yh_RefreshHeaderHeight)/CGFloat(yh_AnimationDuration)/60
+        if frame.origin.y <= -yh_RefreshHeaderHeight {
+            displayLink!.invalidate()
+            displayLink!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+            displayLink = nil
+            animating = false
+        }
+    }
+    
+    private lazy var panGesture : UIPanGestureRecognizer = {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(self.panResponse(_:)))
+        pan.delegate = self
+        return pan
+    }()
     
     override init(var frame: CGRect) {
         frame = CGRect(x: 0, y: -yh_RefreshHeaderHeight, width: yh_ScreenW, height: yh_RefreshHeaderHeight)
@@ -636,17 +688,14 @@ class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
-        
-        panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.panResponse(_:)))
-        panGesture.delegate = self
         if scrollView != nil {
-            scrollView.bounces = false
+            scrollView!.bounces = false
         }
     }
     
@@ -662,48 +711,113 @@ class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate {
         addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: self, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0))
         materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
         materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
+        
+        self.addObserver(self, forKeyPath: yh_RefreshFrameKey, options: [], context: nil)
     }
     
     func panResponse(pan:UIPanGestureRecognizer) {
         
-        frame.origin.y = min(-yh_RefreshHeaderHeight + pan.translationInView(scrollView).y, yh_MaterialMaxOffset)
+        if animating {
+            return
+        }
         
-        if pan.state == .Ended && frame.origin.y == yh_MaterialMaxOffset {
+        guard let _ = scrollView else {
+            return;
+        }
+        
+        frame.origin.y = min((!shouldStayOnWindow ? -yh_RefreshHeaderHeight : (shouldOutted ? outerMargin : -yh_RefreshHeaderHeight)) + pan.translationInView(scrollView!).y, yh_MaterialMaxOffset + scrollView!.contentInset.top)
+        
+        if pan.state == .Ended && frame.origin.y == yh_MaterialMaxOffset + scrollView!.contentInset.top {
             state = .Refreshing
         }
         
-        if pan.state == .Ended && frame.origin.y < yh_MaterialMaxOffset {
+        if pan.state == .Ended && frame.origin.y < yh_MaterialMaxOffset + scrollView!.contentInset.top {
             state = .Normal
         }
     }
     
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        if gestureRecognizer.isEqual(panGesture) {
-            if panGesture.translationInView(scrollView).y < 0 {
-                scrollView.removeGestureRecognizer(panGesture)
+    override public func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if let _ = scrollView where gestureRecognizer.isEqual(panGesture) {
+            if panGesture.translationInView(scrollView!).y < 0 {
+                scrollView!.removeGestureRecognizer(panGesture)
             }
         }
-        
         return true
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-    
-        if scrollView.contentOffset.y <= -scrollView.contentInset.top {
-            if let _ = scrollView.gestureRecognizers where !scrollView.gestureRecognizers!.contains(panGesture) {
-                scrollView.addGestureRecognizer(panGesture)
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        guard let _ = object else {
+            return
+        }
+        
+        guard let _ = keyPath else {
+            return
+        }
+        
+        guard let _ = scrollView else {
+            remove()
+            return
+        }
+        
+        if shouldStayOnWindow {
+            if object!.isEqual(self) && keyPath! == yh_RefreshFrameKey {
+                if frame.origin.y > 0 && scrollView!.contentOffset.y <= scrollView!.contentInset.top && !shouldOutted && !animating && !scrollView!.dragging {
+                    shouldOutted = true
+                    let view = self;
+                    let newFrame = convertRect(bounds, toView: nil)
+                    outerMargin = newFrame.origin.y - panGesture.translationInView(scrollView).y
+                    self.removeFromSuperview()
+                    UIApplication.sharedApplication().keyWindow!.addSubview(view)
+                    frame = newFrame
+                }
+                
+                if shouldOutted && convertRect(bounds, toView: nil).origin.y < scrollView!.contentInset.top + scrollView!.convertRect(scrollView!.bounds, toView: nil).origin.y {
+                    shouldOutted = false
+                    let view = self;
+                    let newFrame = convertRect(bounds, toView: scrollView)
+                    self.removeFromSuperview()
+                    scrollView!.addSubview(view)
+                    frame = newFrame
+                }
+                
+                if !shouldOutted && animating && convertRect(bounds, toView: nil).origin.y < scrollView!.contentInset.top - frame.height + scrollView!.convertRect(scrollView!.bounds, toView: nil).origin.y && frame.origin.y != -yh_RefreshHeaderHeight {
+                    frame.origin.y = -yh_RefreshHeaderHeight
+                }
+            }
+        }
+        
+        if scrollView!.contentOffset.y <= -scrollView!.contentInset.top {
+            if let _ = scrollView?.gestureRecognizers where !scrollView!.gestureRecognizers!.contains(panGesture) {
+                scrollView!.addGestureRecognizer(panGesture)
             }
         }
     }
-
+    
+    private func remove() {
+        if let _ = displayLink {
+            displayLink!.invalidate()
+            displayLink!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSRunLoopCommonModes)
+            displayLink = nil
+        }
+        removeFromSuperview()
+    }
+    
+    deinit {
+        remove()
+        self.removeObserver(self, forKeyPath: yh_RefreshFrameKey)
+    }
+    
+    private var shouldOutted : Bool = false
+    private var outerMargin : CGFloat!
+    private var animating : Bool = false
+    private var displayLink : CADisplayLink?
     private lazy var materialView : YHRefreshMaterialView = YHRefreshMaterialView()
     
     class YHRefreshMaterialView: UIView {
         
         var progress : CGFloat? {
             didSet {
-                
                 if progress > 1 || progress < 0 {
                     return
                 }
@@ -751,56 +865,57 @@ class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate {
             
         }
     }
-    
 }
 
-class YHRefreshFooter : YHRefreshComponent {
+// MARK: - YHRefreshFooter
+public class YHRefreshFooter : YHRefreshComponent {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         state = YHRefreshState.Normal
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func willMoveToSuperview(newSuperview: UIView?) {
+    override public func willMoveToSuperview(newSuperview: UIView?) {
         super.willMoveToSuperview(newSuperview)
         
         if let view = newSuperview as? UIScrollView {
-            superview?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
-            superview?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
+            scrollView?.removeObserver(self, forKeyPath: yh_RefreshContentOffsetKey)
+            scrollView?.removeObserver(self, forKeyPath: yh_RefreshContentSizeKey)
             
             scrollView = view
             
-            frame = CGRect(x: 0, y: scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshHeaderHeight)
+            frame = CGRect(x: 0, y: scrollView!.contentSize.height, width: yh_ScreenW, height: yh_RefreshHeaderHeight)
             
-            scrollView.addObserver(self, forKeyPath: yh_RefreshContentOffsetKey, options: [], context: nil)
-            scrollView.addObserver(self, forKeyPath: yh_RefreshContentSizeKey, options: [], context: nil)
+            scrollView!.addObserver(self, forKeyPath: yh_RefreshContentOffsetKey, options: [], context: nil)
+            scrollView!.addObserver(self, forKeyPath: yh_RefreshContentSizeKey, options: [], context: nil)
         }
     }
     
-    class func footer(target:AnyObject?,selector:Selector?) -> AnyObject {
+    public class func footer(target:AnyObject?,selector:Selector?) -> AnyObject {
         let footer = self.init()
         footer.target = target
         footer.selector = selector
         return footer
     }
     
-    class func footer(handler:(Void -> ())) -> AnyObject {
+    public class func footer(handler:(Void -> ())) -> AnyObject {
         let footer = self.init()
         footer.handler = handler
         return footer
     }
     
-    func showNoMoreData() {
+    public func showNoMoreData() {
         state = .NoMoreData
     }
     
 }
 
-class YHRefreshNormalFooter : YHRefreshFooter {
+// MARK: - YHRefreshNormalFooter
+public class YHRefreshNormalFooter : YHRefreshFooter {
     
     override var state : YHRefreshState {
         didSet {
@@ -840,7 +955,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
                 messageLabel.text = yh_Titles[2] + "\n" + yh_Titles[5] + yh_Titles[6] + "\(NSDate().stringFromDate("HH : mm"))"
                 updateTime = NSDate()
                 
-                let ani = CABasicAnimation(keyPath: "transform.rotation")
+                let ani = CABasicAnimation(keyPath: yh_RefreshRotationKey)
                 ani.toValue = 2 * M_PI
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
@@ -877,7 +992,7 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -905,13 +1020,17 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         arrowView.transform = CGAffineTransformMakeRotation(CGFloat(M_PI + 0.0001))
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        guard let _ = scrollView else {
+            return
+        }
         
         if keyPath == yh_RefreshContentSizeKey {
-            if scrollView.contentSize.height >= yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top {
-                frame = CGRect(x: 0, y: scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshFooterHeight)
+            if scrollView!.contentSize.height >= yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top {
+                frame = CGRect(x: 0, y: scrollView!.contentSize.height, width: yh_ScreenW, height: yh_RefreshFooterHeight)
             }else {
-                frame = CGRect(x: 0, y: yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top, width: yh_ScreenW, height: yh_RefreshFooterHeight)
+                frame = CGRect(x: 0, y: yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top, width: yh_ScreenW, height: yh_RefreshFooterHeight)
             }
         }
         
@@ -922,17 +1041,17 @@ class YHRefreshNormalFooter : YHRefreshFooter {
         if keyPath == yh_RefreshContentOffsetKey {
             if let dragging = scrollView?.dragging {
                 if dragging == true {
-                    if scrollView.contentSize.height >= yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top {
-                        if scrollView?.contentOffset.y < scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshFooterHeight && state != .Normal  && state != .Refreshing {
+                    if scrollView!.contentSize.height >= yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top {
+                        if scrollView!.contentOffset.y < scrollView!.contentSize.height - yh_ScreenH + scrollView!.contentInset.bottom + yh_RefreshFooterHeight && state != .Normal  && state != .Refreshing {
                             state = .Normal
-                        } else if scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshFooterHeight && state != .WillRefresh && state != .Refreshing {
+                        } else if scrollView!.contentOffset.y >= scrollView!.contentSize.height - yh_ScreenH + scrollView!.contentInset.bottom + yh_RefreshFooterHeight && state != .WillRefresh && state != .Refreshing {
                             state = .WillRefresh
                         }
                         
                     }else {
-                        if scrollView.contentOffset.y < yh_RefreshFooterHeight - scrollView.contentInset.top  && state != .Refreshing {
+                        if scrollView!.contentOffset.y < yh_RefreshFooterHeight - scrollView!.contentInset.top && state != .Refreshing {
                             state = .Normal
-                        } else if scrollView.contentOffset.y >= yh_RefreshFooterHeight - scrollView.contentInset.top && state != .WillRefresh && state != .Refreshing {
+                        } else if scrollView!.contentOffset.y >= yh_RefreshFooterHeight - scrollView!.contentInset.top && state != .WillRefresh && state != .Refreshing {
                             state = .WillRefresh
                         }
                     }
@@ -947,7 +1066,8 @@ class YHRefreshNormalFooter : YHRefreshFooter {
     
 }
 
-class YHRefreshAutoFooter : YHRefreshFooter {
+// MARK: - YHRefreshAutoFooter
+public class YHRefreshAutoFooter : YHRefreshFooter {
     
     override var state : YHRefreshState {
         didSet {
@@ -1000,7 +1120,7 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -1024,25 +1144,30 @@ class YHRefreshAutoFooter : YHRefreshFooter {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        guard let _ = scrollView else {
+            return
+        }
         
         if keyPath == yh_RefreshContentSizeKey {
-            hidden = scrollView.contentSize.height < yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top
-            frame = CGRect(x: 0, y: scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshFooterHeight)
+            hidden = scrollView!.contentSize.height < yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top
+            frame = CGRect(x: 0, y: scrollView!.contentSize.height, width: yh_ScreenW, height: yh_RefreshFooterHeight)
         }
         
         if state == .NoMoreData {
             return
         }
         
-        if scrollView.contentSize.height != 0 && scrollView?.contentOffset.y > 0 && scrollView?.contentOffset.y > scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom && state != .Refreshing {
+        if scrollView!.contentSize.height != 0 && scrollView!.contentOffset.y > 0 && scrollView!.contentOffset.y > scrollView!.contentSize.height - yh_ScreenH + scrollView!.contentInset.bottom && state != .Refreshing {
             state = .Refreshing
         }
     }
     
 }
 
-class YHRefreshGifFooter : YHRefreshFooter {
+// MARK: - YHRefreshGifFooter
+public class YHRefreshGifFooter : YHRefreshFooter {
     
     override var state : YHRefreshState {
         didSet {
@@ -1098,7 +1223,7 @@ class YHRefreshGifFooter : YHRefreshFooter {
                 }
                 
                 UIView.animateWithDuration(yh_AnimationDuration, animations: { () -> Void in
-                    self.scrollView.contentInset.bottom += yh_RefreshFooterHeight
+                    self.scrollView?.contentInset.bottom += yh_RefreshFooterHeight
                     }, completion: { (_) -> Void in
                         if let _ = self.handler {
                             self.handler!()
@@ -1121,7 +1246,7 @@ class YHRefreshGifFooter : YHRefreshFooter {
         setup()
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -1143,13 +1268,17 @@ class YHRefreshGifFooter : YHRefreshFooter {
         
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override public func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
+        guard let _ = scrollView else{
+            return
+        }
         
         if keyPath == yh_RefreshContentSizeKey {
-            if scrollView.contentSize.height >= yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top {
-                frame = CGRect(x: 0, y: scrollView.contentSize.height, width: yh_ScreenW, height: yh_RefreshFooterHeight)
+            if scrollView!.contentSize.height >= yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top {
+                frame = CGRect(x: 0, y: scrollView!.contentSize.height, width: yh_ScreenW, height: yh_RefreshFooterHeight)
             }else {
-                frame = CGRect(x: 0, y: yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top, width: yh_ScreenW, height: yh_RefreshFooterHeight)
+                frame = CGRect(x: 0, y: yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top, width: yh_ScreenW, height: yh_RefreshFooterHeight)
             }
         }
         
@@ -1160,17 +1289,17 @@ class YHRefreshGifFooter : YHRefreshFooter {
         if keyPath == yh_RefreshContentOffsetKey {
             if let dragging = scrollView?.dragging {
                 if dragging == true {
-                    if scrollView.contentSize.height >= yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top {
-                        if scrollView?.contentOffset.y < scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshFooterHeight && state != .Normal  && state != .Refreshing {
+                    if scrollView!.contentSize.height >= yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top {
+                        if scrollView?.contentOffset.y < scrollView!.contentSize.height - yh_ScreenH + scrollView!.contentInset.bottom + yh_RefreshFooterHeight && state != .Normal  && state != .Refreshing {
                             state = .Normal
-                        } else if scrollView?.contentOffset.y >= scrollView.contentSize.height - yh_ScreenH + scrollView.contentInset.bottom + yh_RefreshFooterHeight && state != .WillRefresh && state != .Refreshing {
+                        } else if scrollView?.contentOffset.y >= scrollView!.contentSize.height - yh_ScreenH + scrollView!.contentInset.bottom + yh_RefreshFooterHeight && state != .WillRefresh && state != .Refreshing {
                             state = .WillRefresh
                         }
                         
                     }else {
-                        if scrollView.contentOffset.y < yh_RefreshFooterHeight - scrollView.contentInset.top  && state != .Refreshing {
+                        if scrollView!.contentOffset.y < yh_RefreshFooterHeight - scrollView!.contentInset.top  && state != .Refreshing {
                             state = .Normal
-                        } else if scrollView.contentOffset.y >= yh_RefreshFooterHeight - scrollView.contentInset.top  && state != .WillRefresh && state != .Refreshing {
+                        } else if scrollView!.contentOffset.y >= yh_RefreshFooterHeight - scrollView!.contentInset.top  && state != .WillRefresh && state != .Refreshing {
                             state = .WillRefresh
                         }
                     }
@@ -1182,10 +1311,10 @@ class YHRefreshGifFooter : YHRefreshFooter {
             }
             
             if state == .Normal {
-                if scrollView.contentSize.height >= yh_ScreenH - scrollView.contentInset.bottom - scrollView.contentInset.top {
-                    pullingPercent = (scrollView.contentOffset.y - scrollView.contentSize.height + yh_ScreenH - scrollView.contentInset.bottom) / yh_RefreshFooterHeight
+                if scrollView!.contentSize.height >= yh_ScreenH - scrollView!.contentInset.bottom - scrollView!.contentInset.top {
+                    pullingPercent = (scrollView!.contentOffset.y - scrollView!.contentSize.height + yh_ScreenH - scrollView!.contentInset.bottom) / yh_RefreshFooterHeight
                 } else {
-                    pullingPercent = (scrollView.contentOffset.y + scrollView.contentInset.top) / yh_RefreshFooterHeight
+                    pullingPercent = (scrollView!.contentOffset.y + scrollView!.contentInset.top) / yh_RefreshFooterHeight
                 }
                 let images = stateImages[state.rawValue]
                 if let _ = images where pullingPercent<=1 && pullingPercent>=0 {
@@ -1208,12 +1337,12 @@ class YHRefreshGifFooter : YHRefreshFooter {
     
     private lazy var stateDurations = [String : NSTimeInterval]()
     
-    func setGifFooter(images:[UIImage],duration:NSTimeInterval,state:YHRefreshState) {
+    public func setGifFooter(images:[UIImage],duration:NSTimeInterval,state:YHRefreshState) {
         stateImages[state.rawValue] = images
         stateDurations[state.rawValue] = duration
     }
     
-    func setGifFooter(images:[UIImage],state:YHRefreshState) {
+    public func setGifFooter(images:[UIImage],state:YHRefreshState) {
         stateImages[state.rawValue] = images
         stateDurations[state.rawValue] = Double(images.count) * 0.1
     }

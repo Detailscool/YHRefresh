@@ -1,15 +1,16 @@
 //
-//  TableViewController.swift
-//  Test5
+//  DemoViewController.swift
+//  YHRefresh
 //
-//  Created by Detailscool on 16/4/2.
-//  Copyright © 2016年 Detailscool. All rights reserved.
+//  Created by HenryLee on 16/8/30.
+//  Copyright © 2016年 HenryLee. All rights reserved.
 //
 
 import UIKit
+import YHRefresh
 
 class DemoViewController: UITableViewController {
-    
+
     var numbers = [Int]()
     
     var s = 0
@@ -20,7 +21,7 @@ class DemoViewController: UITableViewController {
         self.style = style
         super.init(style: UITableViewStyle.Plain)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -30,12 +31,12 @@ class DemoViewController: UITableViewController {
         
         // Test
         /*
-        tableView.rowHeight = 10;
-        tableView.tableFooterView = UIView()
-        tableView.contentInset.bottom = 50
-        let bottomView = UIView(frame: CGRect(x: 0, y: yh_ScreenH - 50, width: yh_ScreenW, height: 50))
-        bottomView.backgroundColor = UIColor.redColor()
-        UIApplication.sharedApplication().keyWindow!.addSubview(bottomView)
+         tableView.rowHeight = 10;
+         tableView.tableFooterView = UIView()
+         tableView.contentInset.bottom = 50
+         let bottomView = UIView(frame: CGRect(x: 0, y: yh_ScreenH - 50, width: yh_ScreenW, height: 50))
+         bottomView.backgroundColor = UIColor.redColor()
+         UIApplication.sharedApplication().keyWindow!.addSubview(bottomView)
          */
         
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
@@ -105,13 +106,13 @@ class DemoViewController: UITableViewController {
             
         }
         
-//        tableView.yh_footer?.showNoMoreData()
+        //        tableView.yh_footer?.showNoMoreData()
     }
     
     func load() {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
-           
+            
             self.s += 20
             
             for i in self.s..<self.s+20 {
@@ -133,7 +134,7 @@ class DemoViewController: UITableViewController {
                 
             case .MaterialHeader :
                 self.tableView.yh_header?.endRefreshing()
-    
+                
             case .NormalFooter :
                 self.tableView.yh_footer?.endRefreshing()
                 
@@ -147,17 +148,17 @@ class DemoViewController: UITableViewController {
         })
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numbers.count
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -181,5 +182,5 @@ class DemoViewController: UITableViewController {
         cell.backgroundColor =  colorforIndex(indexPath.row)
         
     }
-    
+
 }
