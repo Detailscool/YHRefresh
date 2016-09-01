@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "YHRefresh"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.summary      = "A Refresh Framework Written In Swift."  
   s.homepage     = "https://github.com/Detailscool/YHRefresh"
   s.license      = { :type => "MIT", :file => "LICENSE" }

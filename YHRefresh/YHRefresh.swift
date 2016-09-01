@@ -25,7 +25,8 @@ public class YHRefreshComponent: UIView {
     private var updateTime : NSDate?
     
     private lazy var loadingView : UIImageView = {
-        let iv = UIImageView(image: UIImage(named: "YHRefresh.bundle/YHRefresh_loading"))
+        let loadingImage = UIImage(named: "Frameworks/YHRefresh.framework/YHRefresh.bundle/YHRefresh_loading")
+        let iv = UIImageView(image: loadingImage)
         iv.hidden = true
         return iv
     }()
@@ -47,7 +48,7 @@ public class YHRefreshComponent: UIView {
     }()
     
     private lazy var arrowView : UIImageView = {
-        let arrow = UIImage(named: "YHRefresh.bundle/YHRefresh_arrow")
+        let arrow = UIImage(named: "Frameworks/YHRefresh.framework/YHRefresh.bundle/YHRefresh_arrow")
         let iv = UIImageView(image: arrow)
         return iv
     }()
@@ -420,7 +421,7 @@ public class YHRefreshSpringHeader : YHRefreshHeader {
                 CGContextFillPath(ctx)
             }
             
-            let image = UIImage(named: "YHRefresh.bundle/YHRefresh_load")
+            let image = UIImage(named: "Frameworks/YHRefresh.framework/YHRefresh.bundle/YHRefresh_load")
             
             image?.drawInRect(CGRect(x: center2.x - radius2 * (sizeFactor / 2), y: center2.y - radius2 * (sizeFactor / 2), width: sizeFactor * radius2, height: sizeFactor * radius2))
             
@@ -859,7 +860,7 @@ public class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelega
             CGContextSetFillColorWithColor(ctx, UIColor.grayColor().CGColor)
             CGContextFillPath(ctx)
             
-            let image = UIImage(named: "YHRefresh.bundle/YHRefresh_load")
+            let image = UIImage(named: "Frameworks/YHRefresh.framework/YHRefresh.bundle/YHRefresh_load")
             
             image?.drawInRect(CGRect(x: circleCenter.x - radius * (sizeFactor / 2), y: circleCenter.y - radius * (sizeFactor / 2), width: sizeFactor * radius, height: sizeFactor * radius))
             

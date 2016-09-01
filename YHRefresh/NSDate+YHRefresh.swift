@@ -37,7 +37,6 @@ extension String {
     
     func timeStateForRefresh(format:String = "yyyy-MM-dd HH:mm:ss") -> String {
         let createDate = NSDate.dateFromString(self , format: format)
-        
         if let date = createDate {
             if date.isToday() {
                 return yh_Titles[6] + "\(date.stringFromDate("HH:mm"))"
