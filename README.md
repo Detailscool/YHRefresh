@@ -92,7 +92,8 @@ then run in terminal 在终端运行：
 
 ##Requirements
 * Swift 3.0
-* Xcode 8.0+
+* Xcode 8.0++
+
 ##License
 
 Copyright (c) 2016 YuanHui Lee detailsli@gmail.com. See the LICENSE file for more info.
