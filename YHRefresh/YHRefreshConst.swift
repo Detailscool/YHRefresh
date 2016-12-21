@@ -8,13 +8,13 @@
 import UIKit
 
 public enum YHRefreshState : String {
-    case Normal = "Normal"
-    case WillRefresh = "WillRefresh"
-    case Refreshing = "Refreshing"
-    case NoMoreData = "NoMoreData"
+    case normal = "Normal"
+    case willRefresh = "WillRefresh"
+    case refreshing = "Refreshing"
+    case noMoreData = "NoMoreData"
 }
 
-typealias YHRefreshHandler = Void -> ()
+typealias YHRefreshHandler = (Void) -> ()
 
 public let yh_RefreshContentOffsetKey = "contentOffset"
 public let yh_RefreshContentSizeKey = "contentSize"
@@ -27,10 +27,10 @@ public let yh_RefreshFooterHeight : CGFloat = 55
 
 public let yh_MaterialMaxOffset : CGFloat = 120
 
-public let yh_ScreenW = UIScreen.mainScreen().bounds.size.width
-public let yh_ScreenH = UIScreen.mainScreen().bounds.size.height
+public let yh_ScreenW = UIScreen.main.bounds.size.width
+public let yh_ScreenH = UIScreen.main.bounds.size.height
 
-public let yh_AnimationDuration : NSTimeInterval = 0.25
+public let yh_AnimationDuration : TimeInterval = 0.25
 public let yh_ViewMargin : CGFloat = 15
 
 public let yh_Titles : [String] = [

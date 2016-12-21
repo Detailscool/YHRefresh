@@ -9,13 +9,13 @@
 import UIKit
 
 enum YHRefreshStyle : String {
-    case NormalHeader = "NormalHeader"
-    case SpringHeader = "SpringHeader"
-    case GifHeader = "GifHeader"
-    case MaterialHeader = "MaterialHeader"
-    case NormalFooter = "NormalFooter"
-    case AutoFooter = "AutoFooter"
-    case GifFooter = "GifFooter"
+    case normalHeader = "NormalHeader"
+    case springHeader = "SpringHeader"
+    case gifHeader = "GifHeader"
+    case materialHeader = "MaterialHeader"
+    case normalFooter = "NormalFooter"
+    case autoFooter = "AutoFooter"
+    case gifFooter = "GifFooter"
 }
 
 class GuideViewController: UITableViewController {
@@ -23,39 +23,39 @@ class GuideViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(GuideViewController.back))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(GuideViewController.back))
     }
 
   
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         switch indexPath.row {
         case 0 :
-            pushViewController(.NormalHeader)
+            pushViewController(.normalHeader)
         case 1 :
-            pushViewController(.SpringHeader)
+            pushViewController(.springHeader)
         case 2 :
-            pushViewController(.GifHeader)
+            pushViewController(.gifHeader)
         case 3 :
-            pushViewController(.MaterialHeader)
+            pushViewController(.materialHeader)
         case 4 :
-             pushViewController(.NormalFooter)
+             pushViewController(.normalFooter)
         case 5 :
-             pushViewController(.AutoFooter)
+             pushViewController(.autoFooter)
         case 6 :
-            pushViewController(.GifFooter)
+            pushViewController(.gifFooter)
         default:break
         }
     }
     
-    func pushViewController(style:YHRefreshStyle) {
+    func pushViewController(_ style:YHRefreshStyle) {
         let vc = DemoViewController(style: style)
         vc.title = vc.style.rawValue
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func back() {
-        navigationController?.popViewControllerAnimated(true)
+       _ = navigationController?.popViewController(animated: true)
     }
 
 }

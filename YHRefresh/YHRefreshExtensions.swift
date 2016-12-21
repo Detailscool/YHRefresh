@@ -10,16 +10,17 @@ import UIKit
 var YHRefreshHeaderKey = "YHRefreshHeaderKey"
 var YHRefreshFooterKey = "YHRefreshFooterKey"
 
-extension UIScrollView {
+public extension UIScrollView {
     
-    public override static func initialize() {
+    open override static func initialize() {
         struct Static {
-            static var token: dispatch_once_t = 0
+            static let token: String = NSUUID().uuidString
         }
         
-        dispatch_once(&Static.token) {
-            let originalSelector = Selector("dealloc")
-            let swizzledSelector = Selector("yhDeinit")
+        DispatchQueue.once(token: Static.token) {
+            
+            let originalSelector = #selector(DispatchWorkItem.deinit)
+            let swizzledSelector = #selector(UIScrollView.yhDeinit)
             
             let originalMethod = class_getInstanceMethod(self, originalSelector)
             let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
@@ -62,7 +63,7 @@ extension UIScrollView {
         }
         
         set {
-            if let _ = self.yh_header where self.yh_header != newValue {
+            if let _ = self.yh_header, self.yh_header != newValue {
                 self.yh_header!.removeFromSuperview()
             }
             
@@ -83,7 +84,7 @@ extension UIScrollView {
         }
         
         set {
-            if let _ = self.yh_footer where self.yh_footer != newValue {
+            if let _ = self.yh_footer, self.yh_footer != newValue {
                 self.yh_footer!.removeFromSuperview()
             }
             
@@ -113,4 +114,72 @@ extension UIScrollView {
         return isHeaderRefreshing() || isFooterRefreshing()
     }
     
+}
+
+public extension Date {
+    
+    func stringFromDate(_ format:String = "yyyy-MM-dd HH:mm:ss" ) -> String {
+        let dfm = DateFormatter()
+        dfm.dateFormat = format
+        dfm.locale = Locale(identifier: "en")
+        return dfm.string(from: self)
+    }
+    
+    static func dateFromString(_ string:String, format:String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+        let dfm = DateFormatter()
+        dfm.dateFormat = format
+        dfm.locale = Locale(identifier: "en")
+        return dfm.date(from: string)
+    }
+    
+    func isToday() -> Bool {
+        return Calendar.current.isDateInToday(self)
+    }
+    
+    func isYesterday() -> Bool {
+        return Calendar.current.isDateInYesterday(self)
+    }
+    
+}
+
+public extension String {
+    
+    func timeStateForRefresh(_ format:String = "yyyy-MM-dd HH:mm:ss") -> String {
+        let createDate = Date.dateFromString(self , format: format)
+        if let date = createDate {
+            if date.isToday() {
+                return yh_Titles[6] + "\(date.stringFromDate("HH:mm"))"
+            }else if date.isYesterday() {
+                return yh_Titles[7] + " \(date.stringFromDate("HH:mm"))"
+            }else {
+                return "\(date.stringFromDate("MM-dd HH:mm"))"
+            }
+        }
+        return self
+    }
+    
+}
+
+public extension DispatchQueue {
+    
+    private static var _onceTracker = [String]()
+    
+    /**
+     Executes a block of code, associated with a unique token, only once.  The code is thread safe and will
+     only execute the code once even in the presence of multithreaded calls.
+     
+     - parameter token: A unique reverse DNS style name such as com.vectorform.<name> or a GUID
+     - parameter block: Block to execute once
+     */
+    public class func once(token: String, block:()->Void) {
+        objc_sync_enter(self)
+        defer { objc_sync_exit(self) }
+        
+        if _onceTracker.contains(token) {
+            return
+        }
+        
+        _onceTracker.append(token)
+        block()
+    }
 }

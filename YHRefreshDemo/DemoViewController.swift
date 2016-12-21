@@ -19,7 +19,7 @@ class DemoViewController: UITableViewController {
     
     init(style:YHRefreshStyle) {
         self.style = style
-        super.init(style: UITableViewStyle.Plain)
+        super.init(style: UITableViewStyle.plain)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +39,7 @@ class DemoViewController: UITableViewController {
          UIApplication.sharedApplication().keyWindow!.addSubview(bottomView)
          */
         
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
         
         for i in s..<s+20 {
             numbers.append(i)
@@ -47,13 +47,13 @@ class DemoViewController: UITableViewController {
         
         switch style{
             
-        case .NormalHeader :
+        case .normalHeader :
             tableView.yh_header = YHRefreshNormalHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalHeader
             
-        case .SpringHeader :
+        case .springHeader :
             tableView.yh_header = YHRefreshSpringHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshSpringHeader
             
-        case .GifHeader :
+        case .gifHeader :
             let header = YHRefreshGifHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifHeader
             var refreshingImages = [UIImage]()
             for i in 1...3 {
@@ -67,24 +67,24 @@ class DemoViewController: UITableViewController {
                 nomalImages.append(image!)
             }
             
-            header.setGifHeader(nomalImages, state: YHRefreshState.Normal)
-            header.setGifHeader(refreshingImages, state: YHRefreshState.WillRefresh)
-            header.setGifHeader(refreshingImages, state: YHRefreshState.Refreshing)
+            header.setGifHeader(nomalImages, state: YHRefreshState.normal)
+            header.setGifHeader(refreshingImages, state: YHRefreshState.willRefresh)
+            header.setGifHeader(refreshingImages, state: YHRefreshState.refreshing)
             
             tableView.yh_header = header
             
-        case .MaterialHeader :
+        case .materialHeader :
             let header = YHRefreshMaterialHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshMaterialHeader
             header.shouldStayOnWindow = true
             tableView.yh_header = header
             
-        case .NormalFooter :
+        case .normalFooter :
             tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalFooter
             
-        case .AutoFooter :
+        case .autoFooter :
             tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshAutoFooter
             
-        case .GifFooter :
+        case .gifFooter :
             let footer = YHRefreshGifFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifFooter
             var refreshingImages = [UIImage]()
             for i in 1...3 {
@@ -98,9 +98,9 @@ class DemoViewController: UITableViewController {
                 nomalImages.append(image!)
             }
             
-            footer.setGifFooter(nomalImages, state: YHRefreshState.Normal)
-            footer.setGifFooter(refreshingImages, state: YHRefreshState.WillRefresh)
-            footer.setGifFooter(refreshingImages, state: YHRefreshState.Refreshing)
+            footer.setGifFooter(nomalImages, state: YHRefreshState.normal)
+            footer.setGifFooter(refreshingImages, state: YHRefreshState.willRefresh)
+            footer.setGifFooter(refreshingImages, state: YHRefreshState.refreshing)
             
             tableView.yh_footer = footer
             
@@ -111,7 +111,7 @@ class DemoViewController: UITableViewController {
     
     func load() {
         
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (Int64)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((Int64)(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: { () -> Void in
             
             self.s += 20
             
@@ -123,25 +123,25 @@ class DemoViewController: UITableViewController {
             
             switch self.style {
                 
-            case .NormalHeader :
+            case .normalHeader :
                 self.tableView.yh_header?.endRefreshing()
                 
-            case .SpringHeader :
+            case .springHeader :
                 self.tableView.yh_header?.endRefreshing()
                 
-            case .GifHeader :
+            case .gifHeader :
                 self.tableView.yh_header?.endRefreshing()
                 
-            case .MaterialHeader :
+            case .materialHeader :
                 self.tableView.yh_header?.endRefreshing()
                 
-            case .NormalFooter :
+            case .normalFooter :
                 self.tableView.yh_footer?.endRefreshing()
                 
-            case .AutoFooter :
+            case .autoFooter :
                 self.tableView.yh_footer?.endRefreshing()
                 
-            case .GifFooter :
+            case .gifFooter :
                 self.tableView.yh_footer?.endRefreshing()
             }
             
@@ -155,21 +155,21 @@ class DemoViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return numbers.count
     }
     
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier")
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier")
         cell!.textLabel?.text = "\(indexPath.row)"
-        cell?.textLabel?.textColor = UIColor.whiteColor()
+        cell?.textLabel?.textColor = UIColor.white
         return cell!
         
     }
     
-    func colorforIndex(index: Int) -> UIColor {
+    func colorforIndex(_ index: Int) -> UIColor {
         
         let itemCount = numbers.count - 1
         let color = (CGFloat(index) / CGFloat(itemCount)) * 0.6
@@ -177,7 +177,7 @@ class DemoViewController: UITableViewController {
         
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
         cell.backgroundColor =  colorforIndex(indexPath.row)
         
