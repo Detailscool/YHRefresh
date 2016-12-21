@@ -3,9 +3,9 @@
 ###Introduction 
 Inspired By `MJRefresh`
 #####A refreshing helper written in Swift, which can be used to refresh easily.Still working on making it more perfectly.Looking forward to any positive suggestion 
-#####Swift 2.2 Supporting Now...Gif refresher has been added to New Version
+#####Swift 3.0 Supporting Now...
 #####一款简单易用的Swift版上拉或者下拉刷新...还在努力不断完善中...欢迎任何建设性PR
-#####现已支持Swift 2.2 新增gif上拉下拉刷新
+#####现已支持Swift 3.0 新增类安卓Material刷新
 
 ###Components
 ![](http://ww3.sinaimg.cn/mw1024/9a2346e2gw1f51ztblwehj20j1073gm7.jpg)
@@ -91,9 +91,8 @@ then run in terminal 在终端运行：
 ![](http://ww1.sinaimg.cn/mw1024/9a2346e2gw1f4yfd1c1pag208h0fcjuj.gif)
 
 ##Requirements
-* Swift 2.2
-* Xcode 7.3
-
+* Swift 3.0
+* Xcode 8.0+
 ##License
 
 Copyright (c) 2016 YuanHui Lee detailsli@gmail.com. See the LICENSE file for more info.
