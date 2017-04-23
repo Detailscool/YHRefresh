@@ -19,7 +19,7 @@ public extension UIScrollView {
         
         DispatchQueue.once(token: Static.token) {
             
-            let originalSelector = #selector(DispatchWorkItem.deinit)
+            let originalSelector = NSSelectorFromString("dealloc")
             let swizzledSelector = #selector(UIScrollView.yhDeinit)
             
             let originalMethod = class_getInstanceMethod(self, originalSelector)
@@ -94,24 +94,24 @@ public extension UIScrollView {
         
     }
     
-    public func isHeaderRefreshing() -> Bool {
-        if let _ = yh_header {
-            return yh_header!.isRefreshing
-        }else {
+    public var isHeaderRefreshing : Bool {
+        guard let header = yh_header else {
             return false
         }
+        
+        return header.isRefreshing
     }
     
-    public func isFooterRefreshing() -> Bool {
-        if let _ = yh_footer {
-            return yh_footer!.isRefreshing
-        }else {
+    public var isFooterRefreshing : Bool {
+        guard let footer = yh_footer else {
             return false
         }
+            
+       return footer.isRefreshing
     }
     
-    public func isRefreshing() -> Bool {
-        return isHeaderRefreshing() || isFooterRefreshing()
+    public var isRefreshing : Bool {
+        return isHeaderRefreshing || isFooterRefreshing
     }
     
 }

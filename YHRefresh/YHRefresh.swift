@@ -73,8 +73,8 @@ open class YHRefreshComponent: UIView {
     fileprivate lazy var stateTitles = [YHRefreshState : String]()
     
     fileprivate lazy var loadingView : UIImageView = {
-        let imagePath = Bundle.main.bundlePath + "/YHRefresh.bundle/YHRefresh_loading"
-        let image = UIImage.init(contentsOfFile:imagePath)
+        let imagePath = Bundle(for:type(of: self)).path(forResource: "/YHRefresh.bundle/YHRefresh_loading.png", ofType: nil)
+        let image = UIImage(contentsOfFile:imagePath!)
         let iv = UIImageView(image: image)
         iv.isHidden = true
         return iv
@@ -97,7 +97,8 @@ open class YHRefreshComponent: UIView {
     }()
     
     fileprivate lazy var arrowView : UIImageView = {
-        let image = UIImage.init(contentsOfFile: Bundle.main.bundlePath + "/YHRefresh.bundle/YHRefresh_arrow")
+        let imagePath = Bundle(for:type(of: self)).path(forResource: "/YHRefresh.bundle/YHRefresh_arrow.png", ofType: nil)
+        let image = UIImage(contentsOfFile: imagePath!)
         let iv = UIImageView(image: image)
         return iv
     }()
@@ -201,7 +202,7 @@ open class YHRefreshNormalHeader : YHRefreshHeader {
                 messageLabel.text = titles(forState: .willRefresh, statement: yh_Titles[1])
                 
                 UIImageView.animate(withDuration: yh_AnimationDuration, animations: { () -> Void in
-                    self.arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI - 0.0001))
+                    self.arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi - 0.0001))
                 })
                 
             case .refreshing:
@@ -212,7 +213,7 @@ open class YHRefreshNormalHeader : YHRefreshHeader {
                 updateTime = Date()
                 
                 let ani = CABasicAnimation(keyPath: yh_RefreshRotationKey)
-                ani.toValue = 2 * M_PI
+                ani.toValue = 2 * Double.pi
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
                 ani.isRemovedOnCompletion = false
@@ -460,11 +461,11 @@ open class YHRefreshSpringHeader : YHRefreshHeader {
         override func draw(_ rect: CGRect) {
             
             let ctx = UIGraphicsGetCurrentContext()
-            ctx?.addArc(center: CGPoint(x: center1.x, y: center1.y), radius: radius1, startAngle: 0, endAngle: CGFloat(2 * M_PI), clockwise: true)
+            ctx?.addArc(center: CGPoint(x: center1.x, y: center1.y), radius: radius1, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
             ctx?.setFillColor(UIColor.gray.cgColor)
             ctx?.fillPath()
             
-            ctx?.addArc(center: CGPoint(x: center2.x, y: center2.y), radius: radius2, startAngle: 0, endAngle: CGFloat(2 * M_PI), clockwise: true)
+            ctx?.addArc(center: CGPoint(x: center2.x, y: center2.y), radius: radius2, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
             ctx?.setFillColor(UIColor.gray.cgColor)
             ctx?.fillPath()
             
@@ -483,7 +484,8 @@ open class YHRefreshSpringHeader : YHRefreshHeader {
                 ctx?.fillPath()
             }
             
-            let image = UIImage.init(contentsOfFile: Bundle.main.bundlePath + "/YHRefresh.bundle/YHRefresh_load")
+            let imagePath = Bundle(for:type(of: self)).path(forResource: "/YHRefresh.bundle/YHRefresh_load.png", ofType: nil)
+            let image = UIImage(contentsOfFile: imagePath!)
             
             image?.draw(in: CGRect(x: center2.x - radius2 * (sizeFactor / 2), y: center2.y - radius2 * (sizeFactor / 2), width: sizeFactor * radius2, height: sizeFactor * radius2))
             
@@ -708,7 +710,7 @@ open class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate
                 
             case .refreshing:
                 let ani = CABasicAnimation(keyPath: yh_RefreshRotationKey)
-                ani.toValue = 2 * M_PI
+                ani.toValue = 2 * Double.pi
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
                 ani.isRemovedOnCompletion = false
@@ -920,11 +922,12 @@ open class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate
         override func draw(_ rect: CGRect) {
             
             let ctx = UIGraphicsGetCurrentContext()
-            ctx?.addArc(center: CGPoint(x: circleCenter.x, y: circleCenter.y), radius: radius, startAngle: 0, endAngle: CGFloat(2 * M_PI), clockwise: true)
+            ctx?.addArc(center: CGPoint(x: circleCenter.x, y: circleCenter.y), radius: radius, startAngle: 0, endAngle: CGFloat(2 * Double.pi), clockwise: true)
             ctx?.setFillColor(UIColor.gray.cgColor)
             ctx?.fillPath()
             
-            let image = UIImage.init(contentsOfFile: Bundle.main.bundlePath + "/YHRefresh.bundle/YHRefresh_load")
+            let imagePath = Bundle(for:type(of: self)).path(forResource: "/YHRefresh.bundle/YHRefresh_load.png", ofType: nil)
+            let image = UIImage(contentsOfFile: imagePath!)
             
             image?.draw(in: CGRect(x: circleCenter.x - radius * (sizeFactor / 2), y: circleCenter.y - radius * (sizeFactor / 2), width: sizeFactor * radius, height: sizeFactor * radius))
             
@@ -996,7 +999,7 @@ open class YHRefreshNormalFooter : YHRefreshFooter {
                 loadingView.layer.removeAllAnimations()
                 
                 UIImageView.animate(withDuration: yh_AnimationDuration, animations: { () -> Void in
-                    self.arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI - 0.0001))
+                    self.arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi - 0.0001))
                 })
                 
                 if oldState == .refreshing {
@@ -1021,7 +1024,7 @@ open class YHRefreshNormalFooter : YHRefreshFooter {
                 updateTime = Date()
                 
                 let ani = CABasicAnimation(keyPath: yh_RefreshRotationKey)
-                ani.toValue = 2 * M_PI
+                ani.toValue = 2 * Double.pi
                 ani.duration = 0.75
                 ani.repeatCount = MAXFLOAT
                 ani.isRemovedOnCompletion = false
@@ -1082,7 +1085,7 @@ open class YHRefreshNormalFooter : YHRefreshFooter {
         addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: arrowView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: arrowView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
         
-        arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI + 0.0001))
+        arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi + 0.0001))
     }
     
     override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {

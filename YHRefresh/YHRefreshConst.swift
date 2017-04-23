@@ -14,7 +14,7 @@ public enum YHRefreshState : String {
     case noMoreData = "NoMoreData"
 }
 
-typealias YHRefreshHandler = (Void) -> ()
+typealias YHRefreshHandler = () -> ()
 
 public let yh_RefreshContentOffsetKey = "contentOffset"
 public let yh_RefreshContentSizeKey = "contentSize"

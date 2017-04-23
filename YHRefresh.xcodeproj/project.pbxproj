@@ -17,27 +17,8 @@
 		8D54CB831D751D68001FD872 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D54CB811D751D68001FD872 /* LaunchScreen.storyboard */; };
 		8D54CB8B1D751D79001FD872 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D54CB891D751D79001FD872 /* GuideViewController.swift */; };
 		8D54CB8D1D75298A001FD872 /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D54CB8C1D75298A001FD872 /* DemoViewController.swift */; };
-		8DEB3D561E0A5CBF00290E16 /* YHRefresh_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D4D1E0A5CBF00290E16 /* YHRefresh_arrow.png */; };
-		8DEB3D571E0A5CBF00290E16 /* YHRefresh_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D4E1E0A5CBF00290E16 /* YHRefresh_arrow@2x.png */; };
-		8DEB3D581E0A5CBF00290E16 /* YHRefresh_arrow@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D4F1E0A5CBF00290E16 /* YHRefresh_arrow@3x.png */; };
-		8DEB3D591E0A5CBF00290E16 /* YHRefresh_load.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D501E0A5CBF00290E16 /* YHRefresh_load.png */; };
-		8DEB3D5A1E0A5CBF00290E16 /* YHRefresh_load@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D511E0A5CBF00290E16 /* YHRefresh_load@2x.png */; };
-		8DEB3D5B1E0A5CBF00290E16 /* YHRefresh_load@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D521E0A5CBF00290E16 /* YHRefresh_load@3x.png */; };
-		8DEB3D5C1E0A5CBF00290E16 /* YHRefresh_loading.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D531E0A5CBF00290E16 /* YHRefresh_loading.png */; };
-		8DEB3D5D1E0A5CBF00290E16 /* YHRefresh_loading@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D541E0A5CBF00290E16 /* YHRefresh_loading@2x.png */; };
-		8DEB3D5E1E0A5CBF00290E16 /* YHRefresh_loading@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8DEB3D551E0A5CBF00290E16 /* YHRefresh_loading@3x.png */; };
-		8DEB3D5F1E0A5FA400290E16 /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8D655CD41E091C5100B39557 /* YHRefresh.bundle */; };
+		8DB5D0561EAC85E200FF493F /* YHRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8DB5D0551EAC85E200FF493F /* YHRefresh.bundle */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		8D655CDB1E091CB400B39557 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 8D54CB541D751CF5001FD872 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D655CD31E091C5100B39557;
-			remoteInfo = YHRefreshResources;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		8D54CB5D1D751CF5001FD872 /* YHRefresh.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = YHRefresh.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,17 +35,8 @@
 		8D54CB841D751D68001FD872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D54CB891D751D79001FD872 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		8D54CB8C1D75298A001FD872 /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
-		8D655CD41E091C5100B39557 /* YHRefresh.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YHRefresh.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D655CD61E091C5100B39557 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8DEB3D4D1E0A5CBF00290E16 /* YHRefresh_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YHRefresh_arrow.png; sourceTree = "<group>"; };
-		8DEB3D4E1E0A5CBF00290E16 /* YHRefresh_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YHRefresh_arrow@2x.png"; sourceTree = "<group>"; };
-		8DEB3D4F1E0A5CBF00290E16 /* YHRefresh_arrow@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YHRefresh_arrow@3x.png"; sourceTree = "<group>"; };
-		8DEB3D501E0A5CBF00290E16 /* YHRefresh_load.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YHRefresh_load.png; sourceTree = "<group>"; };
-		8DEB3D511E0A5CBF00290E16 /* YHRefresh_load@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YHRefresh_load@2x.png"; sourceTree = "<group>"; };
-		8DEB3D521E0A5CBF00290E16 /* YHRefresh_load@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YHRefresh_load@3x.png"; sourceTree = "<group>"; };
-		8DEB3D531E0A5CBF00290E16 /* YHRefresh_loading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YHRefresh_loading.png; sourceTree = "<group>"; };
-		8DEB3D541E0A5CBF00290E16 /* YHRefresh_loading@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YHRefresh_loading@2x.png"; sourceTree = "<group>"; };
-		8DEB3D551E0A5CBF00290E16 /* YHRefresh_loading@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YHRefresh_loading@3x.png"; sourceTree = "<group>"; };
+		8DB5D0211EAC853D00FF493F /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = Library/Frameworks/Cocoa.framework; sourceTree = DEVELOPER_DIR; };
+		8DB5D0551EAC85E200FF493F /* YHRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = YHRefresh.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,13 +54,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8D655CD11E091C5100B39557 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -97,7 +62,7 @@
 			children = (
 				8D54CB5F1D751CF5001FD872 /* YHRefresh */,
 				8D54CB771D751D68001FD872 /* YHRefreshDemo */,
-				8D655CD51E091C5100B39557 /* YHRefreshResources */,
+				8DB5D0201EAC853D00FF493F /* Frameworks */,
 				8D54CB5E1D751CF5001FD872 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -107,7 +72,6 @@
 			children = (
 				8D54CB5D1D751CF5001FD872 /* YHRefresh.framework */,
 				8D54CB761D751D68001FD872 /* YHRefreshDemo.app */,
-				8D655CD41E091C5100B39557 /* YHRefresh.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -119,6 +83,7 @@
 				8D54CB6B1D751D04001FD872 /* YHRefresh.swift */,
 				8D54CB6C1D751D04001FD872 /* YHRefreshConst.swift */,
 				8D54CB601D751CF5001FD872 /* YHRefresh.h */,
+				8DB5D0551EAC85E200FF493F /* YHRefresh.bundle */,
 				8D54CB621D751CF5001FD872 /* Info.plist */,
 			);
 			path = YHRefresh;
@@ -138,21 +103,12 @@
 			path = YHRefreshDemo;
 			sourceTree = "<group>";
 		};
-		8D655CD51E091C5100B39557 /* YHRefreshResources */ = {
+		8DB5D0201EAC853D00FF493F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8DEB3D4D1E0A5CBF00290E16 /* YHRefresh_arrow.png */,
-				8DEB3D4E1E0A5CBF00290E16 /* YHRefresh_arrow@2x.png */,
-				8DEB3D4F1E0A5CBF00290E16 /* YHRefresh_arrow@3x.png */,
-				8DEB3D501E0A5CBF00290E16 /* YHRefresh_load.png */,
-				8DEB3D511E0A5CBF00290E16 /* YHRefresh_load@2x.png */,
-				8DEB3D521E0A5CBF00290E16 /* YHRefresh_load@3x.png */,
-				8DEB3D531E0A5CBF00290E16 /* YHRefresh_loading.png */,
-				8DEB3D541E0A5CBF00290E16 /* YHRefresh_loading@2x.png */,
-				8DEB3D551E0A5CBF00290E16 /* YHRefresh_loading@3x.png */,
-				8D655CD61E091C5100B39557 /* Info.plist */,
+				8DB5D0211EAC853D00FF493F /* Cocoa.framework */,
 			);
-			path = YHRefreshResources;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,7 +137,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				8D655CDC1E091CB400B39557 /* PBXTargetDependency */,
 			);
 			name = YHRefresh;
 			productName = YHRefresh;
@@ -205,23 +160,6 @@
 			productReference = 8D54CB761D751D68001FD872 /* YHRefreshDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8D655CD31E091C5100B39557 /* YHRefreshResources */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 8D655CD71E091C5100B39557 /* Build configuration list for PBXNativeTarget "YHRefreshResources" */;
-			buildPhases = (
-				8D655CD01E091C5100B39557 /* Sources */,
-				8D655CD11E091C5100B39557 /* Frameworks */,
-				8D655CD21E091C5100B39557 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = YHRefreshResources;
-			productName = YHRefreshResources;
-			productReference = 8D655CD41E091C5100B39557 /* YHRefresh.bundle */;
-			productType = "com.apple.product-type.bundle";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -241,11 +179,6 @@
 						DevelopmentTeam = K98M2XPBH8;
 						LastSwiftMigration = 0810;
 					};
-					8D655CD31E091C5100B39557 = {
-						CreatedOnToolsVersion = 8.2;
-						DevelopmentTeam = K98M2XPBH8;
-						ProvisioningStyle = Automatic;
-					};
 				};
 			};
 			buildConfigurationList = 8D54CB571D751CF5001FD872 /* Build configuration list for PBXProject "YHRefresh" */;
@@ -263,7 +196,6 @@
 			targets = (
 				8D54CB5C1D751CF5001FD872 /* YHRefresh */,
 				8D54CB751D751D68001FD872 /* YHRefreshDemo */,
-				8D655CD31E091C5100B39557 /* YHRefreshResources */,
 			);
 		};
 /* End PBXProject section */
@@ -273,6 +205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DB5D0561EAC85E200FF493F /* YHRefresh.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,26 +213,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8DEB3D5F1E0A5FA400290E16 /* YHRefresh.bundle in Resources */,
 				8D54CB831D751D68001FD872 /* LaunchScreen.storyboard in Resources */,
 				8D54CB801D751D68001FD872 /* Assets.xcassets in Resources */,
 				8D54CB7E1D751D68001FD872 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8D655CD21E091C5100B39557 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8DEB3D591E0A5CBF00290E16 /* YHRefresh_load.png in Resources */,
-				8DEB3D5A1E0A5CBF00290E16 /* YHRefresh_load@2x.png in Resources */,
-				8DEB3D5D1E0A5CBF00290E16 /* YHRefresh_loading@2x.png in Resources */,
-				8DEB3D581E0A5CBF00290E16 /* YHRefresh_arrow@3x.png in Resources */,
-				8DEB3D561E0A5CBF00290E16 /* YHRefresh_arrow.png in Resources */,
-				8DEB3D5B1E0A5CBF00290E16 /* YHRefresh_load@3x.png in Resources */,
-				8DEB3D5C1E0A5CBF00290E16 /* YHRefresh_loading.png in Resources */,
-				8DEB3D571E0A5CBF00290E16 /* YHRefresh_arrow@2x.png in Resources */,
-				8DEB3D5E1E0A5CBF00290E16 /* YHRefresh_loading@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,22 +242,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8D655CD01E091C5100B39557 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		8D655CDC1E091CB400B39557 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D655CD31E091C5100B39557 /* YHRefreshResources */;
-			targetProxy = 8D655CDB1E091CB400B39557 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		8D54CB7C1D751D68001FD872 /* Main.storyboard */ = {
@@ -517,46 +418,6 @@
 			};
 			name = Release;
 		};
-		8D655CD81E091C5100B39557 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = NO;
-				DEVELOPMENT_TEAM = K98M2XPBH8;
-				INFOPLIST_FILE = YHRefreshResources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.hehe.YHRefreshResources;
-				PRODUCT_NAME = YHRefresh;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Debug;
-		};
-		8D655CD91E091C5100B39557 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CODE_SIGN_IDENTITY = "-";
-				COMBINE_HIDPI_IMAGES = NO;
-				DEVELOPMENT_TEAM = K98M2XPBH8;
-				INFOPLIST_FILE = YHRefreshResources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = cn.hehe.YHRefreshResources;
-				PRODUCT_NAME = YHRefresh;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -583,15 +444,6 @@
 			buildConfigurations = (
 				8D54CB861D751D68001FD872 /* Debug */,
 				8D54CB871D751D68001FD872 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		8D655CD71E091C5100B39557 /* Build configuration list for PBXNativeTarget "YHRefreshResources" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8D655CD81E091C5100B39557 /* Debug */,
-				8D655CD91E091C5100B39557 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
