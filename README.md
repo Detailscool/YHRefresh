@@ -1,26 +1,31 @@
 # YHRefresh
 
-###Introduction 
-Inspired By `MJRefresh`
-#####A refreshing helper written in Swift, which can be used to refresh easily.Still working on making it more perfectly.Looking forward to any positive suggestion 
-#####Swift 3.1 Supporting Now...
-#####一款简单易用的Swift版上拉或者下拉刷新...还在努力不断完善中...欢迎任何建设性PR
-#####现已支持Swift 3.1
+[![Version](https://img.shields.io/cocoapods/v/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
+[![license](https://img.shields.io/cocoapods/l/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
+[![Platform](https://img.shields.io/cocoapods/p/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
+![Language](https://img.shields.io/badge/Language-%20Swift%203.1%20-blue.svg)
 
-###Components
+### Introduction 
+Inspired By `MJRefresh`
+##### A refreshing helper written in Swift, which can be used to refresh easily.Still working on making it more perfectly.Looking forward to any positive suggestion 
+##### Swift 3.1 Supporting Now...
+##### 一款简单易用的Swift版上拉或者下拉刷新...还在努力不断完善中...欢迎任何建设性PR
+##### 现已支持Swift 3.1
+
+### Components
 ![](http://ww3.sinaimg.cn/mw1024/9a2346e2gw1f51ztblwehj20j1073gm7.jpg)
 
-###Cocoapods
+### Cocoapods
 edit Podfile 编辑Podfile文件： 
 ``` bash 
   use_frameworks!
-  pod 'YHRefresh', '~> 0.1.4’
+  pod 'YHRefresh', '~> 0.2.0’
 ```
 then run in terminal 在终端运行：
 ``` bash 
   pod install --no-repo-update
 ```
-##Usage
+## Usage
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -71,7 +76,7 @@ then run in terminal 在终端运行：
     -----------------------------------分割线-----------------------------------
     注：header和footer可以同时用，但请回避两者同时刷新~！
 
-##Effect
+## Effect
 >①YHRefreshNormalHeader<br><br>
 ![](http://ww2.sinaimg.cn/mw1024/9a2346e2jw1f52us5ae1wg208h0f943j.gif)
 
@@ -90,11 +95,10 @@ then run in terminal 在终端运行：
 >⑥YHRefreshGifFooter<br><br>
 ![](http://ww1.sinaimg.cn/mw1024/9a2346e2gw1f4yfd1c1pag208h0fcjuj.gif)
 
-##Requirements
+## Requirements
 * Swift 3.1
 * Xcode 8.0++
 
-##License
+## License
 
 Copyright (c) 2016 YuanHui Lee detailsli@gmail.com. See the LICENSE file for more info.
-
