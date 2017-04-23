@@ -14,9 +14,9 @@ Pod::Spec.new do |s|
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author             = { "Detailscool" => "detailsli@gmail.com" }
   s.source       = { :git => "https://github.com/Detailscool/YHRefresh.git", :tag => s.version }
-  s.social_media_url   = "http://www.jianshu.com/users/5a65c3921bda/top_articles"
+  s.social_media_url   = "http://www.jianshu.com/u/5a65c3921bda"
   s.source_files  = "YHRefresh/*.swift"
-  s.resources    = "YHRefresh/YHRefresh.bundle"
+  s.resources    = "YHRefresh/YHRefresh.bundle/*.png"
   s.requires_arc = true
   s.platform     = :ios, "8.0"
   s.ios.deployment_target = '8.0'
