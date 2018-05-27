@@ -3,14 +3,14 @@
 [![Version](https://img.shields.io/cocoapods/v/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
 [![license](https://img.shields.io/cocoapods/l/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
 [![Platform](https://img.shields.io/cocoapods/p/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
-![Language](https://img.shields.io/badge/Language-%20Swift%203.1%20-blue.svg)
+![Language](https://img.shields.io/badge/Language-Swift%204.1-orange.svg)
 
 ### Introduction 
 Inspired By `MJRefresh`
 ##### A refreshing helper written in Swift, which can be used to refresh easily.Still working on making it more perfectly.Looking forward to any positive suggestion 
-##### Swift 3.1 Supporting Now...
+##### Swift 4.1 Supporting Now...
 ##### 一款简单易用的Swift版上拉或者下拉刷新...还在努力不断完善中...欢迎任何建设性PR
-##### 现已支持Swift 3.1
+##### 现已支持Swift 4.1
 
 ### Components
 ![](http://ww3.sinaimg.cn/mw1024/9a2346e2gw1f51ztblwehj20j1073gm7.jpg)
@@ -19,13 +19,26 @@ Inspired By `MJRefresh`
 edit Podfile 编辑Podfile文件： 
 ``` bash 
   use_frameworks!
-  pod 'YHRefresh', '~> 0.2.0’
+  pod 'YHRefresh', '~> 0.4.0’
 ```
 then run in terminal 在终端运行：
 ``` bash 
   pod install --no-repo-update
 ```
 ## Usage
+```
+   // AppDelegate.m
+   import YHRefresh
+   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        // Switf 4 新特性，取消initialize方法后需手动swizlling method
+        UIScrollView.initialize()
+        
+        return true
+    }
+
+
+    // ViewController.m
+    import YHRefresh
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -75,7 +88,7 @@ then run in terminal 在终端运行：
     }
     -----------------------------------分割线-----------------------------------
     注：header和footer可以同时用，但请回避两者同时刷新~！
-
+```
 ## Effect
 >①YHRefreshNormalHeader<br><br>
 ![](http://ww2.sinaimg.cn/mw1024/9a2346e2jw1f52us5ae1wg208h0f943j.gif)
@@ -95,9 +108,9 @@ then run in terminal 在终端运行：
 >⑥YHRefreshGifFooter<br><br>
 ![](http://ww1.sinaimg.cn/mw1024/9a2346e2gw1f4yfd1c1pag208h0fcjuj.gif)
 
-## Requirements
-* Swift 3.1
-* Xcode 8.0++
+## Last Version Requirements
+* Swift 4.1
+* Xcode 9.0++
 
 ## License
 
