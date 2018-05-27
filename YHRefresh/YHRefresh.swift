@@ -159,7 +159,7 @@ open class YHRefreshHeader : YHRefreshComponent {
         return header
     }
     
-    open class func header(_ handler:@escaping ((Void) -> ())) -> AnyObject {
+    open class func header(_ handler:@escaping (() -> ())) -> AnyObject {
         let header = self.init()
         header.handler = handler
         return header
@@ -782,7 +782,7 @@ open class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate
         self.addObserver(self, forKeyPath: yh_RefreshFrameKey, options: [], context: nil)
     }
     
-    func panResponse(_ pan:UIPanGestureRecognizer) {
+    @objc func panResponse(_ pan:UIPanGestureRecognizer) {
         
         if animating {
             return
@@ -970,7 +970,7 @@ open class YHRefreshFooter : YHRefreshComponent {
         return footer
     }
     
-    open class func footer(_ handler:@escaping ((Void) -> ())) -> AnyObject {
+    open class func footer(_ handler:@escaping (() -> ())) -> AnyObject {
         let footer = self.init()
         footer.handler = handler
         return footer

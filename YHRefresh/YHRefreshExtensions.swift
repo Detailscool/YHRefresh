@@ -12,30 +12,30 @@ var YHRefreshFooterKey = "YHRefreshFooterKey"
 
 public extension UIScrollView {
     
-    open override static func initialize() {
+     public class func initializeMethod() {
         struct Static {
             static let token: String = NSUUID().uuidString
         }
         
         DispatchQueue.once(token: Static.token) {
-            
+
             let originalSelector = NSSelectorFromString("dealloc")
             let swizzledSelector = #selector(UIScrollView.yhDeinit)
             
             let originalMethod = class_getInstanceMethod(self, originalSelector)
             let swizzledMethod = class_getInstanceMethod(self, swizzledSelector)
             
-            let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod), method_getTypeEncoding(swizzledMethod))
+            let didAddMethod = class_addMethod(self, originalSelector, method_getImplementation(swizzledMethod!), method_getTypeEncoding(swizzledMethod!))
             
             if didAddMethod {
-                class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod), method_getTypeEncoding(originalMethod))
+                class_replaceMethod(self, swizzledSelector, method_getImplementation(originalMethod!), method_getTypeEncoding(originalMethod!))
             } else {
-                method_exchangeImplementations(originalMethod, swizzledMethod);
+                method_exchangeImplementations(originalMethod!, swizzledMethod!);
             }
         }
     }
     
-    func yhDeinit() {
+    @objc func yhDeinit() {
         
         if let _ = yh_header {
             removeObserver(yh_header!, forKeyPath: yh_RefreshContentOffsetKey)
