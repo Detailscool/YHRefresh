@@ -3,14 +3,14 @@
 [![Version](https://img.shields.io/cocoapods/v/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
 [![license](https://img.shields.io/cocoapods/l/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
 [![Platform](https://img.shields.io/cocoapods/p/YHRefresh.svg)](http://cocoadocs.org/docsets/YHRefresh)
-![Language](https://img.shields.io/badge/Language-Swift%204.1-orange.svg)
+![Language](https://img.shields.io/badge/Language-Swift4.2-Green)
 
 ### Introduction 
 Inspired By `MJRefresh`
 ##### A refreshing helper written in Swift, which can be used to refresh easily.Still working on making it more perfectly.Looking forward to any positive suggestion 
-##### Swift 4.1 Supporting Now...
+##### Swift 4.2 Supporting Now...
 ##### 一款简单易用的Swift版上拉或者下拉刷新...还在努力不断完善中...欢迎任何建设性PR
-##### 现已支持Swift 4.1
+##### 现已支持Swift 4.2
 
 ### Components
 ![](http://ww3.sinaimg.cn/mw1024/9a2346e2gw1f51ztblwehj20j1073gm7.jpg)
@@ -109,7 +109,7 @@ then run in terminal 在终端运行：
 ![](http://ww1.sinaimg.cn/mw1024/9a2346e2gw1f4yfd1c1pag208h0fcjuj.gif)
 
 ## Last Version Requirements
-* Swift 4.1
+* Swift 4.2
 * Xcode 9.0++
 
 ## License

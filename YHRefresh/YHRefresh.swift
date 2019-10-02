@@ -261,14 +261,14 @@ open class YHRefreshNormalHeader : YHRefreshHeader {
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem:self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem:self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: messageLabel, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: -yh_ViewMargin))
-        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: messageLabel, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: -yh_ViewMargin))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: arrowView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: arrowView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: arrowView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: arrowView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
     }
     
@@ -361,13 +361,13 @@ open class YHRefreshSpringHeader : YHRefreshHeader {
         springView.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
-        springView.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: yh_SpringHeaderHeight))
-        springView.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
+        addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0))
+        springView.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: yh_SpringHeaderHeight))
+        springView.addConstraint(NSLayoutConstraint(item: springView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
         
-        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
     }
     
@@ -498,7 +498,7 @@ open class YHRefreshSpringHeader : YHRefreshHeader {
         fileprivate func calculateTangent() {
             
             let centerDistance = sqrt(pow((center1.x - center2.x), 2) + pow((center1.y - center2.y), 2))
-            let radiusGap = fabs(radius1 - radius2)
+            let radiusGap = abs(radius1 - radius2)
             let angle = acos(radiusGap / centerDistance)
             
             arcPoint1 = CGPoint(x: radius1 * sin(angle) + center1.x, y: -radius1 * cos(angle) + center1.y)
@@ -506,9 +506,9 @@ open class YHRefreshSpringHeader : YHRefreshHeader {
             arcPoint3 = CGPoint(x: radius2 * sin(angle) + center2.x, y: -radius2 * cos(angle) + center2.y)
             arcPoint4 = CGPoint(x: -radius2 * sin(angle) + center2.x, y: -radius2 * cos(angle) + center2.y)
             
-            let controlY = centerDistance > 2 * (radius1 + radius2) ? center1.y + fabs(centerDistance - radius1 - radius2) : fabs(center2.y + center1.y)/2
+            let controlY = centerDistance > 2 * (radius1 + radius2) ? center1.y + abs(centerDistance - radius1 - radius2) : abs(center2.y + center1.y)/2
             
-            controlPiont = CGPoint(x: fabs(center2.x + center1.x)/2, y: controlY)
+            controlPiont = CGPoint(x: abs(center2.x + center1.x)/2, y: controlY)
             
         }
     }
@@ -611,11 +611,11 @@ open class YHRefreshGifHeader : YHRefreshHeader {
         gifView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: messageLabel, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: -yh_ViewMargin))
-        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: messageLabel, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: -yh_ViewMargin))
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
     }
     
@@ -705,7 +705,7 @@ open class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate
                     })
                 }else {
                     displayLink = CADisplayLink(target: self, selector: #selector(self.materailViewBackToNormal))
-                    displayLink!.add(to: RunLoop.current, forMode: RunLoopMode.commonModes)
+                    displayLink!.add(to: RunLoop.current, forMode: RunLoop.Mode.common)
                 }
                 
             case .refreshing:
@@ -736,7 +736,7 @@ open class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate
         frame.origin.y -= (yh_MaterialMaxOffset + yh_RefreshHeaderHeight)/CGFloat(yh_AnimationDuration)/60
         if frame.origin.y <= -yh_RefreshHeaderHeight {
             displayLink!.invalidate()
-            displayLink!.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
+            displayLink!.remove(from: RunLoop.current, forMode: RunLoop.Mode.common)
             displayLink = nil
             animating = false
         }
@@ -774,10 +774,10 @@ open class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate
         
         materialView.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.bottom, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.bottom, multiplier: 1, constant: 0))
-        materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.height, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
-        materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutAttribute.width, relatedBy: NSLayoutRelation.equal, toItem: nil, attribute: NSLayoutAttribute.notAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
+        addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutConstraint.Attribute.bottom, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.bottom, multiplier: 1, constant: 0))
+        materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
+        materialView.addConstraint(NSLayoutConstraint(item: materialView, attribute: NSLayoutConstraint.Attribute.width, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: yh_RefreshHeaderHeight))
         
         self.addObserver(self, forKeyPath: yh_RefreshFrameKey, options: [], context: nil)
     }
@@ -864,7 +864,7 @@ open class YHRefreshMaterialHeader : YHRefreshHeader,UIGestureRecognizerDelegate
     fileprivate func remove() {
         if let _ = displayLink {
             displayLink!.invalidate()
-            displayLink!.remove(from: RunLoop.current, forMode: RunLoopMode.commonModes)
+            displayLink!.remove(from: RunLoop.current, forMode: RunLoop.Mode.common)
             displayLink = nil
         }
         removeFromSuperview()
@@ -1076,14 +1076,14 @@ open class YHRefreshNormalFooter : YHRefreshFooter {
         loadingView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: messageLabel, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: -yh_ViewMargin))
-        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: messageLabel, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: -yh_ViewMargin))
+        addConstraint(NSLayoutConstraint(item: arrowView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: arrowView, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: arrowView, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: arrowView, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: loadingView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: arrowView, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
         arrowView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi + 0.0001))
     }
@@ -1204,11 +1204,11 @@ open class YHRefreshAutoFooter : YHRefreshFooter {
         
         messageLabel.isHidden = true
         
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
     }
     
@@ -1328,11 +1328,11 @@ open class YHRefreshGifFooter : YHRefreshFooter {
         gifView.translatesAutoresizingMaskIntoConstraints = false
         messageLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: messageLabel, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
-        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.trailing, relatedBy: NSLayoutRelation.equal, toItem: messageLabel, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: -yh_ViewMargin))
-        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: self, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutConstraint.Attribute.trailing, relatedBy: NSLayoutConstraint.Relation.equal, toItem: messageLabel, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: -yh_ViewMargin))
+        addConstraint(NSLayoutConstraint(item: gifView, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: self, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0))
         
     }
     
