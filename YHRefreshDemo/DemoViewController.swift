@@ -19,7 +19,7 @@ class DemoViewController: UITableViewController {
     
     init(style:YHRefreshStyle) {
         self.style = style
-        super.init(style: UITableViewStyle.plain)
+        super.init(style: .plain)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,13 +48,13 @@ class DemoViewController: UITableViewController {
         switch style{
             
         case .normalHeader :
-            tableView.yh_header = YHRefreshNormalHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalHeader
+            tableView.yh_header = YHRefreshNormalHeader.header(self, selector: #selector(DemoViewController.loadData))
             
         case .springHeader :
-            tableView.yh_header = YHRefreshSpringHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshSpringHeader
+            tableView.yh_header = YHRefreshSpringHeader.header(self, selector: #selector(DemoViewController.loadData))
             
         case .gifHeader :
-            let header = YHRefreshGifHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifHeader
+            let header = YHRefreshGifHeader.header(self, selector: #selector(DemoViewController.loadData))
             var refreshingImages = [UIImage]()
             for i in 1...3 {
                 let image = UIImage(named: String(format:"dropdown_loading_0%zd", i))
@@ -74,18 +74,18 @@ class DemoViewController: UITableViewController {
             tableView.yh_header = header
             
         case .materialHeader :
-            let header = YHRefreshMaterialHeader.header(self, selector: #selector(DemoViewController.load)) as! YHRefreshMaterialHeader
+            let header = YHRefreshMaterialHeader.header(self, selector: #selector(DemoViewController.loadData))
             header.shouldStayOnWindow = true
             tableView.yh_header = header
             
         case .normalFooter :
-            tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshNormalFooter
+            tableView.yh_footer = YHRefreshNormalFooter.footer(self, selector: #selector(DemoViewController.loadData))
             
         case .autoFooter :
-            tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshAutoFooter
+            tableView.yh_footer = YHRefreshAutoFooter.footer(self, selector: #selector(DemoViewController.loadData))
             
         case .gifFooter :
-            let footer = YHRefreshGifFooter.footer(self, selector: #selector(DemoViewController.load)) as! YHRefreshGifFooter
+            let footer = YHRefreshGifFooter.footer(self, selector: #selector(DemoViewController.loadData))
             var refreshingImages = [UIImage]()
             for i in 1...3 {
                 let image = UIImage(named: String(format:"dropdown_loading_0%zd", i))
@@ -109,7 +109,7 @@ class DemoViewController: UITableViewController {
         //        tableView.yh_footer?.showNoMoreData()
     }
     
-    func load() {
+    @objc func loadData() {
         
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double((Int64)(2 * NSEC_PER_SEC)) / Double(NSEC_PER_SEC), execute: { () -> Void in
             

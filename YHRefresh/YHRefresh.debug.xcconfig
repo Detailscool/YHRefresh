@@ -1,0 +1,14 @@
+//
+//  Config.xcconfig
+//  YHRefresh
+//
+//  Created by Henry on 2022/3/14.
+//  Copyright © 2022 HenryLee. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+#include "YHRefresh.base.xcconfig"
+
+SWIFT_OPTIMIZATION_LEVEL = -Onone

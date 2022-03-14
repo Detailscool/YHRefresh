@@ -23,7 +23,7 @@ class GuideViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: UIBarButtonItemStyle.plain, target: self, action: #selector(GuideViewController.back))
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(GuideViewController.back))
     }
 
   
@@ -54,7 +54,7 @@ class GuideViewController: UITableViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    func back() {
+    @objc func back() {
        _ = navigationController?.popViewController(animated: true)
     }
 

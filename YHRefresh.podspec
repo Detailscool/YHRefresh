@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "YHRefresh"
-  s.version      = "0.4.0"
+  s.version      = "0.5.0"
   s.summary      = "A Refresh Framework Written In Swift."  
   s.homepage     = "https://github.com/Detailscool/YHRefresh"
   s.license      = { :type => "MIT", :file => "LICENSE" }
@@ -20,5 +20,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.platform     = :ios, "8.0"
   s.ios.deployment_target = '8.0'
+  s.swift_version = '5.0'
   
 end

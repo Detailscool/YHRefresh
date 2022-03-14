@@ -1,0 +1,25 @@
+//
+//  Config.xcconfig
+//  YHRefresh
+//
+//  Created by Henry on 2022/3/14.
+//  Copyright © 2022 HenryLee. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+CLANG_ENABLE_MODULES = YES
+CODE_SIGN_IDENTITY = ""
+DEFINES_MODULE = YES
+CODE_SIGN_STYLE = Automatic
+DYLIB_COMPATIBILITY_VERSION = 1
+DYLIB_CURRENT_VERSION = 1
+DYLIB_INSTALL_NAME_BASE = @rpath
+INFOPLIST_FILE = YHRefresh/Info.plist
+INSTALL_PATH = $(LOCAL_LIBRARY_DIR)/Frameworks
+LD_RUNPATH_SEARCH_PATHS = $(inherited) @executable_path/Frameworks @loader_path/Frameworks
+PRODUCT_BUNDLE_IDENTIFIER = cn.hehe.YHRefresh
+PRODUCT_NAME = $(TARGET_NAME)
+SKIP_INSTALL = YES
+SWIFT_VERSION = 5.0
